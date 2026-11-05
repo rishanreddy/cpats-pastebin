@@ -245,18 +245,21 @@ run_script() {
     # Run the script. We write exit code to a temp file instead of capturing
     # it through a pipe (pipes always return 0 for the outer command).
     {
+        set +e
         case "$ext" in
             py)
-                if   command -v uv      &>/dev/null; then uv run "$script_path"
-                elif command -v python3 &>/dev/null; then python3 "$script_path"
+                if   command -v uv      &>/dev/null; then env -u GITHUB_TOKEN -u GH_TOKEN uv run "$script_path"
+                elif command -v python3 &>/dev/null; then env -u GITHUB_TOKEN -u GH_TOKEN python3 "$script_path"
                 else die "No Python runtime found (expected uv or python3)"
                 fi
                 ;;
             *)
-                bash "$script_path"
+                env -u GITHUB_TOKEN -u GH_TOKEN bash "$script_path"
                 ;;
         esac
-        echo $? > "$exit_code_file"
+        status=$?
+        echo "$status" > "$exit_code_file"
+        exit "$status"
     } 2>&1 | tee -a "$output_file"
 
     # Read the actual exit code

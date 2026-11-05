@@ -2,7 +2,10 @@
 
 You are connected to **cpats-pastebin** — a GitHub repo that relays scripts to CyberPatriots VMs.
 
-When asked to write a script: **write it, then push it to GitHub immediately**. The user's VM is watching and will auto-run it.
+When asked to write a script: write and syntax-check it, then ask for confirmation
+before publishing if it changes system state. Publish with the repository's
+`publish.sh` using the authenticated GitHub CLI. The user's VM may be watching
+and auto-run newly published scripts.
 
 ---
 
@@ -11,56 +14,22 @@ When asked to write a script: **write it, then push it to GitHub immediately**. 
 | Variable | Example | Where |
 |---|---|---|
 | `GITHUB_REPO` | `rishanreddy/cpats-pastebin` | In env or ask user |
-| `GITHUB_TOKEN` | `ghp_...` | In env or ask user |
+| `GH CLI auth` | `gh auth login` | Developer machine only |
 | `CPATS_USERNAME` | `rishanreddy` | Whose `scripts/` folder to push to |
 
 ---
 
 ## Push a script — the right way
 
-Always push via the **GitHub Contents API PUT**. Use Python to build the payload — never build JSON by hand (it will break on scripts containing quotes or backslashes).
+Use the authenticated GitHub CLI on the developer machine:
 
-```python
-#!/usr/bin/env python3
-# /// script
-# dependencies = ["requests"]
-# ///
-"""Push a script to cpats-pastebin. Run with: uv run push_script.py"""
-import os, base64, json, requests
-from datetime import datetime, timezone
-
-REPO    = os.environ["GITHUB_REPO"]    # e.g. "rishanreddy/cpats-pastebin"
-TOKEN   = os.environ["GITHUB_TOKEN"]
-USER    = os.environ["CPATS_USERNAME"] # whose scripts/ subfolder
-
-# ── Put your script content here ──────────────────────────────────────────
-SCRIPT = """\
-#!/usr/bin/env bash
-echo "Hello from the VM!"
-"""
-DESC = "hello_world"  # short label, no spaces
-EXT  = "sh"
-# ──────────────────────────────────────────────────────────────────────────
-
-ts   = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-path = f"scripts/{USER}/{ts}_{DESC}.{EXT}"
-url  = f"https://api.github.com/repos/{REPO}/contents/{path}"
-
-resp = requests.put(url,
-    headers={
-        "Authorization": f"token {TOKEN}",
-        "Accept": "application/vnd.github.v3+json",
-    },
-    json={
-        "message": f"script: {DESC} [{USER}]",
-        "content": base64.b64encode(SCRIPT.encode()).decode(),
-        "branch":  "main",
-    }
-)
-resp.raise_for_status()
-print(f"✅ Pushed: {path}")
-print(f"   https://github.com/{REPO}/blob/main/{path}")
+```bash
+bash publish.sh --user rishanreddy --source /tmp/check.sh --name check
 ```
+
+The publisher runs `bash -n`, requires a Bash shebang, uses a unique UTC
+filename, and confirms the path returned by GitHub. It never puts a token in a
+script, command argument, or repository file.
 
 After pushing, tell the user:
 ```

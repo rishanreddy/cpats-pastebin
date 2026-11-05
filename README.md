@@ -8,21 +8,37 @@ Script relay for CyberPatriots competitions. Chat with an AI → it pushes scrip
 
 ## First-time setup (do this once per competition)
 
-### 1. Create your `.cpats.env`
+### 1. Authenticate the developer machine
+
+The developer machine should use GitHub CLI authentication instead of putting
+a token in a project file:
+
+```bash
+gh auth login
+gh auth status
+```
+
+Publish reviewed scripts with:
+
+```bash
+bash publish.sh --user rishanreddy --source /tmp/check.sh --name check
+```
+
+### 2. Create your `.cpats.env`
 
 ```bash
 cp .cpats.env.example .cpats.env
 nano .cpats.env   # fill in your values
 ```
 
-Minimum config:
+Minimum VM config:
 ```bash
 GITHUB_REPO="rishanreddy/cpats-pastebin"
 GITHUB_TOKEN="ghp_..."       # fine-grained PAT: Contents R/W on this repo
 CPATS_USERNAME="yourname"    # your GitHub username
 ```
 
-### 2. Download the runner to your VM
+### 3. Download the runner to your VM
 
 On the CyberPatriots VM (Ubuntu/Mint/Debian terminal):
 
