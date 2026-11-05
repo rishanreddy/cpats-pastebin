@@ -27,6 +27,16 @@ Use the authenticated GitHub CLI on the developer machine:
 bash publish.sh --user rishanreddy --source /tmp/check.sh --name check
 ```
 
+On Windows, use PowerShell:
+
+```powershell
+.\publish.ps1 -User rishanreddy -Source C:\work\check.sh -Name check
+```
+
+The developer machine may be Windows, macOS, or Linux. The VM runner remains
+Linux-only because it executes Bash scripts; no developer OS tools are copied
+to the VM.
+
 The publisher runs `bash -n`, requires a Bash shebang, uses a unique UTC
 filename, and confirms the path returned by GitHub. It never puts a token in a
 script, command argument, or repository file.

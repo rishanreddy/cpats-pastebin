@@ -24,6 +24,17 @@ Publish reviewed scripts with:
 bash publish.sh --user rishanreddy --source /tmp/check.sh --name check
 ```
 
+On Windows, use Git Bash or PowerShell:
+
+```powershell
+.\publish.ps1 -User rishanreddy -Source C:\work\check.sh -Name check
+```
+
+The developer machine can be Windows, macOS, or Linux. It needs the GitHub
+CLI and an authenticated `gh auth status`; only the CyberPatriots VM needs to
+be Ubuntu/Mint/Debian. Windows publishing requires Bash through Git Bash or
+WSL so the Bash script can be syntax-checked.
+
 ### 2. Create your `.cpats.env`
 
 ```bash
