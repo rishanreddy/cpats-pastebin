@@ -1,0 +1,18 @@
+# .gitignore for cpats-pastebin
+
+# ── Secrets — NEVER commit these ──────────────────────────────────────────────
+.cpats.env
+*.env
+!*.env.example
+
+# ── Keep placeholder files in empty dirs ──────────────────────────────────────
+# (the .gitkeep files below are committed)
+
+# ── OS junk ───────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Temp files ────────────────────────────────────────────────────────────────
+*.tmp
+*.log
+*.bak
