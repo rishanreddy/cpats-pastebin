@@ -8,15 +8,22 @@ source "${SCRIPT_DIR}/runner.sh"
 
 usage() {
     cat <<'EOF'
-Usage: ./publish.sh --user USER --source PATH --name SLUG [--repo OWNER/REPO] [--branch BRANCH]
+Usage: bash publish.sh --user USER --source PATH --name SLUG [--repo OWNER/REPO] [--branch BRANCH]
 
-Requires GitHub CLI authentication (`gh auth login`). The source is uploaded
-through GitHub's Contents API; no Git remote or local commit is required.
+Publishes a Bash script to scripts/USER/ so the VM watching USER runs it.
+  --user USER     Whose VM should run it (a collaborator's GitHub username)
+  --source PATH   The Bash script to publish (needs a Bash shebang and LF endings)
+  --name SLUG     Short label for the filename: lowercase letters, digits, _ and -
+  --repo, --branch  Default: rishanreddy/cpats-pastebin on main
+
+Uses your GitHub CLI login (`gh auth login`), so no token flag is needed. The
+source is uploaded through GitHub's Contents API; no Git remote or local commit
+is required.
 EOF
 }
 
-REPO="rishanreddy/cpats-pastebin"
-BRANCH="main"
+REPO="$DEFAULT_REPO"
+BRANCH="$DEFAULT_BRANCH"
 PUBLISH_USER=""
 SOURCE=""
 NAME=""
@@ -42,17 +49,17 @@ PUBLISH_USER=$(normalize_user "$PUBLISH_USER") || exit 2
 }
 [[ -f "$SOURCE" ]] || { echo "Source file not found: $SOURCE" >&2; exit 2; }
 command -v gh >/dev/null 2>&1 || { echo "GitHub CLI (gh) is required on the developer machine." >&2; exit 2; }
-command -v python3 >/dev/null 2>&1 || { echo "Python 3 is required on the developer machine." >&2; exit 2; }
+require_core_tools
 gh auth status >/dev/null || { echo "Run 'gh auth login' before publishing." >&2; exit 2; }
 bash -n "$SOURCE" || { echo "Bash syntax check failed." >&2; exit 2; }
 head -n 1 "$SOURCE" | grep -Eq '^#!/(usr/bin/env bash|bin/bash)$' || {
     echo "Script must begin with a Bash shebang." >&2
     exit 2
 }
-_py 'import pathlib, sys; sys.exit(b"\r\n" in pathlib.Path(sys.argv[1]).read_bytes())' "$SOURCE" || {
+if LC_ALL=C grep -q $'\r' "$SOURCE"; then
     echo "Save Bash scripts with LF line endings before publishing." >&2
     exit 2
-}
+fi
 
 GITHUB_REPO="$REPO"
 GH_BACKEND=cli

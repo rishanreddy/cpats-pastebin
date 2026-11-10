@@ -1,143 +1,92 @@
 #!/usr/bin/env bash
 # collab.sh — manage cpats-pastebin collaborators
 #
-# Add or remove teammates from the GitHub repo so they can push scripts
-# and upload outputs. Requires a token with admin:repo scope (or the repo
-# owner running it).
+# Run on your own computer by the repo owner. Uses your GitHub CLI login
+# (`gh auth login`), so there is no token flag or config file.
 #
 # Usage:
-#   ./collab.sh add <github-username>
-#   ./collab.sh remove <github-username>
-#   ./collab.sh list
+#   bash collab.sh add USERNAME [--permission push|maintain|admin]
+#   bash collab.sh remove USERNAME
+#   bash collab.sh list
+#   Add --repo OWNER/REPO to manage a different repo.
 
 set -euo pipefail
 
-RED='\033[0;31m' GREEN='\033[0;32m' YELLOW='\033[1;33m'
-CYAN='\033[0;36m' BOLD='\033[1m' NC='\033[0m'
+DEFAULT_REPO='rishanreddy/cpats-pastebin'
 
-ok()   { printf "${GREEN}[  ok ]${NC} %s\n" "$*"; }
-log()  { printf "${CYAN}[cpats]${NC} %s\n" "$*"; }
-warn() { printf "${YELLOW}[ warn]${NC} %s\n" "$*"; }
-die()  { printf "${RED}[error]${NC} %s\n" "$*" >&2; exit 1; }
+ok()   { printf '[  ok ] %s\n' "$*"; }
+log()  { printf '[cpats] %s\n' "$*"; }
+warn() { printf '[ warn] %s\n' "$*" >&2; }
+die()  { printf '[error] %s\n' "$*" >&2; exit 1; }
 
-# ── Config ────────────────────────────────────────────────────────────────────
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck disable=SC1091
-[[ -f "${SCRIPT_DIR}/.cpats.env" ]] && source "${SCRIPT_DIR}/.cpats.env"
-
-GITHUB_REPO="${GITHUB_REPO:-}"
-GITHUB_TOKEN="${GITHUB_TOKEN:-}"
-
-[[ -z "$GITHUB_REPO"  ]] && die "GITHUB_REPO not set in .cpats.env"
-[[ -z "$GITHUB_TOKEN" ]] && die "GITHUB_TOKEN not set — collaborator management requires write access"
-
-GH_API="https://api.github.com/repos/${GITHUB_REPO}"
-
-# ── Helpers ───────────────────────────────────────────────────────────────────
-
-gh_call() {
-    local method="$1" path="$2"
-    shift 2
-    curl -fsSL -X "$method" \
-        -H "Accept: application/vnd.github.v3+json" \
-        -H "Authorization: token ${GITHUB_TOKEN}" \
-        "$@" \
-        "${GH_API}${path}"
-}
-
-# ── Commands ──────────────────────────────────────────────────────────────────
-
-collab_add() {
-    local username="$1"
-    # permission: "push" lets them push scripts + outputs. "maintain" if you
-    # want them to manage the repo but not admin settings. "admin" for full access.
-    local permission="${2:-push}"
-
-    log "Inviting ${username} as collaborator (permission: ${permission})…"
-
-    local http_code
-    http_code=$(curl -sS -o /tmp/collab_resp.json -w "%{http_code}" -X PUT \
-        -H "Accept: application/vnd.github.v3+json" \
-        -H "Authorization: token ${GITHUB_TOKEN}" \
-        -H "Content-Type: application/json" \
-        -d "{\"permission\": \"${permission}\"}" \
-        "${GH_API}/collaborators/${username}")
-
-    case "$http_code" in
-        201) ok "Invitation sent to ${username}. They must accept it via GitHub." ;;
-        204) ok "${username} is already a collaborator." ;;
-        *)
-            cat /tmp/collab_resp.json >&2
-            die "Failed to add collaborator (HTTP ${http_code})"
-            ;;
-    esac
-    rm -f /tmp/collab_resp.json
-}
-
-collab_remove() {
-    local username="$1"
-    log "Removing ${username} from ${GITHUB_REPO}…"
-
-    local http_code
-    http_code=$(curl -sS -o /dev/null -w "%{http_code}" -X DELETE \
-        -H "Accept: application/vnd.github.v3+json" \
-        -H "Authorization: token ${GITHUB_TOKEN}" \
-        "${GH_API}/collaborators/${username}")
-
-    case "$http_code" in
-        204) ok "Removed ${username} from collaborators." ;;
-        404) warn "${username} was not a collaborator." ;;
-        *)   die "Failed to remove collaborator (HTTP ${http_code})" ;;
-    esac
-}
-
-collab_list() {
-    log "Fetching collaborators for ${GITHUB_REPO}…"
-    local raw
-    raw=$(gh_call GET "/collaborators")
-    python3 - "$raw" <<'PYEOF'
-import sys, json
-users = json.loads(sys.argv[1])
-if not users:
-    print("  (no collaborators)")
-    sys.exit(0)
-for u in users:
-    print(f"  → {u['login']} [{u.get('permissions', {})}]")
-PYEOF
-}
-
-# ── Main ──────────────────────────────────────────────────────────────────────
-
-printf "\n${BOLD}cpats-pastebin collaborators${NC} │ repo: ${CYAN}%s${NC}\n\n" "$GITHUB_REPO"
-
-CMD="${1:-}"
-case "$CMD" in
-    add)
-        [[ -z "${2:-}" ]] && die "Usage: $(basename "$0") add <github-username>"
-        collab_add "$2" "${3:-push}"
-        ;;
-    remove|rm)
-        [[ -z "${2:-}" ]] && die "Usage: $(basename "$0") remove <github-username>"
-        collab_remove "$2"
-        ;;
-    list|ls)
-        collab_list
-        ;;
-    *)
-        cat <<EOF
-Usage: $(basename "$0") <command> [args]
+usage() {
+    cat <<EOF
+Usage: bash collab.sh <command> [options]
 
 Commands:
-  add <username> [permission]   Add collaborator (permission: push/maintain/admin, default: push)
-  remove <username>             Remove a collaborator
-  list                          List current collaborators
+  add USERNAME      Invite USERNAME as a collaborator. They must accept the email
+                    or the invitation at https://github.com/${DEFAULT_REPO}/invitations
+  remove USERNAME   Remove a collaborator
+  list              List collaborators and any pending invitations
 
-Examples:
-  ./collab.sh add   partneruser
-  ./collab.sh add   partneruser maintain
-  ./collab.sh list
-  ./collab.sh remove partneruser
+Options:
+  --permission LEVEL  With add: push (default), maintain, or admin
+  --repo OWNER/REPO   Default: ${DEFAULT_REPO}
+  -h, --help          Show this help
+
+Needs the GitHub CLI signed in as the repo owner: gh auth login
 EOF
+}
+
+COMMAND='' TARGET='' PERMISSION=push REPO="$DEFAULT_REPO"
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help) usage; exit 0 ;;
+        --permission) [[ $# -ge 2 ]] || die 'Missing value for --permission'; PERMISSION="$2"; shift 2 ;;
+        --repo) [[ $# -ge 2 ]] || die 'Missing value for --repo'; REPO="$2"; shift 2 ;;
+        -*) die "Unknown argument: $1. Run with --help for the options." ;;
+        *)
+            if [[ -z "$COMMAND" ]]; then COMMAND="$1"
+            elif [[ -z "$TARGET" ]]; then TARGET="$1"
+            else die "Unexpected argument: $1"
+            fi
+            shift ;;
+    esac
+done
+
+[[ "$REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]] || die '--repo must look like owner/repo.'
+[[ "$PERMISSION" =~ ^(push|maintain|admin)$ ]] || die '--permission must be push, maintain, or admin.'
+if [[ -n "$TARGET" ]]; then
+    [[ "$TARGET" =~ ^[A-Za-z0-9][A-Za-z0-9-]{0,38}$ ]] || die "Invalid GitHub username: ${TARGET}"
+fi
+[[ -n "$COMMAND" ]] || { usage; exit 0; }
+command -v gh >/dev/null || die 'GitHub CLI (gh) is required. Install it, then run: gh auth login'
+gh auth status >/dev/null 2>&1 || die 'Not signed in. Run: gh auth login'
+
+case "$COMMAND" in
+    add)
+        [[ -n "$TARGET" ]] || die 'Usage: bash collab.sh add USERNAME'
+        log "Inviting ${TARGET} to ${REPO} (permission: ${PERMISSION})"
+        RESPONSE=$(gh api --method PUT "repos/${REPO}/collaborators/${TARGET}" -f "permission=${PERMISSION}") \
+            || die "Could not add ${TARGET}. Only the repo owner or an admin can do this."
+        if [[ -z "$RESPONSE" ]]; then
+            ok "${TARGET} already has access."
+        else
+            ok "Invitation sent. ${TARGET} must accept it at https://github.com/${REPO}/invitations"
+        fi
         ;;
+    remove|rm)
+        [[ -n "$TARGET" ]] || die 'Usage: bash collab.sh remove USERNAME'
+        gh api --method DELETE "repos/${REPO}/collaborators/${TARGET}" >/dev/null \
+            || die "Could not remove ${TARGET}. They may not be a collaborator, or you are not an admin."
+        ok "Removed ${TARGET}."
+        ;;
+    list|ls)
+        log "Collaborators on ${REPO}"
+        gh api "repos/${REPO}/collaborators" --jq '.[] | "  \(.login) (\(.role_name // "member"))"' \
+            || die 'Could not list collaborators. Only a repo admin can.'
+        PENDING=$(gh api "repos/${REPO}/invitations" --jq '.[] | "  \(.invitee.login) (invited, not accepted yet)"' 2>/dev/null || true)
+        [[ -z "$PENDING" ]] || printf '%s\n' "$PENDING"
+        ;;
+    *) die "Unknown command: ${COMMAND}. Run with --help." ;;
 esac

@@ -1,0 +1,5 @@
+# Shell scripts must keep Unix (LF) line endings on every system. On Windows, Git's
+# default autocrlf would otherwise convert them and Bash would fail with "$'\r': command not found".
+*.sh text eol=lf
+*.ps1 text eol=lf
+*.md text eol=lf

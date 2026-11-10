@@ -1,175 +1,125 @@
 #!/usr/bin/env bash
 # reset_competition.sh — cpats-pastebin competition reset
 #
-# Wipes scripts/, outputs/, and clipboard/ from the GitHub repo via API.
-# Preserves keep/ and all infrastructure files. Run between competitions.
+# Deletes the files under scripts/, outputs/, and clipboard/ through the GitHub
+# API. Keeps keep/ and every tool. Run it on your own computer between
+# competitions. Uses your GitHub CLI login (`gh auth login`): no token flag and
+# no config file.
 #
 # Usage:
-#   ./reset_competition.sh [--dry-run] [--yes]
+#   bash reset_competition.sh [--dry-run] [--yes] [--repo OWNER/REPO] [--branch NAME]
 
 set -euo pipefail
 
-RED='\033[0;31m' GREEN='\033[0;32m' YELLOW='\033[1;33m'
-CYAN='\033[0;36m' BOLD='\033[1m' NC='\033[0m'
+DEFAULT_REPO='rishanreddy/cpats-pastebin'
 
-log()  { printf "${CYAN}[cpats]${NC} %s\n" "$*"; }
-ok()   { printf "${GREEN}[  ok ]${NC} %s\n" "$*"; }
-warn() { printf "${YELLOW}[ warn]${NC} %s\n" "$*"; }
-die()  { printf "${RED}[error]${NC} %s\n" "$*" >&2; exit 1; }
+log()  { printf '[cpats] %s\n' "$*"; }
+ok()   { printf '[  ok ] %s\n' "$*"; }
+warn() { printf '[ warn] %s\n' "$*" >&2; }
+die()  { printf '[error] %s\n' "$*" >&2; exit 1; }
 
-# ── Config ────────────────────────────────────────────────────────────────────
+usage() {
+    cat <<EOF
+Usage: bash reset_competition.sh [options]
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck disable=SC1091
-[[ -f "${SCRIPT_DIR}/.cpats.env" ]] && source "${SCRIPT_DIR}/.cpats.env"
+Deletes everything under scripts/, outputs/, and clipboard/ (placeholders stay).
+Keeps keep/, the tools, the docs, and the Git history.
 
-GITHUB_REPO="${GITHUB_REPO:-}"
-GITHUB_TOKEN="${GITHUB_TOKEN:-}"
-BRANCH="${BRANCH:-main}"
+  --dry-run           List what would be deleted and delete nothing
+  --yes, -y           Skip the typed confirmation
+  --repo OWNER/REPO   Default: ${DEFAULT_REPO}
+  --branch NAME       Default: main
+  -h, --help          Show this help
 
-# ── Args ──────────────────────────────────────────────────────────────────────
+Stop all runners and publishers first. Needs the GitHub CLI signed in with
+write access to the repo: gh auth login
+EOF
+}
 
-DRY_RUN=false
-SKIP_CONFIRM=false
-
+DRY_RUN=false SKIP_CONFIRM=false REPO="$DEFAULT_REPO" BRANCH=main
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --dry-run)  DRY_RUN=true;        shift ;;
-        --yes|-y)   SKIP_CONFIRM=true;   shift ;;
-        --repo)     GITHUB_REPO="$2";    shift 2 ;;
-        -h|--help)
-            echo "Usage: $(basename "$0") [--dry-run] [--yes]"
-            echo "  --dry-run  Show what would be deleted without deleting"
-            echo "  --yes      Skip confirmation prompt"
-            exit 0 ;;
-        *) die "Unknown argument: $1" ;;
+        --dry-run) DRY_RUN=true; shift ;;
+        --yes|-y) SKIP_CONFIRM=true; shift ;;
+        --repo) [[ $# -ge 2 ]] || die 'Missing value for --repo'; REPO="$2"; shift 2 ;;
+        --branch) [[ $# -ge 2 ]] || die 'Missing value for --branch'; BRANCH="$2"; shift 2 ;;
+        -h|--help) usage; exit 0 ;;
+        *) die "Unknown argument: $1. Run with --help for the options." ;;
     esac
 done
 
-# ── Validate ──────────────────────────────────────────────────────────────────
+[[ "$REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]] || die '--repo must look like owner/repo.'
+[[ "$BRANCH" =~ ^[A-Za-z0-9._/-]+$ && "$BRANCH" != *..* && "$BRANCH" != *//* ]] || die '--branch has unexpected characters.'
+command -v gh >/dev/null || die 'GitHub CLI (gh) is required. Install it, then run: gh auth login'
+gh auth status >/dev/null 2>&1 || die 'Not signed in. Run: gh auth login'
 
-[[ -z "$GITHUB_REPO"  ]] && die "GITHUB_REPO not set in .cpats.env"
-[[ -z "$GITHUB_TOKEN" ]] && die "GITHUB_TOKEN not set — reset requires write access"
-
-GH_API="https://api.github.com/repos/${GITHUB_REPO}"
-
-# ── File discovery via Git tree API ──────────────────────────────────────────
-# Uses the recursive tree endpoint — one API call gets every file in the repo.
-# This is correct and doesn't require any JSON recursion logic in bash.
-
-get_all_files_to_delete() {
-    local tree_url="${GH_API}/git/trees/${BRANCH}?recursive=1"
-    local raw
-    raw=$(curl -fsSL \
-        -H "Accept: application/vnd.github.v3+json" \
-        -H "Authorization: token ${GITHUB_TOKEN}" \
-        "$tree_url") || die "Failed to fetch repo tree. Check GITHUB_TOKEN and repo name."
-
-    # Extract all blob paths that are under the directories we want to clear
-    python3 - "$raw" <<'PYEOF'
-import sys, json
-
-data = json.loads(sys.argv[1])
-if data.get("truncated"):
-    print("WARNING: repo tree was truncated by GitHub API", file=sys.stderr)
-
-CLEAR_PREFIXES = ("scripts/", "outputs/", "clipboard/")
-KEEP_FILES = {".gitkeep"}
-
-for item in data.get("tree", []):
-    if item.get("type") != "blob":
-        continue
-    path = item["path"]
-    fname = path.rsplit("/", 1)[-1]
-    if fname in KEEP_FILES:
-        continue
-    if any(path.startswith(p) for p in CLEAR_PREFIXES):
-        print(f"{path}|{item['sha']}")
-PYEOF
+# One call returns every file in the repo. gh's built-in --jq filter keeps the ones to
+# delete, so no Python or separate jq is needed. A first line of TRUNCATED means
+# GitHub cut the list short.
+list_files_to_delete() {
+    gh api "repos/${REPO}/git/trees/${BRANCH}?recursive=1" --jq '
+        (if .truncated then "TRUNCATED" else empty end),
+        (.tree[]
+         | select(.type == "blob")
+         | select(.path | test("^(scripts|outputs|clipboard)/"))
+         | select(.path | test("(^|/)\\.gitkeep$") | not)
+         | "\(.path)|\(.sha)")' \
+        || die "Could not read ${REPO} on branch ${BRANCH}. Check --repo, --branch, and gh auth status."
 }
-
-# ── Delete a single file via API ─────────────────────────────────────────────
 
 delete_file() {
     local path="$1" sha="$2"
-
     if [[ "$DRY_RUN" == true ]]; then
         warn "[dry-run] would delete: ${path}"
         return 0
     fi
-
-    local payload
-    payload=$(python3 -c "
-import json, sys
-print(json.dumps({'message': 'reset: remove ' + sys.argv[1], 'sha': sys.argv[2], 'branch': sys.argv[3]}))" \
-        "$path" "$sha" "$BRANCH")
-
-    local http_code
-    http_code=$(curl -sS -o /dev/null -w "%{http_code}" -X DELETE \
-        -H "Accept: application/vnd.github.v3+json" \
-        -H "Authorization: token ${GITHUB_TOKEN}" \
-        -H "Content-Type: application/json" \
-        -d "$payload" \
-        "${GH_API}/contents/${path}")
-
-    if [[ "$http_code" == "200" ]]; then
+    if gh api --method DELETE "repos/${REPO}/contents/${path}" \
+        -f "message=reset: remove ${path}" -f "sha=${sha}" -f "branch=${BRANCH}" >/dev/null 2>&1; then
         ok "Deleted: ${path}"
     else
-        warn "Failed to delete ${path} (HTTP ${http_code})"
+        warn "Failed to delete ${path}"
         return 1
     fi
 }
 
-# ── UI ────────────────────────────────────────────────────────────────────────
-
-printf "\n${BOLD}cpats-pastebin reset${NC} │ repo: ${CYAN}%s${NC}\n\n" "$GITHUB_REPO"
-printf "${YELLOW}Will delete all files in:${NC}\n"
-printf "  ${RED}✗${NC} scripts/\n"
-printf "  ${RED}✗${NC} outputs/\n"
-printf "  ${RED}✗${NC} clipboard/\n"
-printf "\n${GREEN}Will preserve:${NC}\n"
-printf "  ${GREEN}✓${NC} keep/\n"
-printf "  ${GREEN}✓${NC} runner.sh, clipboard_upload.sh, reset_competition.sh\n"
-printf "  ${GREEN}✓${NC} README.md, .skill/, .cpats.env.example, .gitignore\n\n"
-
-[[ "$DRY_RUN" == true ]] && warn "DRY RUN — nothing will actually be deleted\n"
+printf '\ncpats-pastebin reset | repo: %s | branch: %s\n\n' "$REPO" "$BRANCH"
+printf 'Will delete everything in:\n  x scripts/\n  x outputs/\n  x clipboard/\n\n'
+printf 'Will keep:\n  + keep/\n  + the runner, publisher, clipboard tool, and docs\n  + the Git history (old files stay visible in past commits)\n\n'
+[[ "$DRY_RUN" == false ]] || warn 'DRY RUN: nothing will be deleted.'
 
 if [[ "$SKIP_CONFIRM" == false && "$DRY_RUN" == false ]]; then
-    printf "${BOLD}Type RESET to confirm: ${NC}"
-    read -r confirm
-    [[ "$confirm" == "RESET" ]] || { log "Cancelled."; exit 0; }
+    printf 'Type RESET to confirm: '
+    read -r CONFIRM
+    [[ "$CONFIRM" == RESET ]] || { log 'Cancelled.'; exit 0; }
 fi
 
-# ── Execute ───────────────────────────────────────────────────────────────────
-
-log "Fetching file list from GitHub…"
-mapfile -t FILES < <(get_all_files_to_delete)
-
-if [[ ${#FILES[@]} -eq 0 ]]; then
-    ok "Nothing to delete — repo is already clean."
+log 'Fetching the file list from GitHub'
+FILE_LIST=$(list_files_to_delete)
+if [[ "$FILE_LIST" == TRUNCATED* ]]; then
+    warn 'GitHub truncated the file list. Run the reset again afterwards to finish.'
+    FILE_LIST="${FILE_LIST#TRUNCATED}"
+    FILE_LIST="${FILE_LIST#$'\n'}"
+fi
+if [[ -z "$FILE_LIST" ]]; then
+    ok 'Nothing to delete. The repo is already clean.'
     exit 0
 fi
 
-printf "\n"
-DELETED=0 FAILED=0
-for entry in "${FILES[@]}"; do
-    [[ -z "$entry" ]] && continue
-    fpath="${entry%%|*}"
-    fsha="${entry##*|}"
-    if delete_file "$fpath" "$fsha"; then
-        DELETED=$((DELETED + 1))
-    else
-        FAILED=$((FAILED + 1))
-    fi
-    # Respect GitHub's rate limit: 1 write/s is safe on the free tier
-    sleep 0.5
-done
+COUNT=0 DELETED=0 FAILED=0
+while IFS= read -r ENTRY; do
+    [[ -n "$ENTRY" ]] || continue
+    COUNT=$((COUNT + 1))
+    if delete_file "${ENTRY%%|*}" "${ENTRY##*|}"; then DELETED=$((DELETED + 1)); else FAILED=$((FAILED + 1)); fi
+    # Stay under GitHub's secondary rate limit for rapid writes.
+    [[ "$DRY_RUN" == true ]] || sleep 1
+done <<< "$FILE_LIST"
 
-printf "\n"
+printf '\n'
 if [[ "$DRY_RUN" == true ]]; then
-    warn "Dry run complete — ${#FILES[@]} files would be deleted."
+    warn "Dry run complete: ${COUNT} files would be deleted."
 elif [[ "$FAILED" -eq 0 ]]; then
-    ok "Reset complete — ${DELETED} files removed. Ready for next competition."
+    ok "Reset complete: ${DELETED} files removed."
 else
-    warn "Reset done with errors — ${DELETED} deleted, ${FAILED} failed."
+    warn "Reset finished with errors: ${DELETED} deleted, ${FAILED} failed. Run it again to retry."
+    exit 1
 fi

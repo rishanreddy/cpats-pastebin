@@ -1,9 +1,12 @@
 # .gitignore for cpats-pastebin
 
 # ── Secrets — NEVER commit these ──────────────────────────────────────────────
+# The tools take every setting as a flag and read no env files. These patterns
+# are a safety net for leftovers from older versions and for pasted tokens.
 .cpats.env
 *.env
 !*.env.example
+*.token
 
 # ── Keep placeholder files in empty dirs ──────────────────────────────────────
 # (the .gitkeep files below are committed)
