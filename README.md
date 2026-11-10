@@ -1,175 +1,184 @@
 # cpats-pastebin
 
-Script relay for CyberPatriots competitions. Chat with an AI → it pushes scripts here → your VM runs them → output comes back here.
+A shared GitHub repo for sending scripts to Ubuntu, Mint, and Debian VMs and collecting their output. Each teammate publishes into their own username folder.
 
-**No installs on the VM.** Just `curl` and `bash` (pre-installed on Ubuntu/Mint/Debian).
+The VM needs Bash, curl, and Python 3 already available. It does not need Git, GitHub CLI, uv, or Python packages. Scripts run as the account that starts the runner.
 
----
+## Publish from your computer
 
-## First-time setup (do this once per competition)
-
-### 1. Authenticate the developer machine
-
-The developer machine should use GitHub CLI authentication instead of putting
-a token in a project file:
+Authenticate GitHub CLI on the developer machine:
 
 ```bash
 gh auth login
 gh auth status
 ```
 
-Publish reviewed scripts with:
+On macOS, Linux, or Git Bash, use the Bash publisher. It also needs Python 3:
 
 ```bash
 bash publish.sh --user rishanreddy --source /tmp/check.sh --name check
+bash publish.sh --user sid1332 --source /tmp/check.sh --name check
 ```
 
-On Windows, use Git Bash or PowerShell:
+On Windows, use the native PowerShell publisher:
 
 ```powershell
-.\publish.ps1 -User rishanreddy -Source C:\work\check.sh -Name check
+.\publish.ps1 -User sid1332 -Source C:\work\check.sh -Name check
 ```
 
-The developer machine can be Windows, macOS, or Linux. It needs the GitHub
-CLI and an authenticated `gh auth status`; only the CyberPatriots VM needs to
-be Ubuntu/Mint/Debian. Windows publishing requires Bash through Git Bash or
-WSL so the Bash script can be syntax-checked.
+Windows also needs Bash through Git Bash or WSL for the syntax check. Save Bash scripts with LF line endings. Both publishers require a Bash shebang, check syntax, and use the authenticated GitHub CLI. Keep `runner.sh` beside `publish.sh` because it contains the shared upload helpers.
 
-### 2. Create your `.cpats.env`
+Publishing makes a script available to any VM watching that username. The agent workflow is in [.agents/skills/cpats-pastebin/SKILL.md](.agents/skills/cpats-pastebin/SKILL.md).
+
+## Work together without push conflicts
+
+Publish scripts through the helpers instead of committing them in a local clone. Each upload creates a new file through the Contents API, so neither teammate needs to pull or merge the other's scripts before publishing.
+
+Files use a UTC timestamp with microseconds and a random UUID. Outputs also include the VM hostname. Even two uploads from the same username, host, and second get separate paths. Usernames are normalized to lowercase, including `Sid1332` becoming `sid1332`.
+
+GitHub writes can still conflict while the branch changes. Uploads retry conflicts with increasing delays, up to five attempts. A retry uses the same path and bytes. If the file already exists, matching bytes count as success and different bytes cause an error. The helpers never overwrite an existing script, output, or paste.
+
+Keep normal Git commits for changes to the tools themselves. Stop all runners and publishers before a competition reset. GitHub documents the conflict between simultaneous creates and deletes in its [Contents API reference](https://docs.github.com/en/rest/repos/contents#create-or-update-file-contents).
+
+## Set up the VM
+
+### Teammate setup using their own login
+
+Sid first accepts the repo invitation. Then he runs these commands on his own computer from this checkout:
 
 ```bash
-cp .cpats.env.example .cpats.env
-nano .cpats.env   # fill in your values
+gh auth login --hostname github.com
+uv run prepare_vm.py --user sid1332
 ```
 
-Minimum VM config:
+The helper checks the signed-in username and collaborator write access. It creates a private folder outside the checkout containing the runner, clipboard uploader, and a configured `.cpats.env` using that account's CLI credential. It never prints the credential. It refuses to package the owner's login for a different teammate.
+
+Copy the entire generated folder, including hidden `.cpats.env`, onto Sid's VM. In that folder on the VM, run:
+
+```bash
+bash runner.sh --user sid1332 --upload-output --loop
+```
+
+These commands work with Python 3 on Windows, macOS, and Linux. If uv is unavailable on the developer computer, run `python prepare_vm.py --user sid1332` using Python 3. Nothing needs to be installed on the VM.
+
+The generated folder contains a real login credential. Keep it private and outside Git. GitHub CLI's browser login can use the account's `repo` access, which is broader than a fine-grained token restricted to this one repository. This makes the existing collaborator setup work; it does not turn that credential into a repo-limited token. See the [CLI login documentation](https://cli.github.com/manual/gh_auth_login) and [credential export command](https://cli.github.com/manual/gh_auth_token).
+
+The owner can use the same helper with `--user rishanreddy`. To use a token restricted to this repo instead, follow the manual setup below with an appropriate token. Shared ownership is available through a GitHub organization, where both people can be members and create fine-grained tokens for permitted organization repos. A personally owned repo has owner and collaborator roles. Moving this repo to an organization would be a separate change; see [GitHub account permissions](https://docs.github.com/en/get-started/learning-about-github/access-permissions-on-github).
+
+### Manual token setup
+
+This repository is private. Download the tools using a token that can read it:
+
+```bash
+read -rsp 'GitHub token: ' GITHUB_TOKEN
+printf '\n'
+export GITHUB_TOKEN
+
+for file in runner.sh clipboard_upload.sh .cpats.env.example; do
+    curl -fsSL -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+        "https://raw.githubusercontent.com/rishanreddy/cpats-pastebin/main/${file}" \
+        -o "$file" || break
+done
+chmod 700 runner.sh clipboard_upload.sh
+cp .cpats.env.example .cpats.env
+chmod 600 .cpats.env
+nano .cpats.env
+```
+
+Set these values in `.cpats.env`:
+
 ```bash
 GITHUB_REPO="rishanreddy/cpats-pastebin"
-GITHUB_TOKEN="ghp_..."       # fine-grained PAT: Contents R/W on this repo
-CPATS_USERNAME="yourname"    # your GitHub username
+GITHUB_TOKEN="YOUR_TOKEN"
+CPATS_USERNAME="sid1332"
+BRANCH="main"
 ```
 
-### 3. Download the runner to your VM
+Keep `runner.sh`, `clipboard_upload.sh`, and `.cpats.env` in the same directory. Re-download both shell files together when updating them.
 
-On the CyberPatriots VM (Ubuntu/Mint/Debian terminal):
+The repo owner can use a fine-grained token limited to this repo with Contents read and write access. Repository collaborators such as `sid1332` currently need a classic personal access token with the `repo` scope, or a GitHub App token with Contents access. GitHub lists repository collaborators among the [fine-grained token limitations](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#fine-grained-personal-access-tokens-limitations). Each teammate should authenticate with their own account and token.
+
+## Run scripts
 
 ```bash
-# Public repo — no token needed to download
-curl -fsSL https://raw.githubusercontent.com/rishanreddy/cpats-pastebin/main/runner.sh \
-     -o runner.sh && chmod +x runner.sh
+# Run your latest published script and send its output back
+bash runner.sh --user rishanreddy --upload-output
 
-# Private repo — pass the token inline
-curl -fsSL -H "Authorization: token ghp_YOUR_TOKEN" \
-     https://raw.githubusercontent.com/rishanreddy/cpats-pastebin/main/runner.sh \
-     -o runner.sh && chmod +x runner.sh
+# Sid's VM watches his folder
+bash runner.sh --user sid1332 --upload-output --loop
 
-# Same for clipboard_upload.sh if you want it
-curl -fsSL https://raw.githubusercontent.com/rishanreddy/cpats-pastebin/main/clipboard_upload.sh \
-     -o clipboard_upload.sh && chmod +x clipboard_upload.sh
+# List available scripts without running them
+bash runner.sh --list --user sid1332
+
+# Run a local script, without GitHub access
+bash runner.sh --file /path/to/script.sh
 ```
 
-Create `.cpats.env` on the VM too (copy the contents from above).
+The runner picks the script with the greatest timestamp filename in the selected username's folder. Loop mode checks every 30 seconds and runs only the latest script, so intermediate scripts can be skipped when several arrive between checks.
 
----
+Stdout and stderr stream to the terminal and a unique local log. The log includes the script's exit code, including failures. `--upload-output` creates a file under `outputs/<username>/`. A one-time run returns the script's exit code after saving and uploading its log.
 
-## Running scripts
+Loop state includes the repo, branch, username, and script blob hash. It lives under `~/.local/state/cpats-pastebin`, or `CPATS_STATE_DIR` when configured. If an output upload fails, the loop keeps it pending and retries it before checking for another script. It does not rerun the script just to retry the upload. Failed uploads retain the local log or paste and print its path.
+
+Python scripts run with system `python3`. The runner does not install dependencies. It removes GitHub token environment variables before starting a script.
+
+## Share text from the VM
 
 ```bash
-# Pull and run the latest script your teammate pushed
-./runner.sh --user rishanreddy
+# Use an existing clipboard tool, if available
+bash clipboard_upload.sh -l auth-log
 
-# Run it AND upload the output back to GitHub so your AI can read it
-./runner.sh --user rishanreddy --upload-output
+# Pipe text without installing a clipboard tool
+cat /var/log/auth.log | bash clipboard_upload.sh -l auth-log
+ss -tlnp | bash clipboard_upload.sh -l open-ports
 
-# Keep watching — auto-runs within 30s whenever a new script is pushed
-./runner.sh --user rishanreddy --upload-output --loop
-
-# See what scripts are available
-./runner.sh --list --user rishanreddy
-
-# Run a local script you already have (no pull)
-./runner.sh --file /path/to/script.sh
+# Supply text directly
+bash clipboard_upload.sh -u sid1332 -l note -t 'Check this service'
 ```
 
----
+Pastes appear at `clipboard/<username>/` with unique timestamped names. Piped text keeps its trailing newlines and can exceed the shell's command argument size limit.
 
-## Sharing text from the VM
+## Manage teammates
+
+The repo owner can invite and list collaborators with the authenticated GitHub CLI:
 
 ```bash
-# Upload whatever's in your clipboard
-./clipboard_upload.sh -l auth-log
-
-# Pipe a file or command output
-cat /var/log/auth.log | ./clipboard_upload.sh -l auth-log
-cat /etc/passwd       | ./clipboard_upload.sh -l passwd
-ss -tlnp              | ./clipboard_upload.sh -l open-ports
-
-# Upload text directly
-./clipboard_upload.sh -l note -t "192.168.1.50 is suspicious"
+gh api --method PUT repos/rishanreddy/cpats-pastebin/collaborators/sid1332 -f permission=push
+gh api repos/rishanreddy/cpats-pastebin/invitations
+gh api repos/rishanreddy/cpats-pastebin/collaborators --jq '.[].login'
 ```
 
-Your AI agent reads these from `clipboard/<username>/` and can analyze them.
-
----
-
-## Managing teammates (repo owner only)
-
-```bash
-# Add your partner as a collaborator (they can push scripts + upload outputs)
-./collab.sh add partnerusername
-
-# List current collaborators
-./collab.sh list
-
-# Remove someone
-./collab.sh remove partnerusername
-```
-
-Each teammate needs their own `.cpats.env` with their own token.  
-Scripts are organized by username: `scripts/alice/`, `scripts/bob/`.
-
----
+The invited teammate must accept on GitHub before accessing the private repo. `collab.sh` also supports add, list, and remove operations when configured with a repo administration token.
 
 ## Between competitions
 
+Stop all runners and publishers first. Preview the reset, then clear the competition data:
+
 ```bash
-# See what would be cleared without touching anything
-./reset_competition.sh --dry-run
-
-# Wipe scripts/, outputs/, clipboard/ — keeps keep/ and all scripts
-./reset_competition.sh
+bash reset_competition.sh --dry-run
+bash reset_competition.sh
 ```
 
-Anything in `keep/` is permanent — use it for reference scripts, checklists, notes.
+A reset clears `scripts/`, `outputs/`, and `clipboard/` while preserving `keep/`, placeholders, and the tools. It does not erase Git history.
 
----
+## Repo layout
 
-## Repo structure
+| Path | Purpose |
+| --- | --- |
+| `scripts/<username>/` | Published scripts |
+| `outputs/<username>/` | Script logs |
+| `clipboard/<username>/` | Text from the VM |
+| `keep/` | Files preserved across resets |
+| `publish.sh`, `publish.ps1` | Developer publishers |
+| `prepare_vm.py` | Prepare VM files with the signed-in teammate's credential |
+| `runner.sh` | Standalone VM runner and shared API helpers |
+| `clipboard_upload.sh` | Clipboard and stdin uploader |
+| `.agents/skills/cpats-pastebin/SKILL.md` | Agent workflow |
 
+## Development checks
+
+```bash
+uv run tests/test_workflow.py
 ```
-scripts/   ← AI pushes scripts here, organized by username
-outputs/   ← VM uploads script results here
-clipboard/ ← VM text pastes land here
-keep/      ← permanent files, never cleared
 
-runner.sh             ← run on VM to pull + execute scripts
-clipboard_upload.sh   ← run on VM to upload clipboard/text
-collab.sh             ← manage repo collaborators (owner only)
-reset_competition.sh  ← wipe competition data between rounds
-.cpats.env.example    ← config template
-.skill/               ← AI agent skill (auto-loaded by this AI)
-```
-
----
-
-## Token setup
-
-Go to **github.com/settings/tokens** → **Fine-grained tokens** → New token:
-- Repository access: `rishanreddy/cpats-pastebin` only
-- Permissions: **Contents → Read and write**
-
-That's it. One scope, one repo. Much safer than a classic PAT.
-
-For **public repos**: the VM runner doesn't need a token to *read* scripts — it only needs one for `--upload-output` or `clipboard_upload.sh`.
-
-For **private repos**: everyone needs a token for everything (reads and writes).
+The integration suite runs on macOS or Linux with fake `curl` and `gh` commands and never contacts GitHub. It covers concurrent publishing, conflicts, lost responses, output capture, pending uploads, username isolation, and collaborator VM setup. Set `CPATS_TEST_PWSH` to a PowerShell executable to include the native publisher test.
