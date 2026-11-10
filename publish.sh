@@ -66,3 +66,4 @@ GH_BACKEND=cli
 path=$(new_repo_path scripts "$PUBLISH_USER" "$NAME" sh)
 gh_upload "$path" "$SOURCE" "script: ${NAME} [${PUBLISH_USER}]"
 echo "Published: https://github.com/${REPO}/blob/${BRANCH}/${path}"
+echo "Next: bash results.sh --user ${PUBLISH_USER} --script ${path##*/} --wait 180"

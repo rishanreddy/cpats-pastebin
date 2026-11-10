@@ -17,7 +17,7 @@ BRANCH="$DEFAULT_BRANCH"
 GH_BACKEND=http           # http: curl or wget with --token. cli: the developer's gh login.
 GH_HTTP_CODE=000
 RATE_LIMIT_WAIT=0
-GH_RATE_LIMIT='' GH_RATE_REMAINING='' GH_TOKEN_SCOPES=''
+GH_RATE_LIMIT='' GH_RATE_REMAINING='' GH_TOKEN_SCOPES='' GH_TOKEN_EXPIRES=''
 LISTING=''
 
 log()  { printf '[cpats] %s\n' "$*"; }
@@ -41,6 +41,11 @@ _slug() { tr -d '\n' | tr '[:upper:]' '[:lower:]' | tr -c 'a-z0-9_-' '-' | cut -
 
 # Prints the value of one response header from a curl -D or wget -S dump, or nothing.
 _header() { { grep -i "^[[:space:]]*$2:" "$1" 2>/dev/null | tail -n 1 | cut -d: -f2- | tr -d ' \r'; } || true; }
+
+# Like _header, but keeps spaces inside the value, such as a date.
+_header_text() {
+    { grep -i "^[[:space:]]*$2:" "$1" 2>/dev/null | tail -n 1 | cut -d: -f2- | tr -d '\r' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'; } || true
+}
 
 # First string value of a key in a JSON file. Works on compact and pretty-printed JSON.
 _json_string() {
@@ -140,6 +145,7 @@ note_rate_limit() {
     GH_RATE_LIMIT=$(_header "$file" x-ratelimit-limit)
     GH_RATE_REMAINING=$(_header "$file" x-ratelimit-remaining)
     GH_TOKEN_SCOPES=$(_header "$file" x-oauth-scopes)
+    GH_TOKEN_EXPIRES=$(_header_text "$file" github-authentication-token-expiration)
     [[ "$GH_HTTP_CODE" == 403 || "$GH_HTTP_CODE" == 429 ]] || return 0
     retry=$(_header "$file" retry-after)
     reset=$(_header "$file" x-ratelimit-reset)
@@ -425,7 +431,7 @@ run_once() {
 
 # Tests the repo, branch, and token with two cheap requests, then explains what works.
 check_setup() {
-    local response write scopes problems=0
+    local response write scopes expires problems=0
     response=$(mktemp) || return 1
     log "Checking ${GITHUB_REPO} on branch ${BRANCH}"
     if ! gh_request GET '' "$response"; then
@@ -439,6 +445,7 @@ check_setup() {
     esac
     write=$(_json_push_permission "$response")
     scopes="$GH_TOKEN_SCOPES"
+    expires="$GH_TOKEN_EXPIRES"
     if gh_request GET "/branches/$(_enc_branch)" "$response" && [[ "$GH_HTTP_CODE" == 200 ]]; then
         ok "Branch ${BRANCH} exists."
     else
@@ -455,6 +462,11 @@ check_setup() {
         ok "Token accepted. Its account can push, and its scopes are: ${scopes}."
     else
         ok 'Token accepted, and its account can push. Fine-grained tokens also need Contents: Read and write on this repo.'
+    fi
+    if [[ -n "$GITHUB_TOKEN" && -n "$expires" ]]; then
+        log "This token expires: ${expires}. A token that lasts about a day is safest."
+    elif [[ -n "$GITHUB_TOKEN" ]]; then
+        log 'GitHub reports no expiration date for this token. Prefer one that expires within a day.'
     fi
     [[ -z "$GH_RATE_REMAINING" ]] || log "GitHub requests left this hour: ${GH_RATE_REMAINING} of ${GH_RATE_LIMIT}."
     return "$problems"

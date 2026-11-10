@@ -64,6 +64,7 @@ try {
                 throw 'GitHub did not confirm the expected published path.'
             }
             Write-Output "Published: https://github.com/$Repo/blob/$Branch/$remotePath"
+            Write-Output "Next (in Git Bash): bash results.sh --user $User --script $(Split-Path -Leaf $remotePath) --wait 180"
             return
         }
         if ($status -notin @(0, 409, 422, 500, 502, 503, 504)) {
@@ -73,6 +74,7 @@ try {
         if ($LASTEXITCODE -eq 0) {
             if ($existingSha -ne $expectedSha) { throw "Refusing to overwrite different content at $remotePath" }
             Write-Output "Published: https://github.com/$Repo/blob/$Branch/$remotePath"
+            Write-Output "Next (in Git Bash): bash results.sh --user $User --script $(Split-Path -Leaf $remotePath) --wait 180"
             return
         }
         if ($status -eq 422 -or $attempt -eq 5) {

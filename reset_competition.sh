@@ -3,8 +3,8 @@
 #
 # Deletes the files under scripts/, outputs/, and clipboard/ through the GitHub
 # API. Keeps keep/ and every tool. Run it on your own computer between
-# competitions. Uses your GitHub CLI login (`gh auth login`): no token flag and
-# no config file.
+# competitions. Run it on YOUR computer, never on the VM. It uses your GitHub CLI login
+# (`gh auth login`): no token flag and no config file.
 #
 # Usage:
 #   bash reset_competition.sh [--dry-run] [--yes] [--repo OWNER/REPO] [--branch NAME]
@@ -21,6 +21,9 @@ die()  { printf '[error] %s\n' "$*" >&2; exit 1; }
 usage() {
     cat <<EOF
 Usage: bash reset_competition.sh [options]
+
+Run this on YOUR computer, never on the VM. It uses your GitHub CLI login to delete
+files from the repo.
 
 Deletes everything under scripts/, outputs/, and clipboard/ (placeholders stay).
 Keeps keep/, the tools, the docs, and the Git history.

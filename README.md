@@ -69,13 +69,13 @@ Anyone can *read* this public repo. Being a collaborator is what allows *writing
 
 ### 2. Make a token for the VM (only to upload)
 
-Skip this step if the VM will only run scripts and you don't need its output back in GitHub.
+Skip this step if the VM will only run scripts and you don't need its output back in GitHub. Make a fresh token for each practice session or competition. Nothing needs to be saved: you type it into the VM's terminal, and you can delete it on GitHub afterwards at <https://github.com/settings/tokens>.
 
 **Classic token (works for every collaborator):**
 
 1. Open <https://github.com/settings/tokens/new?scopes=public_repo&description=cpats-pastebin>. This is *Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token (classic)*.
 2. Tick only **`public_repo`**. It is all a public repo needs.
-3. Set a short expiration, such as the length of the competition.
+3. **Make it expire in one day.** Under *Expiration* choose **Custom** and pick tomorrow's date. If you only see presets, take **7 days**, the shortest, and delete the token yourself when you finish. A forgotten or leaked token then stops working on its own.
 4. Click **Generate token** and copy it. GitHub shows it once.
 
 **Fine-grained token (only the repo owner can use this):** at <https://github.com/settings/personal-access-tokens/new> choose *Only select repositories → cpats-pastebin* and set **Contents: Read and write**. GitHub currently does not let collaborators create fine-grained tokens for someone else's personal repo. See [Choosing a token](#choosing-a-token).
@@ -109,7 +109,7 @@ Check that everything is wired up:
 bash runner.sh --check --token "$T"
 ```
 
-You should see the repo, the branch, and your token reported as working. Then start watching your folder:
+You should see the repo, the branch, and your token reported as working. `--check` also shows when the token expires. If it says GitHub reports no expiration date, make a new token that expires in a day. Then start watching your folder:
 
 ```bash
 bash runner.sh --user sid1332 --token "$T" --upload-output --loop
@@ -142,6 +142,15 @@ gh auth login
 The VM picks it up within the check interval (30 seconds with a token), runs it, and uploads the output.
 
 ### 5. Read the result
+
+`publish.sh` printed a `Next:` line. Run it on your computer. It waits for that script's output and prints it:
+
+```bash
+bash results.sh --user sid1332 --script FILENAME.sh --wait 180
+bash results.sh --user sid1332                      # or just the newest output right now
+```
+
+`results.sh` uses your `gh` login, so it needs no token. It runs in macOS, Linux, or Git Bash on Windows. See the [reference](#resultssh-on-your-computer). You can also fetch files with `gh` directly:
 
 ```bash
 # newest output from sid1332's VM
@@ -264,7 +273,22 @@ Every setting is a flag. `--repo` defaults to `rishanreddy/cpats-pastebin` and `
 | `--name SLUG` | `-Name` | A label (lowercase letters, digits, `_`, `-`, up to 40 characters) used in the file name. |
 | `--repo`, `--branch` | `-Repo`, `-Branch` | Optional overrides. |
 
-### `collab.sh` (on the owner's computer)
+### `results.sh` (on your computer)
+
+Fetches what the VM sent back, and can wait for it. It uses your `gh` login, so it takes no token.
+
+| Flag | Meaning |
+| --- | --- |
+| `--user NAME` | Required. Whose VM. |
+| `--kind outputs\|clipboard` | Script output (default) or pasted text. |
+| `--script FILE` | Only the output of this published script (the file name `publish.sh` printed). |
+| `--wait SECONDS` | Keep checking every 10 seconds for up to this long, 0 to 3600. Without `--script`, it waits for a file newer than the newest one now. |
+| `--list` | List the file names, oldest first, and exit. |
+| `--repo`, `--branch` | As above. |
+
+Exit codes: `0` printed a result, `3` timed out waiting, `4` nothing exists yet, `1` an error.
+
+### `collab.sh` (on your computer, never the VM)
 
 ```bash
 bash collab.sh add sid1332                      # invite with write access
@@ -273,9 +297,9 @@ bash collab.sh list                             # collaborators and pending invi
 bash collab.sh remove sid1332
 ```
 
-Uses your `gh` login and needs repo admin rights.
+Uses your `gh` login (no token flag) and needs repo admin rights.
 
-### `reset_competition.sh` (on the owner's computer)
+### `reset_competition.sh` (on your computer, never the VM)
 
 ```bash
 bash reset_competition.sh --dry-run   # list what would be deleted
@@ -283,7 +307,7 @@ bash reset_competition.sh             # type RESET to confirm
 bash reset_competition.sh --yes       # skip the confirmation
 ```
 
-See [Between competitions](#between-competitions).
+It uses the GitHub CLI login that is already on your computer. Nothing runs on the VM, and the VM needs no GitHub login for a reset. See [Between competitions](#between-competitions).
 
 ## Details worth knowing
 
@@ -328,11 +352,11 @@ Two VMs behind the same router share one IP address, so the 60 is shared between
 
 | Option | Reach if it leaks | Who can use it | Notes |
 | --- | --- | --- | --- |
-| **Classic token with `public_repo`** (recommended) | Write access to **every public repo that account can push to** | Any collaborator | Give it a short expiry and revoke it after the competition. |
+| **Classic token with `public_repo`** (recommended) | Write access to **every public repo that account can push to** | Any collaborator | Make it expire in **one day** (a Custom date) and delete it when you finish. |
 | **Fine-grained token** for this repo | Only this repo | Only the **repo owner** | GitHub currently doesn't let collaborators create fine-grained tokens for another person's personal repo. |
 | **GitHub organization** | Only this repo, per person | Every member | Move the repo to an organization where both teammates are members and each can make their own repo-limited fine-grained token. Worth it if you will use this for several seasons. |
 
-Never share a token in chat or commit it. Make a new token per competition.
+Never share a token in chat or commit it. Make a new one-day token for each practice session or competition.
 
 ## Security
 
@@ -340,14 +364,14 @@ This repo is **public**, so please read this section.
 
 - **Anything you publish or upload can be read by anyone**, including other teams. That covers scripts, outputs, and pastes. Don't put credentials, scoring-engine details, or anything you wouldn't want an opponent to see in a script or an output. Outputs include the VM's hostname and username. Make sure your round's rules allow using a tool like this.
 - **Git history is permanent.** [Resetting](#between-competitions) deletes the files, but old commits still show them. If you need a truly clean slate, start a fresh repo.
-- **Write access means code execution.** Whoever can write to `scripts/<user>/` can run commands on that user's VM. Only add collaborators you trust, use short-lived tokens, and revoke them afterwards at <https://github.com/settings/tokens>.
+- **Write access means code execution.** Whoever can write to `scripts/<user>/` can run commands on that user's VM. Only add collaborators you trust, use tokens that expire in a day, and delete them afterwards at <https://github.com/settings/tokens>.
 - **Scripts aren't sandboxed.** They run with the rights of whoever started the runner. `publish.sh` checks syntax only. It doesn't judge whether a script is safe, so read scripts before you publish them.
 - **A token on the command line** is visible to other users on the same machine while the command runs. The `read -rsp ... T` and `--token "$T"` pattern keeps it out of your shell history and out of any file. Don't paste a literal token into a command, and don't write one into a script or a file.
 - **A leaked token** should be revoked immediately at <https://github.com/settings/tokens>.
 
 ## Between competitions
 
-Stop all runners and publishers first, then on your computer:
+Run these on **your own computer**, using your `gh` login. A reset never runs on the VM. Stop all runners and publishers first:
 
 ```bash
 bash reset_competition.sh --dry-run
@@ -394,18 +418,27 @@ Start with `bash runner.sh --check --token "$T"`. It tests the repo, the branch,
 
 ## Using a coding agent
 
-The repo ships an agent skill at [`.agents/skills/cpats-pastebin/SKILL.md`](.agents/skills/cpats-pastebin/SKILL.md). It teaches an agent this workflow: write a script, check it, publish it for the right teammate, tell you the VM command, and later read the output.
+The repo is set up so an agent can run a whole practice round with you, and move on its own instead of waiting for each instruction. Open your agent **in this folder**. It loads [`AGENTS.md`](AGENTS.md) automatically, and Claude Code also loads [`CLAUDE.md`](CLAUDE.md).
 
-- **In this repo:** it lives in the standard `.agents/skills/` folder. If your agent doesn't load it by itself, point the agent at the file.
-- **Claude Code, anywhere:** copy it once with `mkdir -p ~/.claude/skills && cp -r .agents/skills/cpats-pastebin ~/.claude/skills/`.
+What those files teach it:
 
-Things to ask for:
+- **The context.** You are practicing CyberPatriot: harden a Linux VM image, guided by its README, without breaking what must keep working. It can't touch the VM. This repo is its only bridge, and everything in it is public.
+- **How to start by itself.** When you say "let's start", it checks your `gh` login, looks at what the repo already holds, and sends one message with a plan and a few questions, each with a recommended default.
+- **The loop.** It publishes read-only recon (`keep/recon.sh`), waits for the output with `results.sh`, works out what is wrong, proposes fixes, applies the ones you approve, checks that they worked, and repeats, without you saying "next".
+- **When to ask.**
 
-- "Write a script that lists accounts with UID 0 and publish it for sid1332."
-- "Publish a script that checks for unauthorized users, then show me what sid1332's VM printed."
-- "What did my VM upload in the last few minutes?"
+| What the agent wants to do | Does it ask you? |
+| --- | --- |
+| Read GitHub, plan, write scripts locally, read outputs | No |
+| Publish **read-only** scripts (recon, checks) | Once per session, then no |
+| Publish anything that **changes** the VM | Yes, for every batch, with a plain-language summary and an undo plan |
+| Reset the repo, manage collaborators, change this repo's code | Only when you ask |
 
-The agent runs on your computer, uses your `gh` login to publish and read, and never needs a token. A running `--loop` will execute whatever it publishes, so the skill tells the agent to publish only what you asked for and to name the target teammate.
+A good first message is enough: *"We're doing a CyberPatriot practice round on my Mint VM. Let's start."*
+
+The agent never needs a token. It publishes and reads with your `gh` login, and you type the token only into the VM's terminal. It recommends a one-day token. The detailed instructions are in [`.agents/skills/cpats-pastebin/SKILL.md`](.agents/skills/cpats-pastebin/SKILL.md) and its [CyberPatriot playbook](.agents/skills/cpats-pastebin/references/cyberpatriot-playbook.md). To use the skill from any folder in Claude Code, copy it once: `mkdir -p ~/.claude/skills && cp -r .agents/skills/cpats-pastebin ~/.claude/skills/`. Outside this repo the skill carries a short version of the rules.
+
+`keep/recon.sh` is a read-only baseline scan of a Linux image. It prints the scenario README, users, sudo rules, password policy, SSH settings, firewall, listening ports, services, risky packages, updates, scheduled tasks, media files, setuid files, and key permissions. It changes nothing and never prints password hashes. You can also run it yourself: `bash publish.sh --user NAME --source keep/recon.sh --name recon`.
 
 ## Repo layout, tests, and forking
 
@@ -414,12 +447,14 @@ The agent runs on your computer, uses your `gh` login to publish and read, and n
 | `runner.sh` | The VM runner. It also holds the shared GitHub helpers that the other scripts use. |
 | `clipboard_upload.sh` | Uploads piped or clipboard text. Keep it next to `runner.sh`. |
 | `publish.sh`, `publish.ps1` | Publish a script from your computer, in Bash or PowerShell. |
+| `results.sh` | Fetch and wait for what the VM sent back. |
 | `.gitattributes` | Keeps the shell scripts on Unix line endings in Windows checkouts. |
 | `collab.sh` | Invite and remove collaborators. |
 | `reset_competition.sh` | Clear competition data between events. |
 | `scripts/<user>/`, `outputs/<user>/`, `clipboard/<user>/` | Published scripts, run output, and pastes. |
-| `keep/` | Files that survive a reset. |
-| `.agents/skills/cpats-pastebin/SKILL.md` | The agent workflow. `.skill/` and `.agents/skills/cpats-pastebin.md` are pointers to it. |
+| `keep/` | Files that survive a reset. It holds `recon.sh`, the read-only baseline scan. |
+| `AGENTS.md`, `CLAUDE.md` | What an agent reads first: the CyberPatriot context and how proactive to be. |
+| `.agents/skills/cpats-pastebin/` | The agent skill, with its CyberPatriot playbook. `.skill/` and `.agents/skills/cpats-pastebin.md` are pointers to it. |
 | `tests/test_workflow.py` | Offline integration tests. |
 
 Run the tests with `uv run tests/test_workflow.py`, or `python3 tests/test_workflow.py`. Python is only needed here, to run the tests. The tools themselves never use it.
@@ -429,6 +464,10 @@ The tests use fake `curl`, `wget`, and `gh` commands and never contact GitHub. T
 **The VM tools are tested with a `PATH` that has only standard utilities.** The tests hand the scripts a `PATH` holding `bash`, `sed`, `awk`, `grep`, `base64`, and similar tools. It has no `python3`, `jq`, or `git`, and a run with `wget` but no `curl`. A script that reaches for anything else fails its test. The tools also target Bash 3.2, which is what macOS ships, with BSD `sed`, `awk`, and `date`, so they work on macOS, and Linux's GNU tools are more permissive.
 
 To fork the project, pass `--repo` to every tool, or change the default repo in four places: `DEFAULT_REPO` at the top of `runner.sh` (`publish.sh` and `clipboard_upload.sh` reuse it), `DEFAULT_REPO` in `collab.sh` and in `reset_competition.sh`, and the `-Repo` default in `publish.ps1`. Keep commits to the *tools* ordinary Git commits. Publish *scripts* only through `publish.sh` or `publish.ps1`, so two people never need to merge.
+
+### Keep your copy current
+
+If you cloned this repo earlier, for example into Downloads, run `git pull` in that folder. `git status -sb` shows `behind N` when updates are waiting. Your own local files are left alone. The VMs are separate: re-download `runner.sh` and `clipboard_upload.sh` there to get the same updates.
 
 ### Upgrading from the `.env` version
 

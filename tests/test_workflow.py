@@ -24,7 +24,7 @@ import unittest
 from urllib.parse import parse_qs, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS = ("runner.sh", "publish.sh", "publish.ps1", "clipboard_upload.sh", "collab.sh", "reset_competition.sh")
+TOOLS = ("runner.sh", "publish.sh", "publish.ps1", "clipboard_upload.sh", "collab.sh", "reset_competition.sh", "results.sh")
 # Everything the shell tools are allowed to use. Linux Mint, Ubuntu, and Debian all ship these.
 STANDARD_TOOLS = ("bash", "env", "cat", "tee", "tr", "sed", "grep", "awk", "cut", "sort", "head", "tail", "wc", "date",
                   "base64", "od", "mktemp", "rm", "mv", "mkdir", "uname", "id", "basename", "dirname", "sha1sum", "shasum")
@@ -190,6 +190,10 @@ def fake_tool(tool, args):
             if re.fullmatch(r"\d+", args[0]):
                 state.setdefault("sleeps", []).append(int(args[0]))
                 state["polls"] = state.get("polls", 0) + 1
+                arrival = state.get("arrives_after_sleeps")
+                if arrival and state["polls"] >= arrival["n"]:
+                    state["files"][arrival["key"]] = arrival["data"]
+                    state["arrives_after_sleeps"] = None
                 if state["polls"] >= int(os.environ.get("CPATS_TEST_POLLS", "2")):
                     code = 99
             save()
@@ -208,6 +212,8 @@ def fake_tool(tool, args):
                             "x-ratelimit-remaining": str(state.get("rate_remaining", 57))}
         if state.get("scopes") is not None and auth:
             response_headers["x-oauth-scopes"] = state["scopes"]
+        if state.get("expires") and auth:
+            response_headers["github-authentication-token-expiration"] = state["expires"]
         lost = False
         if tool in ("curl", "wget") and method == "GET" and state.get("rate_limited_requests", 0) > 0:
             state["rate_limited_requests"] -= 1
@@ -241,6 +247,10 @@ def fake_tool(tool, args):
         return 0 if status < 400 else 1
     if jq == ".sha" and status == 200:
         print(body["sha"])
+    elif jq and isinstance(body, list) and "map(.name)" in jq:
+        # Stand-in for the jq filter in results.sh: file names, oldest first.
+        for name in sorted(item["name"] for item in body if item["type"] == "file"):
+            print(name)
     elif jq and rest.startswith("git/trees/"):
         # Stand-in for the jq filter in reset_competition.sh.
         if body["truncated"]:
@@ -700,7 +710,123 @@ class WorkflowTests(unittest.TestCase):
         self.configure(missing_repo=True)
         self.assertIn("was not found", self.runner("--check").stderr)
 
+    def test_check_reports_when_the_token_expires(self):
+        self.configure(expires="2026-11-11 22:00:00 UTC")
+        for fakes, name in (("curl", "curl-bin"), ("wget", "wget-bin")):
+            with self.subTest(tool=fakes):
+                env = dict(self.env, PATH=str(self.make_bin(name, (fakes, "gh", "sleep"))))
+                result = self.runner("--check", env=env)
+                self.assert_ok(result)
+                self.assertIn("expires: 2026-11-11 22:00:00 UTC", result.stdout)
+        self.configure(expires=None)
+        undated = self.runner("--check")
+        self.assertIn("no expiration date", undated.stdout)
+        self.assertNotIn("expires:", self.runner("--check", token=False).stdout)
+
     # ── Developer-side tools ──
+
+    def seed_output(self, name, script, body="hello\n", kind="outputs", user="sid1332"):
+        header = f"script:    {script}\ntimestamp: 2026-11-10T00:00:00Z\nhost:      vm\nuser:      u\n---\n"
+        self.seed(f"{kind}/{user}/{name}", (header + body).encode() if kind == "outputs" else body.encode())
+
+    def results(self, *args, **kwargs):
+        env = dict(self.env, CPATS_TEST_POLLS="1000")
+        return self.bash("results.sh", "--repo", "test/relay", *args, env=env, **kwargs)
+
+    def test_results_prints_the_newest_output_and_lists_files(self):
+        self.seed_output("20261110_000001_a.txt", "one.sh", "first run\n")
+        self.seed_output("20261110_000002_b.txt", "two.sh", "second run\n")
+        newest = self.results("--user", "Sid1332")
+        self.assert_ok(newest)
+        self.assertIn("==> outputs/sid1332/20261110_000002_b.txt", newest.stdout)
+        self.assertIn("second run", newest.stdout)
+        self.assertNotIn("first run", newest.stdout)
+        listing = self.results("--user", "sid1332", "--list")
+        self.assertEqual(listing.stdout.split(), ["20261110_000001_a.txt", "20261110_000002_b.txt"])
+
+    def test_results_finds_the_output_for_one_published_script(self):
+        self.seed_output("20261110_000001_a.txt", "wanted.sh", "wanted output\n")
+        self.seed_output("20261110_000002_b.txt", "other.sh", "newer but different script\n")
+        result = self.results("--user", "sid1332", "--script", "scripts/sid1332/wanted.sh")
+        self.assert_ok(result)
+        self.assertIn("wanted output", result.stdout)
+        self.assertNotIn("different script", result.stdout)
+
+    def test_results_exit_codes_distinguish_nothing_yet_from_a_timeout(self):
+        nothing = self.results("--user", "sid1332")
+        self.assertEqual(nothing.returncode, 4, nothing.stderr)
+        self.assertIn("No outputs found", nothing.stderr)
+        timed_out = self.results("--user", "sid1332", "--script", "missing.sh", "--wait", "20")
+        self.assertEqual(timed_out.returncode, 3, timed_out.stderr)
+        self.assertIn("runner may not be running", timed_out.stderr)
+
+    def test_results_waits_for_a_file_to_arrive(self):
+        self.seed_output("20261110_000001_old.txt", "old.sh", "old\n")
+        arrival = {"n": 2, "key": "test/relay|main|outputs/sid1332/20261110_000009_new.txt",
+                   "data": base64.b64encode(b"script:    new.sh\n---\narrived\n").decode()}
+        self.configure(arrives_after_sleeps=arrival)
+        waited = self.results("--user", "sid1332", "--wait", "60")
+        self.assert_ok(waited)
+        self.assertIn("arrived", waited.stdout)
+        self.assertNotIn("old\n", waited.stdout.replace("==> ", ""))
+        self.configure(arrives_after_sleeps=None, sleeps=[], polls=0)
+        arrival["n"] = 1
+        arrival["key"] = "test/relay|main|outputs/sid1332/20261110_000010_script.txt"
+        arrival["data"] = base64.b64encode(b"script:    target.sh\n---\ntarget arrived\n").decode()
+        self.configure(arrives_after_sleeps=arrival)
+        targeted = self.results("--user", "sid1332", "--script", "target.sh", "--wait", "60")
+        self.assert_ok(targeted)
+        self.assertIn("target arrived", targeted.stdout)
+
+    def test_results_reads_clipboard_pastes_and_validates_flags(self):
+        self.seed_output("20261110_000001_note.txt", "", "pasted from the VM\n", kind="clipboard")
+        paste = self.results("--user", "sid1332", "--kind", "clipboard")
+        self.assert_ok(paste)
+        self.assertIn("pasted from the VM", paste.stdout)
+        for flags, message in ((["--user", "sid1332", "--kind", "scripts"], "outputs or clipboard"),
+                               (["--user", "sid1332", "--script", "x.sh", "--kind", "clipboard"], "only applies to --kind outputs"),
+                               (["--user", "sid1332", "--script", "x.py"], ".sh file name"),
+                               (["--user", "sid1332", "--wait", "99999"], "0 to 3600"),
+                               ([], "Missing --user")):
+            with self.subTest(flags=flags):
+                result = self.results(*flags)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn(message, result.stderr)
+
+    def test_publishers_print_the_matching_results_command(self):
+        published = self.bash("publish.sh", "--repo", "test/relay", "--user", "Sid1332", "--source", str(self.source), "--name", "check")
+        self.assert_ok(published)
+        name = re.search(r"/(\d{8}_\d{6}_\d{6}_check_[0-9a-f]{32}\.sh)", published.stdout).group(1)
+        self.assertIn(f"Next: bash results.sh --user sid1332 --script {name} --wait 180", published.stdout)
+
+    def test_recon_script_is_read_only_and_valid(self):
+        recon = ROOT / "keep" / "recon.sh"
+        text = recon.read_text()
+        self.assertTrue(text.startswith("#!/usr/bin/env bash\n"))
+        self.assertNotIn("\r", text)
+        self.assertEqual(subprocess.run(["bash", "-n", str(recon)]).returncode, 0)
+        # Drop comments and quoted strings, then look for anything that could change the VM.
+        code = "\n".join(line.split(" #")[0] for line in text.splitlines() if not line.lstrip().startswith("#"))
+        code = re.sub(r"'[^']*'|\"[^\"]*\"", "''", code)
+        code = re.sub(r"\bhave\s+\S+", "have", code)  # "have tool" only checks that a tool exists
+        forbidden = {
+            "a file write": r"(?<![0-9&-])>>?(?!\s*(/dev/null|&))",
+            "a file or account command": r"\b(rm|mv|cp|ln|touch|mkdir|chmod|chown|chgrp|tee|dd|kill|pkill|killall|shutdown|reboot|halt|"
+                                         r"useradd|userdel|usermod|groupadd|groupdel|gpasswd|chpasswd|newusers|visudo|crontab\s+-[er])\b",
+            "passwd that is not -S": r"(?<![\w/.-])passwd\b(?!\s+-S)",
+            "apt that is not a simulation": r"(?<![\w/.-])apt(-get)?\b(?!\s+-s\b)",
+            "dpkg that is not dpkg-query": r"(?<![\w/.-])dpkg\b(?!-query)(?![.])",
+            "systemctl that is not a list": r"(?<![\w/.-])systemctl\s+(?!list-)",
+            "ufw that is not status": r"(?<![\w/.-])ufw\s+(?!status)",
+            "snap that is not list": r"(?<![\w/.-])snap\s+(?!list)",
+            "sysctl that is not a read": r"(?<![\w/.-])sysctl\s+(?!-n)",
+            "find that deletes or executes": r"-(delete|exec|execdir|ok)\b",
+            "an in-place edit": r"\bsed\s+-i",
+            "a download": r"\b(curl|wget)\b",
+            "a read of a secret file": r"\b(cat|head|tail|grep|sed|awk|less|more|strings|base64)\b[^\n|;]*(/etc/shadow|/etc/gshadow|id_rsa|id_ed25519|\.ssh/)",
+        }
+        for what, pattern in forbidden.items():
+            self.assertIsNone(re.search(pattern, code), f"recon.sh contains {what}")
 
     def test_collaborator_management_uses_the_gh_login(self):
         self.assertIn("Invitation sent", self.bash("collab.sh", "add", "sid1332", "--repo", "test/relay").stdout)
@@ -747,6 +873,52 @@ class WorkflowTests(unittest.TestCase):
                 result = self.bash(script, "--help")
                 self.assert_ok(result)
                 self.assertIn(flag, result.stdout)
+
+    # ── The instructions an agent reads ──
+
+    DOCS = ("README.md", "AGENTS.md", "CLAUDE.md", ".agents/skills/cpats-pastebin/SKILL.md",
+            ".agents/skills/cpats-pastebin/references/cyberpatriot-playbook.md", "keep/README.md")
+
+    def test_every_flag_in_the_docs_exists_in_a_tool(self):
+        known = set()
+        for script in ("runner.sh", "clipboard_upload.sh", "publish.sh", "collab.sh", "reset_competition.sh", "results.sh"):
+            known |= set(re.findall(r"(?<![\w-])--[a-z][a-z-]*", self.bash(script, "--help").stdout))
+        # Flags of other programs that the docs show in example commands: gh, git, and systemctl.
+        known |= {"--jq", "--public", "--push", "--help", "--now"}
+        for name in self.DOCS:
+            text = (ROOT / name).read_text()
+            for flag in sorted(set(re.findall(r"(?<![\w-])--[a-z][a-z-]*", text)) - known):
+                self.fail(f"{name} mentions {flag}, which no tool documents. Fix the doc or the tool.")
+
+    def test_doc_links_and_referenced_files_exist(self):
+        for name in self.DOCS:
+            base = (ROOT / name).parent
+            text = (ROOT / name).read_text()
+            for target in re.findall(r"\]\((?!https?:|#)([^)#\s]+)", text):
+                self.assertTrue((base / target).exists(), f"{name} links to missing {target}")
+            for path in re.findall(r"`((?:keep|\.agents|tests)/[\w./-]+\.(?:sh|md|py))`", text):
+                self.assertTrue((ROOT / path).exists(), f"{name} mentions missing {path}")
+
+    def test_agent_instructions_carry_the_context_and_the_proactive_rules(self):
+        agents = (ROOT / "AGENTS.md").read_text()
+        claude = (ROOT / "CLAUDE.md").read_text()
+        self.assertEqual(claude.splitlines()[0], "@AGENTS.md", "CLAUDE.md must import AGENTS.md")
+        for phrase in ("CyberPatriot", "practice round", "scoring engine", "README", "PUBLIC", "keep/recon.sh",
+                       "results.sh", "Never ask the user whether a script finished", "read-only", "one day",
+                       "They never run on the VM"):
+            self.assertIn(phrase, agents, f"AGENTS.md lost: {phrase!r}")
+        for rule in ("Never create an env file", "settings are flags", "Read-only means", "Ask every time"):
+            self.assertIn(rule.lower(), agents.lower(), f"AGENTS.md lost: {rule!r}")
+        skill = (ROOT / ".agents/skills/cpats-pastebin/SKILL.md").read_text()
+        self.assertTrue(skill.startswith("---\nname: cpats-pastebin\ndescription: "))
+        for phrase in ("proactive", "keep/recon.sh", "expires in one day", "never run on the VM"):  # skill wording
+            self.assertIn(phrase, skill, f"SKILL.md lost: {phrase!r}")
+        readme = (ROOT / "README.md").read_text()
+        for phrase in ("expire in one day", "never the VM", "AGENTS.md", "results.sh"):
+            self.assertIn(phrase, readme, f"README.md lost: {phrase!r}")
+        for name in ("AGENTS.md", ".agents/skills/cpats-pastebin/SKILL.md"):
+            text = (ROOT / name).read_text()
+            self.assertNotIn(".cpats.env", text, f"{name} must not tell anyone to use an env file")
 
     @unittest.skipUnless(os.environ.get("CPATS_TEST_PWSH"), "Set CPATS_TEST_PWSH to test PowerShell")
     def test_powershell_publish_retries_and_checks_syntax(self):
