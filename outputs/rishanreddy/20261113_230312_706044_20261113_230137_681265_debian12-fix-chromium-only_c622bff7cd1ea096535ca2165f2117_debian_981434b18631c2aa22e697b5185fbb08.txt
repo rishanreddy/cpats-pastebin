@@ -1,0 +1,104 @@
+script:    20261113_230137_681265_debian12-fix-chromium-only_c622bff7cd1ea096535ca2165f211775.sh
+timestamp: 2026-11-13T23:02:43Z
+host:      debian
+user:      root
+---
+
+===== CHROMIUM-ONLY UPGRADE PREFLIGHT =====
+/root/afa-chromium-20261113T225851Z-54894/packages/chromium-common_113.0.5672.126-1_amd64.deb: OK
+/root/afa-chromium-20261113T225851Z-54894/packages/chromium-sandbox_113.0.5672.126-1_amd64.deb: OK
+/root/afa-chromium-20261113T225851Z-54894/packages/chromium_113.0.5672.126-1_amd64.deb: OK
+3 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Inst chromium [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst chromium-sandbox [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst chromium-common [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst libharfbuzz-subset0 (6.0.0+dfsg-3 Debian:12.15/oldstable [amd64])
+Conf chromium (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf chromium-sandbox (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf chromium-common (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf libharfbuzz-subset0 (6.0.0+dfsg-3 Debian:12.15/oldstable [amd64])
+
+===== BACK UP CLOSED-BROWSER PROFILES =====
+Private profile backup saved for pparker; contents omitted.
+
+===== INSTALL ONLY THE APPROVED CHROMIUM UPDATE =====
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  geoip-database libevent-2.1-7 libgeoip1 libjsoncpp25 liblua5.3-0
+  libluajit-5.1-2 libluajit-5.1-common libnet1 libopusfile0 libre2-9
+  libsdl2-mixer-2.0-0 libu2f-udev libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libharfbuzz-subset0
+Suggested packages:
+  chromium-l10n chromium-shell chromium-driver
+The following NEW packages will be installed:
+  libharfbuzz-subset0
+The following packages will be upgraded:
+  chromium chromium-common chromium-sandbox
+3 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Need to get 115 MB of archives.
+After this operation, 130 MB of additional disk space will be used.
+Get:1 http://security.debian.org/debian-security bookworm-security/main amd64 chromium amd64 156.0.8078.79-1~deb12u1 [81.2 MB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libharfbuzz-subset0 amd64 6.0.0+dfsg-3 [1931 kB]
+Get:3 http://security.debian.org/debian-security bookworm-security/main amd64 chromium-sandbox amd64 156.0.8078.79-1~deb12u1 [164 kB]
+Get:4 http://security.debian.org/debian-security bookworm-security/main amd64 chromium-common amd64 156.0.8078.79-1~deb12u1 [31.6 MB]
+apt-listchanges: Reading changelogs...
+apt-listchanges: News
+---------------------
+
+chromium (155.0.8059.39-1) unstable; urgency=high
+
+  We now patch Chromium directly to make DuckDuckGo the default search
+  engine, instead of using a configuration setting in master_preferences.
+  Our modifications also make more options available in the search engine
+  selection dialog.
+
+  This change should not affect the selected search engine in an existing
+  user profile.
+
+  Additionally, a handful of obsolete keys have been dropped from the
+  master_preferences file, and we will follow Google's lead in renaming
+  this file to initial_preferences in an upcoming release.
+
+ -- Daniel Richard G. <skunk@iSKUNK.ORG>  Wed, 07 Oct 2026 01:00:00 -0400
+
+Fetched 115 MB in 4s (29.9 MB/s)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 160902 files and directories currently installed.)
+Preparing to unpack .../chromium_156.0.8078.79-1~deb12u1_amd64.deb ...
+Unpacking chromium (156.0.8078.79-1~deb12u1) over (113.0.5672.126-1) ...
+Preparing to unpack .../chromium-sandbox_156.0.8078.79-1~deb12u1_amd64.deb ...
+Unpacking chromium-sandbox (156.0.8078.79-1~deb12u1) over (113.0.5672.126-1) ...
+Preparing to unpack .../chromium-common_156.0.8078.79-1~deb12u1_amd64.deb ...
+Unpacking chromium-common (156.0.8078.79-1~deb12u1) over (113.0.5672.126-1) ...
+Selecting previously unselected package libharfbuzz-subset0:amd64.
+Preparing to unpack .../libharfbuzz-subset0_6.0.0+dfsg-3_amd64.deb ...
+Unpacking libharfbuzz-subset0:amd64 (6.0.0+dfsg-3) ...
+Setting up chromium-sandbox (156.0.8078.79-1~deb12u1) ...
+Setting up libharfbuzz-subset0:amd64 (6.0.0+dfsg-3) ...
+Setting up chromium-common (156.0.8078.79-1~deb12u1) ...
+Setting up chromium (156.0.8078.79-1~deb12u1) ...
+Installing new version of config file /etc/chromium/master_preferences ...
+Processing triggers for desktop-file-utils (0.26-1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for mate-menus (1.26.0-3) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for mailcap (3.70+nmu1) ...
+
+===== VALIDATE UPGRADED BROWSER AND REQUIRED SETTINGS =====
+chromium installed 156.0.8078.79-1~deb12u1
+chromium-common installed 156.0.8078.79-1~deb12u1
+chromium-sandbox installed 156.0.8078.79-1~deb12u1
+libharfbuzz-subset0 installed 6.0.0+dfsg-3
+Chromium 156.0.8078.79 built on Debian GNU/Linux 12 (bookworm)
+Chromium update validated. Browser default, security sources, and required services are preserved.
+Private rollback packages and pre-upgrade profiles: /root/afa-chromium-20261113T225851Z-54894
+Undo if necessary: close Chromium, reinstall the saved old packages with --allow-downgrades, then restore the saved profile rather than opening a migrated profile with the old browser.
+The required new dependency may remain installed after package rollback.
+No hacking tools, forensics files, or user passwords were changed.
+
+---
+exit code: 0
