@@ -1,0 +1,41 @@
+script:    20261113_225244_184284_remove-netcat_def447a3e8c1455cba6325718c8850a5.sh
+timestamp: 2026-11-13T22:53:07Z
+host:      debian
+user:      root
+---
+
+Command: env DEBIAN_FRONTEND=noninteractive LC_ALL=C apt-get -o APT::Get::AutomaticRemove=false -o APT::Get::Purge=false -o APT::Get::Upgrade=false -o APT::Get::No-New-Install=true --assume-yes remove -- netcat-traditional
+
+APT preview:
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  geoip-database libgeoip1 liblua5.3-0 libluajit-5.1-2 libluajit-5.1-common
+  libnet1 libopusfile0 libsdl2-mixer-2.0-0 libwpe-1.0-1
+  libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  netcat-traditional
+0 upgraded, 0 newly installed, 1 to remove and 4 not upgraded.
+Remv netcat-traditional [1.10-47]
+To reinstall if needed: sudo apt-get install -- netcat-traditional
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  geoip-database libgeoip1 liblua5.3-0 libluajit-5.1-2 libluajit-5.1-common
+  libnet1 libopusfile0 libsdl2-mixer-2.0-0 libwpe-1.0-1
+  libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  netcat-traditional
+0 upgraded, 0 newly installed, 1 to remove and 4 not upgraded.
+After this operation, 146 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 160949 files and directories currently installed.)
+Removing netcat-traditional (1.10-47) ...
+Processing triggers for man-db (2.11.2-2) ...
+Verified: netcat-traditional is no longer installed.
+
+---
+exit code: 0
