@@ -1,0 +1,37 @@
+script:    20261113_222636_182940_debian12-restore-security-source_abb496b7158f50966b68fae6a7fd25ec.sh
+timestamp: 2026-11-13T22:27:10Z
+host:      debian
+user:      root
+---
+
+===== TARGETED SECURITY-UPDATE SOURCE RESTORE =====
+Before: bookworm-security is missing from the restored original source file.
+Configured official bookworm, bookworm-updates, and bookworm-security sources.
+Source backup: /root/afa-security-source-20261113T222710Z-48197/sources.list.before
+
+===== REFRESH INDEXES, NO PACKAGE INSTALLATION =====
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Hit:2 http://security.debian.org/debian-security bookworm-security InRelease
+Hit:3 http://deb.debian.org/debian bookworm-updates InRelease
+Reading package lists...
+
+===== VERIFY SECURITY INDEX AND REQUIRED SERVICES =====
+ 500 http://security.debian.org/debian-security bookworm-security/non-free-firmware amd64 Packages
+ 500 http://security.debian.org/debian-security bookworm-security/non-free amd64 Packages
+ 500 http://security.debian.org/debian-security bookworm-security/contrib amd64 Packages
+ 500 http://security.debian.org/debian-security bookworm-security/main amd64 Packages
+ssh: active
+lightdm: active
+ccsclient: active
+
+Installed approved-software versions, unchanged by this script:
+chromium installed 113.0.5672.126-1
+openssh-server installed 1:9.2p1-2+deb12u10
+sudo installed 1.9.13p3-1+deb12u4
+
+Official security-update source restored and package indexes refreshed.
+No packages or services were installed, removed, downgraded, upgraded, stopped, or restarted.
+Refresh the normal Desktop Scoring Report to check the five-point item.
+
+---
+exit code: 0
