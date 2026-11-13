@@ -1,0 +1,68 @@
+script:    20261113_231916_305384_audit-scheduled-jobs-sudoers_3a17de20cd8a4f24a5ecad360dac9ff7.sh
+timestamp: 2026-11-13T23:20:25Z
+host:      debian
+user:      root
+---
+
+== Cron files (counts only) ==
+/etc/crontab jobs=4 network-tool-lines=0
+/etc/cron.d/anacron jobs=1 network-tool-lines=0
+/etc/cron.d/e2scrub_all jobs=2 network-tool-lines=0
+
+== Executable periodic cron entries ==
+/etc/cron.daily/0anacron (package-owned)
+/etc/cron.daily/apt-compat (package-owned)
+/etc/cron.daily/dpkg (package-owned)
+/etc/cron.daily/logrotate (package-owned)
+/etc/cron.daily/man-db (package-owned)
+/etc/cron.daily/plocate (package-owned)
+/etc/cron.weekly/0anacron (package-owned)
+/etc/cron.weekly/man-db (package-owned)
+/etc/cron.monthly/0anacron (package-owned)
+
+== Installed systemd timers ==
+anacron.timer                enabled enabled
+apt-daily-upgrade.timer      enabled enabled
+apt-daily.timer              enabled enabled
+dpkg-db-backup.timer         enabled enabled
+e2scrub_all.timer            enabled enabled
+fstrim.timer                 enabled enabled
+logrotate.timer              enabled enabled
+man-db.timer                 enabled enabled
+plocate-updatedb.timer       enabled enabled
+systemd-tmpfiles-clean.timer static  -
+
+== Active systemd timers ==
+anacron.timer anacron.service
+dpkg-db-backup.timer dpkg-db-backup.service
+logrotate.timer logrotate.service
+plocate-updatedb.timer plocate-updatedb.service
+man-db.timer man-db.service
+apt-daily-upgrade.timer apt-daily-upgrade.service
+apt-daily.timer apt-daily.service
+systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+e2scrub_all.timer e2scrub_all.service
+fstrim.timer fstrim.service
+
+== Sudoers validation ==
+Sudoers syntax, ownership, and permissions passed visudo.
+
+== Sudoers rules to review locally ==
+
+== README standard users with a sudo policy grant ==
+bbanner has at least one sudo grant; review locally with sudo -l -U bbanner
+swilson has at least one sudo grant; review locally with sudo -l -U swilson
+sstrange has at least one sudo grant; review locally with sudo -l -U sstrange
+slang has at least one sudo grant; review locally with sudo -l -U slang
+cdanvers has at least one sudo grant; review locally with sudo -l -U cdanvers
+okoye has at least one sudo grant; review locally with sudo -l -U okoye
+kbishop has at least one sudo grant; review locally with sudo -l -U kbishop
+ybelova has at least one sudo grant; review locally with sudo -l -U ybelova
+jfoster has at least one sudo grant; review locally with sudo -l -U jfoster
+nleeds has at least one sudo grant; review locally with sudo -l -U nleeds
+mjwatson has at least one sudo grant; review locally with sudo -l -U mjwatson
+jtorres has at least one sudo grant; review locally with sudo -l -U jtorres
+pcarter has at least one sudo grant; review locally with sudo -l -U pcarter
+
+---
+exit code: 0
