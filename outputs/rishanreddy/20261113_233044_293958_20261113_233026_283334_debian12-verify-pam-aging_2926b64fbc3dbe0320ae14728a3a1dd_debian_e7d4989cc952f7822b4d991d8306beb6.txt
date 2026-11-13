@@ -1,0 +1,62 @@
+script:    20261113_233026_283334_debian12-verify-pam-aging_2926b64fbc3dbe0320ae14728a3a1dd7.sh
+timestamp: 2026-11-13T23:30:43Z
+host:      debian
+user:      root
+---
+
+===== INDEPENDENT PAM VERIFICATION =====
+PASS: Quality then history then pam_unix, with required token propagation and yescrypt
+password	requisite pam_pwquality.so retry=3 minlen=14 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 enforce_for_root
+password	requisite pam_pwhistory.so remember=5 retry=3 use_authtok enforce_for_root
+password	[success=1 default=ignore]	pam_unix.so obscure use_authtok try_first_pass yescrypt
+PASS: No pam_unix nullok option in common-auth
+PASS: Module available: pam_pwquality.so
+PASS: Module available: pam_pwhistory.so
+PASS: Module available: pam_unix.so
+PASS: Module available: pam_deny.so
+PASS: Module available: pam_permit.so
+PASS: Dictionary component available: pwd
+PASS: Dictionary component available: pwi
+PASS: Dictionary component available: hwm
+PASS: Password-history file is private root:root 600
+
+Current password-aging defaults, no changes:
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_WARN_AGE	7
+
+Authorized account aging metadata, no passwords or hashes:
+name status last-change minimum-days maximum-days warning-days inactive-days
+pparker P 2026-10-11 0 99999 7 -1
+tstark P 2026-10-11 0 99999 7 -1
+ppotts P 2026-10-11 0 99999 7 -1
+hhogan P 2026-10-11 0 99999 7 -1
+nfury P 2026-10-11 0 99999 7 -1
+mhill P 2026-10-11 0 99999 7 -1
+pcoulson P 2026-10-11 0 99999 7 -1
+bbanner P 2026-10-11 0 99999 7 -1
+swilson P 2026-10-11 0 99999 7 -1
+sstrange P 2026-10-11 0 99999 7 -1
+slang P 2026-10-11 0 99999 7 -1
+cdanvers P 2026-10-11 0 99999 7 -1
+okoye P 2026-10-11 0 99999 7 -1
+kbishop P 2026-10-11 0 99999 7 -1
+ybelova P 2026-10-11 0 99999 7 -1
+jfoster P 2026-10-11 0 99999 7 -1
+nleeds P 2026-10-11 0 99999 7 -1
+mjwatson P 2026-10-11 0 99999 7 -1
+jtorres P 2026-10-11 0 99999 7 -1
+pcarter P 2026-10-11 0 99999 7 -1
+PASS: ssh active
+PASS: lightdm active
+PASS: ccsclient active
+PASS: SSH configuration validates
+PASS: UFW active
+PASS: Security-update source retained
+PASS: Package database clean
+
+Verification failures: 0
+Interactive login and password-change tests require local user-entered credentials.
+
+---
+exit code: 0
