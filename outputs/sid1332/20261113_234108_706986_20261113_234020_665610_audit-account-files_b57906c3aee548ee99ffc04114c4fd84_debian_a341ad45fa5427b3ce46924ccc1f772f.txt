@@ -1,0 +1,10 @@
+script:    20261113_234020_665610_audit-account-files_b57906c3aee548ee99ffc04114c4fd84.sh
+timestamp: 2026-11-13T23:41:08Z
+host:      debian
+user:      root
+---
+
+Account audit complete. Read the private report on the VM: sudo cat /var/tmp/cpats-account-audit.PN1sdcTC/report.txt
+
+---
+exit code: 0
