@@ -1,0 +1,52 @@
+script:    20261113_230553_358596_debian12-verify-chromium-policy_7df4518aecba8b955586d698c1d029b4.sh
+timestamp: 2026-11-13T23:06:47Z
+host:      debian
+user:      root
+---
+
+===== INDEPENDENT CHROMIUM VERIFICATION =====
+chromium installed=156.0.8078.79-1~deb12u1 candidate=156.0.8078.79-1~deb12u1 state=installed
+PASS: chromium matches the official candidate
+chromium-common installed=156.0.8078.79-1~deb12u1 candidate=156.0.8078.79-1~deb12u1 state=installed
+PASS: chromium-common matches the official candidate
+chromium-sandbox installed=156.0.8078.79-1~deb12u1 candidate=156.0.8078.79-1~deb12u1 state=installed
+PASS: chromium-sandbox matches the official candidate
+Chromium 156.0.8078.79 built on Debian GNU/Linux 12 (bookworm)
+PASS: Chromium remains the system browser default
+
+Primary user browser MIME defaults:
+text/html=chromium.desktop
+x-scheme-handler/http=chromium.desktop
+x-scheme-handler/https=chromium.desktop
+PASS: ssh active
+PASS: lightdm active
+PASS: ccsclient active
+PASS: UFW remains active
+PASS: Security-update source retained
+PASS: Package database clean
+PASS: Private pre-upgrade profile backup exists
+
+===== REMAINING POLICY INVENTORY, NO CHANGES =====
+
+Automatic-update intervals, selected numeric directives only:
+
+Password aging defaults:
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_WARN_AGE	7
+
+Active password modules and selected options only:
+/etc/pam.d/common-password:
+module=pam_unix.so obscure yescrypt 
+module=pam_deny.so 
+module=pam_permit.so 
+module=pam_gnome_keyring.so 
+/etc/pam.d/common-auth:
+module=pam_unix.so nullok 
+module=pam_deny.so 
+module=pam_permit.so 
+
+Browser verification failures: 0
+
+---
+exit code: 0
