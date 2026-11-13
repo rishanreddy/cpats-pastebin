@@ -1,0 +1,33 @@
+script:    20261113_225835_176215_debian12-chromium-backup_7cb9387d95fd3874679a986b0e4e58f0.sh
+timestamp: 2026-11-13T22:58:51Z
+host:      debian
+user:      root
+---
+
+===== CHROMIUM ROLLBACK PACKAGE PREPARATION =====
+Backup directory: /root/afa-chromium-20261113T225851Z-54894
+
+Fetching isolated, signed historical repository metadata.
+Get:1 https://snapshot.debian.org/archive/debian/20230611 bookworm InRelease [147 kB]
+Get:2 https://snapshot.debian.org/archive/debian/20230611 bookworm/main amd64 Packages [8904 kB]
+Fetched 9051 kB in 3s (2919 kB/s)
+Reading package lists...
+
+Downloading the original three packages for rollback only.
+Get:1 https://snapshot.debian.org/archive/debian/20230611 bookworm/main amd64 chromium amd64 113.0.5672.126-1 [68.6 MB]
+Fetched 68.6 MB in 7s (9973 kB/s)
+Get:1 https://snapshot.debian.org/archive/debian/20230611 bookworm/main amd64 chromium-common amd64 113.0.5672.126-1 [4921 kB]
+Fetched 4921 kB in 1s (4615 kB/s)
+Get:1 https://snapshot.debian.org/archive/debian/20230611 bookworm/main amd64 chromium-sandbox amd64 113.0.5672.126-1 [78.1 kB]
+Fetched 78.1 kB in 0s (207 kB/s)
+
+===== VALIDATE ROLLBACK ARCHIVES =====
+Saved verified rollback archive: chromium 113.0.5672.126-1
+Saved verified rollback archive: chromium-common 113.0.5672.126-1
+Saved verified rollback archive: chromium-sandbox 113.0.5672.126-1
+Global security sources are unchanged. No installed packages were changed.
+READY: /root/afa-chromium-20261113T225851Z-54894
+Next: ensure Chromium is closed, back up profiles, and apply the approved upgrade.
+
+---
+exit code: 0
