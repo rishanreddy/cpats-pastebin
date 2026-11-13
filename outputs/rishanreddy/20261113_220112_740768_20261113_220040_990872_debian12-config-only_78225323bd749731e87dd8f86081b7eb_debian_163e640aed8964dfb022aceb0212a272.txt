@@ -1,0 +1,47 @@
+script:    20261113_220040_990872_debian12-config-only_78225323bd749731e87dd8f86081b7eb.sh
+timestamp: 2026-11-13T22:01:12Z
+host:      debian
+user:      root
+---
+
+===== CONFIGURATION-ONLY READ-ONLY CHECK =====
+Forensics is assigned to the user's colleague.
+
+Sudo group:
+sudo:x:27:pparker,tstark,ppotts,hhogan,nfury,mhill,pcoulson,bbanner,sstrange
+
+Sudo configuration validation:
+/etc/sudoers: parsed OK
+/etc/sudoers.d/README: parsed OK
+
+Account database tools:
+/usr/bin/gpasswd
+/usr/sbin/sshd
+/usr/bin/systemctl
+
+SSH global configuration, selected directives only:
+/etc/ssh/sshd_config:Include /etc/ssh/sshd_config.d/*.conf
+/etc/ssh/sshd_config:PermitRootLogin yes
+/etc/ssh/sshd_config:PermitEmptyPasswords yes
+/etc/ssh/sshd_config:UsePAM yes
+
+LightDM seat headers and guest settings only:
+/etc/lightdm/lightdm.conf:[LightDM]
+/etc/lightdm/lightdm.conf:[Seat:*]
+/etc/lightdm/lightdm.conf:allow-guest=true
+/etc/lightdm/lightdm.conf:[XDMCPServer]
+/etc/lightdm/lightdm.conf:[VNCServer]
+/usr/share/lightdm/lightdm.conf.d/01_debian.conf:[Seat:*]
+
+SSH active and enabled state:
+active
+enabled
+
+Required service state:
+active
+active
+
+Configuration-only check complete. No changes applied.
+
+---
+exit code: 0
