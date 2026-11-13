@@ -1,0 +1,62 @@
+script:    20261113_224423_884681_debian12-remaining-candidates_683fd425605ac72a493d49687a338d6f.sh
+timestamp: 2026-11-13T22:45:14Z
+host:      debian
+user:      root
+---
+
+===== INSTALLED SOFTWARE CANDIDATES =====
+chromium installed 113.0.5672.126-1
+chromium-common installed 113.0.5672.126-1
+chromium-sandbox installed 113.0.5672.126-1
+ettercap-common installed 1:0.8.3.1-11
+ettercap-graphical installed 1:0.8.3.1-11
+inetutils-telnet installed 2:2.4-2+deb12u3
+netcat-traditional installed 1.10-47
+ufw installed 0.36.2-1
+
+===== CHROMIUM VERSION CANDIDATES =====
+chromium:
+  Installed: 113.0.5672.126-1
+  Candidate: 156.0.8078.79-1~deb12u1
+chromium-common:
+  Installed: 113.0.5672.126-1
+  Candidate: 156.0.8078.79-1~deb12u1
+chromium-sandbox:
+  Installed: 113.0.5672.126-1
+  Candidate: 156.0.8078.79-1~deb12u1
+
+===== CHROMIUM UPDATE PLAN, SIMULATION ONLY =====
+3 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Inst chromium [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst chromium-sandbox [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst chromium-common [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst libharfbuzz-subset0 (6.0.0+dfsg-3 Debian:12.15/oldstable [amd64])
+Conf chromium (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf chromium-sandbox (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf chromium-common (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf libharfbuzz-subset0 (6.0.0+dfsg-3 Debian:12.15/oldstable [amd64])
+
+===== MEDIA FILES IN EMPLOYEE MUSIC FOLDER, LIST ONLY =====
+
+===== SELECTED CURRENT PASSWORD POLICY =====
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_WARN_AGE	7
+/etc/pam.d/common-password:
+
+
+
+module=pam_unix.so obscure yescrypt 
+module=pam_deny.so 
+module=pam_permit.so 
+module=pam_gnome_keyring.so 
+/etc/pam.d/common-auth:
+
+module=pam_unix.so nullok 
+module=pam_deny.so 
+module=pam_permit.so 
+
+Read-only candidate review complete. Nothing was changed.
+
+---
+exit code: 0
