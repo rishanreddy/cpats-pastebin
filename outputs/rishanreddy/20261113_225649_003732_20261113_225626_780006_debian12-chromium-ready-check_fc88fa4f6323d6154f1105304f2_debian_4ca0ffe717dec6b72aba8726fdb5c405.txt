@@ -1,0 +1,37 @@
+script:    20261113_225626_780006_debian12-chromium-ready-check_fc88fa4f6323d6154f1105304f2cdc8e.sh
+timestamp: 2026-11-13T22:56:48Z
+host:      debian
+user:      root
+---
+
+===== CHROMIUM PROCESS NAMES, ARGUMENTS OMITTED =====
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+Chromium processes: 15
+
+===== ROOT FILESYSTEM SPACE =====
+Filesystem     1024-blocks    Used Available Capacity Mounted on
+/dev/sda3         22013424 5125392  15744480      25% /
+
+===== PROFILE BACKUP SIZES, CONTENTS OMITTED =====
+35160	/home/pparker/.config/chromium
+
+===== PACKAGE DATABASE HEALTH =====
+No incomplete package states.
+Read-only readiness check complete.
+
+---
+exit code: 0
