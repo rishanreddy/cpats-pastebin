@@ -1,0 +1,10 @@
+script:    20261113_235049_810218_audit-browser-defaults_566806c9643d4f11be2dd493f8a724c6.sh
+timestamp: 2026-11-13T23:51:23Z
+host:      debian
+user:      root
+---
+
+Browser audit complete. Read the private report on the VM: sudo cat /var/tmp/cpats-browser-audit.cYykoZYd/report.txt
+
+---
+exit code: 0
