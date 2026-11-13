@@ -1,0 +1,30 @@
+script:    20261113_223502_290737_debian12-fix-accounts-ftp_c05bc5f89b3c06e892f2c3a32bcf0642.sh
+timestamp: 2026-11-13T22:35:20Z
+host:      debian
+user:      root
+---
+
+===== PREFLIGHT =====
+
+===== PRIVATE BACKUPS =====
+Backup directory: /root/afa-accounts-ftp-20261113T223521Z-51864
+
+===== FIXES 1 AND 2: REMOVE UNAUTHORIZED LOGIN ACCOUNTS =====
+Removed login account brumlow, without the home-removal option.
+Removed login account azola, without the home-removal option.
+
+===== FIX 3: STOP AND DISABLE FTP =====
+Synchronizing state of vsftpd.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install disable vsftpd
+Removed "/etc/systemd/system/multi-user.target.wants/vsftpd.service".
+
+===== VALIDATE AUTHORIZED ACCESS AND REQUIRED SERVICES =====
+Both unauthorized accounts are absent; existing home paths and ownership are preserved.
+All twenty authorized accounts exist, and all seven authorized administrators retain sudo.
+FTP is disabled/inactive, and port 21 has no listener. SSH remains enabled and listening.
+SSH, LightDM, and CCS Client are active. No package or repository changes were made.
+Private backups for undo: /root/afa-accounts-ftp-20261113T223521Z-51864
+Undo: restore the saved account databases and original FTP enablement/running state.
+
+---
+exit code: 0
