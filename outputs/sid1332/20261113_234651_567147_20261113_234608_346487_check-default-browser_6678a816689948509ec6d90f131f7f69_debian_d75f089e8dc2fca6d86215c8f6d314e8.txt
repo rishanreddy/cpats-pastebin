@@ -1,0 +1,10 @@
+script:    20261113_234608_346487_check-default-browser_6678a816689948509ec6d90f131f7f69.sh
+timestamp: 2026-11-13T23:46:51Z
+host:      debian
+user:      root
+---
+
+PASS: Chromium is the default browser for pparker.
+
+---
+exit code: 0
