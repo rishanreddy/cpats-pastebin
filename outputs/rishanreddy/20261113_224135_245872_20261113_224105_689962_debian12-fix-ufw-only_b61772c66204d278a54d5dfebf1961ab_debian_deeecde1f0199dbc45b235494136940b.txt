@@ -1,0 +1,62 @@
+script:    20261113_224105_689962_debian12-fix-ufw-only_b61772c66204d278a54d5dfebf1961ab.sh
+timestamp: 2026-11-13T22:41:28Z
+host:      debian
+user:      root
+---
+
+===== UFW-ONLY PREFLIGHT =====
+
+===== PRIVATE FIREWALL BACKUPS =====
+Backup directory: /root/afa-ufw-only-20261113T224128Z-52529
+
+===== INSTALL UFW ONLY =====
+Inst ufw (0.36.2-1 Debian:12.15/oldstable [all])
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  liblua5.3-0 libopusfile0 libsdl2-mixer-2.0-0 libwpe-1.0-1
+  libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+Suggested packages:
+  rsyslog
+The following NEW packages will be installed:
+  ufw
+Preconfiguring packages ...
+0 upgraded, 1 newly installed, 0 to remove and 4 not upgraded.
+Need to get 0 B/168 kB of archives.
+After this operation, 878 kB of additional disk space will be used.
+Selecting previously unselected package ufw.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 161012 files and directories currently installed.)
+Preparing to unpack .../archives/ufw_0.36.2-1_all.deb ...
+Unpacking ufw (0.36.2-1) ...
+Setting up ufw (0.36.2-1) ...
+Processing triggers for man-db (2.11.2-2) ...
+
+===== ALLOW SSH BEFORE ENABLING FIREWALL =====
+Rules updated
+Rules updated (v6)
+Default incoming policy changed to 'deny'
+(be sure to update your rules accordingly)
+Default outgoing policy changed to 'allow'
+(be sure to update your rules accordingly)
+Firewall is active and enabled on system startup
+
+===== VERIFY ACTIVE AND PERSISTENT PROTECTION =====
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere                   # Required SSH
+22/tcp (v6)                ALLOW IN    Anywhere (v6)              # Required SSH
+UFW is active and persistent, with SSH allowed for IPv4 and IPv6.
+SSH, LightDM, and CCS Client remain active. Security sources are unchanged.
+Private backups: /root/afa-ufw-only-20261113T224128Z-52529
+Undo: disable UFW, restore saved firewall/configuration state, and remove newly installed UFW if needed.
+UFW-only batch completed. Confirm actual points in the normal Desktop report.
+
+---
+exit code: 0
