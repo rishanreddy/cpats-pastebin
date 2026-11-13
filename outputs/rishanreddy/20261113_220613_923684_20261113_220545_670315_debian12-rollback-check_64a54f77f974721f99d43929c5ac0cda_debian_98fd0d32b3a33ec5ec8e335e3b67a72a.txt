@@ -1,0 +1,40 @@
+script:    20261113_220545_670315_debian12-rollback-check_64a54f77f974721f99d43929c5ac0cda.sh
+timestamp: 2026-11-13T22:06:13Z
+host:      debian
+user:      root
+---
+
+===== BACKUP COMPARISON =====
+RESTORED: /etc/group
+RESTORED: /etc/gshadow
+RESTORED: /etc/ssh/sshd_config
+RESTORED: /etc/lightdm/lightdm.conf
+
+===== CURRENT SSH POLICY =====
+pparker:
+usepam yes
+permitrootlogin yes
+passwordauthentication yes
+permitemptypasswords yes
+Full effective-output byte count: 4369
+pcarter:
+usepam yes
+permitrootlogin yes
+passwordauthentication yes
+permitemptypasswords yes
+Full effective-output byte count: 4369
+
+===== QUIET-GREP PIPELINE DIAGNOSTIC =====
+Inspecting pipeline exit statuses only; no additional configuration is printed.
+Nonzero quiet-grep pipeline results: 0 of 40
+
+===== GROUP AND REQUIRED SERVICES =====
+sudo:x:27:pparker,tstark,ppotts,hhogan,nfury,mhill,pcoulson,bbanner,sstrange
+active
+active
+active
+
+Read-only diagnostic complete.
+
+---
+exit code: 0
