@@ -1,0 +1,89 @@
+script:    20261113_232406_656064_debian12-fix-pam-hardening_95cac35aaaa9fc4eb95601228a1b9286.sh
+timestamp: 2026-11-13T23:25:23Z
+host:      debian
+user:      root
+---
+
+===== PAM HARDENING PREFLIGHT =====
+
+===== PRIVATE CONFIGURATION BACKUPS =====
+Private backup directory: /root/afa-pam-20261113T232524Z-58026
+
+===== INSTALL SUPPORTED PASSWORD QUALITY AND DICTIONARIES =====
+0 upgraded, 5 newly installed, 0 to remove and 1 not upgraded.
+Inst libcrack2 (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Inst cracklib-runtime (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Inst libpwquality-common (1.4.5-1 Debian:12.15/oldstable [all])
+Inst libpwquality1 (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+Inst libpam-pwquality (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+Conf libcrack2 (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Conf cracklib-runtime (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Conf libpwquality-common (1.4.5-1 Debian:12.15/oldstable [all])
+Conf libpwquality1 (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+Conf libpam-pwquality (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+Reading package lists...
+Building dependency tree...
+Reading state information...
+wamerican is already the newest version (2020.12.07-2).
+The following packages were automatically installed and are no longer required:
+  geoip-database libevent-2.1-7 libgeoip1 libjsoncpp25 liblua5.3-0
+  libluajit-5.1-2 libluajit-5.1-common libnet1 libopusfile0 libre2-9
+  libsdl2-mixer-2.0-0 libu2f-udev libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libcrack2 libpwquality-common libpwquality1
+The following NEW packages will be installed:
+  cracklib-runtime libcrack2 libpam-pwquality libpwquality-common
+  libpwquality1
+0 upgraded, 5 newly installed, 0 to remove and 1 not upgraded.
+Need to get 264 kB of archives.
+After this operation, 1401 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libcrack2 amd64 2.9.6-5+b1 [44.0 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 cracklib-runtime amd64 2.9.6-5+b1 [143 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 libpwquality-common all 1.4.5-1 [51.3 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 libpwquality1 amd64 1.4.5-1+b1 [12.8 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libpam-pwquality amd64 1.4.5-1+b1 [12.9 kB]
+Fetched 264 kB in 0s (552 kB/s)
+Selecting previously unselected package libcrack2:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 160917 files and directories currently installed.)
+Preparing to unpack .../libcrack2_2.9.6-5+b1_amd64.deb ...
+Unpacking libcrack2:amd64 (2.9.6-5+b1) ...
+Selecting previously unselected package cracklib-runtime.
+Preparing to unpack .../cracklib-runtime_2.9.6-5+b1_amd64.deb ...
+Unpacking cracklib-runtime (2.9.6-5+b1) ...
+Selecting previously unselected package libpwquality-common.
+Preparing to unpack .../libpwquality-common_1.4.5-1_all.deb ...
+Unpacking libpwquality-common (1.4.5-1) ...
+Selecting previously unselected package libpwquality1:amd64.
+Preparing to unpack .../libpwquality1_1.4.5-1+b1_amd64.deb ...
+Unpacking libpwquality1:amd64 (1.4.5-1+b1) ...
+Selecting previously unselected package libpam-pwquality:amd64.
+Preparing to unpack .../libpam-pwquality_1.4.5-1+b1_amd64.deb ...
+Unpacking libpam-pwquality:amd64 (1.4.5-1+b1) ...
+Setting up libpwquality-common (1.4.5-1) ...
+Setting up libcrack2:amd64 (2.9.6-5+b1) ...
+Setting up cracklib-runtime (2.9.6-5+b1) ...
+Setting up libpwquality1:amd64 (1.4.5-1+b1) ...
+Setting up libpam-pwquality:amd64 (1.4.5-1+b1) ...
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Processing triggers for man-db (2.11.2-2) ...
+
+===== STAGE MODERN PAM PASSWORD PROFILES =====
+
+===== VALIDATE STACK ORDER AND MODULE AVAILABILITY =====
+
+===== RESULT =====
+password	requisite pam_pwquality.so retry=3 minlen=14 difok=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 enforce_for_root
+password	requisite pam_pwhistory.so remember=5 retry=3 use_authtok enforce_for_root
+password	[success=1 default=ignore]	pam_unix.so obscure use_authtok try_first_pass yescrypt
+Quality checks require at least 14 characters, upper/lower/digit/symbol, and dictionary checks.
+Five-password history is enforced before pam_unix, including root-initiated changes.
+Local pam_unix authentication no longer uses nullok.
+Existing password status is unchanged for every authorized user, including pparker.
+SSH/LightDM/CCS Client remain active; UFW active; security sources unchanged.
+Private configuration/selection backups: /root/afa-pam-20261113T232524Z-58026
+Undo: remove custom profiles through pam-auth-update, restore saved common-* and profile selections, and restore pwquality configuration before removing a referenced module.
+Validation is structural; a user-entered sudo/password-change test is still needed for interactive authentication.
+
+---
+exit code: 0
