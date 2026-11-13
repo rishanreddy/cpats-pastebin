@@ -1,0 +1,40 @@
+script:    20261113_220718_454169_debian12-fix-batch1-retry_0e8a71c66d79230875dbcd6d0a3b5745.sh
+timestamp: 2026-11-13T22:07:33Z
+host:      debian
+user:      root
+---
+
+===== APPROVED BATCH 1: PREFLIGHT =====
+
+===== ROOT-ONLY BACKUPS =====
+Backup directory: /root/afa-batch1-20261113T220734Z-4630
+
+===== FIXES 1 AND 2: REMOVE UNAUTHORIZED SUDO MEMBERSHIPS =====
+Removing user bbanner from group sudo
+Removing user sstrange from group sudo
+
+===== FIXES 3 AND 4: SSH LOGIN POLICY =====
+
+===== FIX 5: DISABLE LIGHTDM GUEST LOGIN =====
+
+===== VALIDATION BEFORE SSH RELOAD =====
+Sudo policy, seven administrators, twenty accounts, and SSH settings validated.
+
+===== RELOAD SSH AND CHECK REQUIRED SERVICES =====
+
+===== RESULT =====
+sudo:x:27:pparker,tstark,ppotts,hhogan,nfury,mhill,pcoulson
+usepam yes
+permitrootlogin no
+passwordauthentication yes
+permitemptypasswords no
+allow-guest=false
+SSH is enabled and active. LightDM and CCS Client are active.
+LightDM was not restarted. Guest policy applies to subsequent login screens.
+Existing user sessions may retain cached group membership until next login.
+Backups for undo: /root/afa-batch1-20261113T220734Z-4630
+Undo: restore group, gshadow, sshd_config, and lightdm.conf to their original paths; validate SSH, then reload ssh.
+Five approved fixes applied. Check the scoring report for actual points.
+
+---
+exit code: 0
