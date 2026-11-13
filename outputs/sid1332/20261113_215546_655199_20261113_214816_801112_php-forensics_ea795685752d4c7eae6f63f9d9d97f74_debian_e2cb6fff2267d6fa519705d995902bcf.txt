@@ -1,0 +1,11 @@
+script:    20261113_214816_801112_php-forensics_ea795685752d4c7eae6f63f9d9d97f74.sh
+timestamp: 2026-11-13T21:55:46Z
+host:      debian
+user:      root
+---
+
+CVE-2026-109618
+CVE-2026-109619
+
+---
+exit code: 0
