@@ -1,0 +1,17 @@
+script:    20261113_222820_058464_debian12-verify-security-source_4a01dfe4ce7c139027533fb93547e8df.sh
+timestamp: 2026-11-13T22:28:29Z
+host:      debian
+user:      root
+---
+
+===== SECURITY-UPDATE SOURCE VERIFICATION =====
+PASS: active official bookworm-security source is configured
+PASS: bookworm-security/main package index is loaded
+PASS: package database has no incomplete package states
+PASS: ssh is active
+PASS: lightdm is active
+PASS: ccsclient is active
+Read-only verification complete. Actual score must be checked in the Desktop report.
+
+---
+exit code: 0
