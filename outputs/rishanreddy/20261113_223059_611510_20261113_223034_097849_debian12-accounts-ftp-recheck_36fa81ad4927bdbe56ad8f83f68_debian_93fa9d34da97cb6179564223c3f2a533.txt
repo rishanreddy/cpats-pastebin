@@ -1,0 +1,38 @@
+script:    20261113_223034_097849_debian12-accounts-ftp-recheck_36fa81ad4927bdbe56ad8f83f6848351.sh
+timestamp: 2026-11-13T22:30:59Z
+host:      debian
+user:      root
+---
+
+===== CURRENT OBSERVATION TIME =====
+2026-11-13 22:30:59 UTC
+
+===== ACCOUNTS ABSENT FROM THE AUTHORIZED LIST =====
+brumlow uid=1011 gid=1011 home=/home/brumlow shell=/bin/bash
+uid=1011(brumlow) gid=1011(brumlow) groups=1011(brumlow),20(dialout),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),100(users),106(netdev),114(scanner)
+Running executable names owned by this account, arguments omitted:
+azola uid=1020 gid=1020 home=/home/azola shell=/bin/bash
+uid=1020(azola) gid=1020(azola) groups=1020(azola),20(dialout),24(cdrom),25(floppy),29(audio),30(dip),44(video),46(plugdev),100(users),106(netdev),114(scanner)
+Running executable names owned by this account, arguments omitted:
+
+===== FTP AND REQUIRED SERVICES =====
+vsftpd active: active
+vsftpd enabled: enabled
+ssh active: active
+ssh enabled: enabled
+lightdm active: active
+lightdm enabled: enabled
+ccsclient active: active
+ccsclient enabled: enabled
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*          
+LISTEN 0      32                 *:21              *:*          
+LISTEN 0      128             [::]:22           [::]:*          
+
+===== SECURITY SOURCE STILL PRESENT =====
+Official bookworm-security source remains configured.
+
+Read-only check complete. No accounts or services changed.
+
+---
+exit code: 0
