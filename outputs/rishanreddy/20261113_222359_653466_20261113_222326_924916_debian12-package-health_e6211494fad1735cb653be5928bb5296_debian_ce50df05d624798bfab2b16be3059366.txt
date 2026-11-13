@@ -1,0 +1,34 @@
+script:    20261113_222326_924916_debian12-package-health_e6211494fad1735cb653be5928bb5296.sh
+timestamp: 2026-11-13T22:23:59Z
+host:      debian
+user:      root
+---
+
+===== PACKAGE-MANAGER PROCESS STATE, ARGUMENTS OMITTED =====
+
+===== PACKAGE DATABASE AUDIT =====
+dpkg audit exit code: 0
+No incomplete package states reported.
+
+===== RELEVANT PACKAGE STATES =====
+chromium ii  113.0.5672.126-1
+iptables ii  1.8.9-2
+libip6tc2 ii  1.8.9-2
+man-db ii  2.11.2-2
+openssh-server ii  1:9.2p1-2+deb12u10
+sudo ii  1.9.13p3-1+deb12u4
+ufw rc  0.36.2-1
+
+===== SOURCE HOST AND SUITE SUMMARY =====
+Host: snapshot.debian.org Suite: bookworm
+
+===== REQUIRED SERVICES AND FTP =====
+ssh active: active
+lightdm active: active
+ccsclient active: active
+vsftpd active: active
+
+READ-ONLY package health check complete.
+
+---
+exit code: 0
