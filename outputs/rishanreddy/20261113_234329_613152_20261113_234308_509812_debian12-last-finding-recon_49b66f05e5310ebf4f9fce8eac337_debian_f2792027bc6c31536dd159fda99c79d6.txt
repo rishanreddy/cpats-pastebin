@@ -1,0 +1,30 @@
+script:    20261113_234308_509812_debian12-last-finding-recon_49b66f05e5310ebf4f9fce8eac337492.sh
+timestamp: 2026-11-13T23:43:27Z
+host:      debian
+user:      root
+---
+
+===== CANDIDATE ACCOUNT PASSWORD METADATA =====
+hhogan P 2026-10-11 10 90 7 -1
+
+===== CENTRAL CRON AND STARTUP REVIEW, INDICATORS ONLY =====
+/etc/crontab: active-lines=6, flagged-lines=0
+/etc/cron.d/anacron: active-lines=3, flagged-lines=0
+/etc/cron.d/e2scrub_all: active-lines=2, flagged-lines=0
+/home/pparker/.config/autostart/SetUniqueIdAuto.desktop: active-lines=5, flagged-lines=0
+
+===== ENABLED SERVICE/TIMER NAMES MATCHING MAINTENANCE/POLLING =====
+anacron.service enabled
+cron.service enabled
+anacron.timer enabled
+apt-daily-upgrade.timer enabled
+apt-daily.timer enabled
+
+===== AUTOMATIC-UPDATE CONFIGURATION, SELECTED NUMERIC SETTINGS =====
+
+===== OTHER AUTHORIZED USERS WITH EMPTY PASSWORD STATUS =====
+
+Read-only assessment complete. No jobs, settings, or passwords changed.
+
+---
+exit code: 0
