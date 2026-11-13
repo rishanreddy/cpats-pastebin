@@ -1,0 +1,675 @@
+script:    20261113_222123_393906_audio-app-inventory_840190ad98564ba79a38f9ccb3528c6e.sh
+timestamp: 2026-11-13T22:25:33Z
+host:      debian
+user:      root
+---
+
+== Installed application packages ==
+accountsservice [admin] - query and manipulate user account information
+acl [utils] - access control list - utilities
+adduser [admin] - add and remove users and groups
+adwaita-icon-theme [gnome] - default icon theme of GNOME
+[possible audio] alsa-utils [sound] - Utilities for configuring and using ALSA
+amd64-microcode [non-free-firmware/admin] - Platform firmware and microcode for AMD CPUs and SoCs
+anacron [admin] - cron-like program that doesn't go by time
+apparmor [admin] - user-space parser utility for AppArmor
+apt [admin] - commandline package manager
+[possible audio] apt-listchanges [utils] - package change history notification tool
+apt-utils [admin] - package management related utility programs
+aspell [text] - GNU Aspell spell-checker
+aspell-en [text] - English dictionary for GNU Aspell
+at-spi2-common [misc] - Assistive Technology Service Provider Interface (common files)
+at-spi2-core [misc] - Assistive Technology Service Provider Interface (D-Bus core)
+atril [x11] - MATE document viewer
+atril-common [x11] - MATE document viewer (common files)
+avahi-daemon [net] - Avahi mDNS/DNS-SD daemon
+avahi-utils [net] - Avahi browsing, publishing and discovery utilities
+base-files [admin] - Debian base system miscellaneous files
+base-passwd [admin] - Debian base system master password and group files
+bash [shells] - GNU Bourne Again SHell
+bash-completion [shells] - programmable completion for the bash shell
+bc [math] - GNU bc arbitrary precision calculator language
+bind9-dnsutils [net] - Clients provided with BIND 9
+bind9-host [net] - DNS Lookup Utility
+binutils [devel] - GNU assembler, linker and binary utilities
+binutils-common:amd64 [devel] - Common files for the GNU assembler, linker and binary utilities
+binutils-x86-64-linux-gnu [devel] - GNU binary utilities, for x86-64-linux-gnu target
+bsdextrautils [utils] - extra utilities from 4.4BSD-Lite
+bsdutils [utils] - basic utilities from 4.4BSD-Lite
+bubblewrap [admin] - utility for unprivileged chroot and namespace manipulation
+busybox [utils] - Tiny utilities for small and embedded systems
+bzip2 [utils] - high-quality block-sorting file compressor - utilities
+ca-certificates [misc] - Common CA certificates
+caja [utils] - file manager for the MATE desktop
+caja-common [utils] - file manager for the MATE desktop (common files)
+[possible audio] chromium [web] - web browser
+[possible audio] chromium-common [web] - web browser - common resources used by the chromium packages
+[possible audio] chromium-sandbox [web] - web browser - setuid security sandbox for chromium
+coinor-libcbc3:amd64 [science] - Coin-or branch-and-cut mixed integer programming solver (shared libraries)
+coinor-libcgl1:amd64 [science] - COIN-OR Cut Generation Library
+coinor-libclp1:amd64 [science] - Coin-or linear programming solver (shared libraries)
+coinor-libcoinutils3v5:amd64 [science] - Coin-or collection of utility classes (binaries and libraries)
+coinor-libosi1v5:amd64 [science] - COIN-OR Open Solver Interface
+colord [graphics] - system service to manage device colour profiles -- system daemon
+colord-data [graphics] - system service to manage device colour profiles -- data files
+console-setup [utils] - console font and keymap setup program
+console-setup-linux [utils] - Linux specific part of console-setup
+coreutils [utils] - GNU core utilities
+cpio [utils] - GNU cpio -- a program to manage archives of files
+cpp [interpreters] - GNU C preprocessor (cpp)
+cpp-12 [interpreters] - GNU C preprocessor
+cron [admin] - process scheduling daemon
+cron-daemon-common [admin] - process scheduling daemon's configuration files
+cups [net] - Common UNIX Printing System(tm) - PPD/driver support, web interface
+cups-browsed [net] - OpenPrinting CUPS Filters - cups-browsed
+cups-client [net] - Common UNIX Printing System(tm) - client programs (SysV)
+cups-common [net] - Common UNIX Printing System(tm) - common files
+cups-core-drivers [net] - Common UNIX Printing System(tm) - driverless printing
+cups-daemon [net] - Common UNIX Printing System(tm) - daemon
+cups-filters [net] - OpenPrinting CUPS Filters - Main Package
+cups-filters-core-drivers [net] - OpenPrinting CUPS Filters - Driverless printing
+cups-ipp-utils [net] - Common UNIX Printing System(tm) - IPP developer/admin utilities
+cups-pk-helper [gnome] - PolicyKit helper to configure cups with fine-grained privileges
+cups-ppdc [utils] - Common UNIX Printing System(tm) - PPD manipulation utilities
+cups-server-common [net] - Common UNIX Printing System(tm) - server common files
+dash [shells] - POSIX-compliant shell
+dbus [admin] - simple interprocess messaging system (system message bus)
+dbus-bin [admin] - simple interprocess messaging system (command line utilities)
+dbus-daemon [admin] - simple interprocess messaging system (reference message bus)
+dbus-session-bus-common [admin] - simple interprocess messaging system (session bus configuration)
+dbus-system-bus-common [admin] - simple interprocess messaging system (system bus configuration)
+dbus-user-session [admin] - simple interprocess messaging system (systemd --user integration)
+dbus-x11 [x11] - simple interprocess messaging system (X11 deps)
+debconf [admin] - Debian configuration management system
+debian-archive-keyring [misc] - GnuPG archive keys of the Debian archive
+debian-mate-default-settings [x11] - Default settings for MATE on Debian
+debianutils [utils] - Miscellaneous utilities specific to Debian
+desktop-base [x11] - common files for the Debian Desktop
+desktop-file-utils [devel] - Utilities for .desktop files
+dictionaries-common [text] - spelling dictionaries - common utilities
+diffutils [utils] - File comparison utilities
+dirmngr [utils] - GNU privacy guard - network certificate management service
+discover [admin] - hardware identification system
+distro-info-data [devel] - information about the distributions' releases (data files)
+dmidecode [utils] - SMBIOS/DMI table decoder
+dmsetup [admin] - Linux Kernel Device Mapper userspace library
+dns-root-data [misc] - DNS root hints and DNSSEC trust anchor
+dnsmasq-base [net] - Small caching DNS proxy and DHCP/TFTP server - executable
+docbook-xml [text] - standard XML documentation system for software and systems
+dosfstools [otherosfs] - utilities for making and checking MS-DOS FAT filesystems
+dpkg [admin] - Debian package management system
+e2fsprogs [admin] - ext2/ext3/ext4 file system utilities
+eject [utils] - ejects CDs and operates CD-Changers under Linux
+emacsen-common [editors] - Common facilities for all emacsen
+enchant-2 [text] - Wrapper for various spell checker engines (binary programs)
+engrampa [x11] - archive manager for MATE
+engrampa-common [x11] - archive manager for MATE (common files)
+eom [graphics] - Eye of MATE graphics viewer program
+eom-common [graphics] - Eye of MATE graphics viewer program (common files)
+[possible audio] espeak-ng-data:amd64 [sound] - Multi-lingual software speech synthesizer: speech data files
+ethtool [net] - display or change Ethernet device settings
+ettercap-common [net] - Multipurpose sniffer/interceptor/logger for switched LAN
+ettercap-graphical [net] - Ettercap GUI-enabled executable
+exfatprogs [otherosfs] - exFAT file system utilities
+fdisk [utils] - collection of partitioning utilities
+[possible audio] ffmpegthumbnailer [video] - fast and lightweight video thumbnailer
+file [utils] - Recognize the type of data in a file using "magic" numbers
+findutils [utils] - utilities for finding files--find, xargs
+[possible audio] freeciv [games] - Civilization turn based strategy game
+[possible audio] freeciv-client-gtk3 [games] - Civilization turn based strategy game (GTK 3 client)
+[possible audio] freeciv-data [games] - Civilization turn based strategy game (data)
+[possible audio] freeciv-server [games] - Civilization turn based strategy game (server files)
+fuse3 [utils] - Filesystem in Userspace (3.x version)
+gcr [gnome] - GNOME crypto services (daemon and tools)
+gdisk [admin] - GPT fdisk text-mode partitioning tool
+geoip-database [net] - IP lookup command line tools that use the GeoIP library (country database)
+gettext-base [utils] - GNU Internationalization utilities for the base system
+ghostscript [text] - interpreter for the PostScript language and for PDF
+gimp [graphics] - GNU Image Manipulation Program
+gimp-data [graphics] - Data files for GIMP
+gir1.2-atk-1.0:amd64 [introspection] - ATK accessibility toolkit (GObject introspection)
+gir1.2-atspi-2.0:amd64 [introspection] - Assistive Technology Service Provider (GObject introspection)
+gir1.2-eom-1.0 [introspection] - GObject introspection data for the eom library
+gir1.2-freedesktop:amd64 [introspection] - Introspection data for some FreeDesktop components
+gir1.2-gdkpixbuf-2.0:amd64 [introspection] - GDK Pixbuf library - GObject-Introspection
+gir1.2-glib-2.0:amd64 [introspection] - Introspection data for GLib, GObject, Gio and GModule
+gir1.2-gstreamer-1.0:amd64 [introspection] - GObject introspection data for the GStreamer library
+gir1.2-gtk-3.0:amd64 [introspection] - GTK graphical user interface library -- gir bindings
+gir1.2-gtksource-4:amd64 [introspection] - gir files for the GTK+ syntax highlighting widget
+gir1.2-handy-1:amd64 [introspection] - GObject introspection files for libhandy
+gir1.2-harfbuzz-0.0:amd64 [introspection] - OpenType text shaping engine (GObject introspection data)
+gir1.2-matemenu-2.0:amd64 [introspection] - GObject introspection data for the MATE menu specification
+[possible audio] gir1.2-notify-0.7:amd64 [introspection] - sends desktop notifications to a notification daemon (Introspection files)
+gir1.2-packagekitglib-1.0 [introspection] - GObject introspection data for the PackageKit GLib library
+gir1.2-pango-1.0:amd64 [introspection] - Layout and rendering of internationalized text - gir bindings
+gir1.2-peas-1.0:amd64 [introspection] - Application plugin library (introspection files)
+gir1.2-pluma-1.0 [introspection] - GObject introspection data for Pluma
+gir1.2-polkit-1.0 [introspection] - GObject introspection data for polkit
+gir1.2-secret-1:amd64 [introspection] - Secret store (GObject-Introspection)
+gir1.2-wnck-3.0:amd64 [introspection] - GObject introspection data for the WNCK library
+gnome-accessibility-themes [gnome] - High Contrast GTK 2 theme and icons
+gnome-icon-theme [gnome] - This package contains the default icon theme used by the GNOME
+gnome-keyring [gnome] - GNOME keyring services (daemon and tools)
+gnome-themes-extra:amd64 [gnome] - Adwaita GTK 2 theme — engine
+gnome-themes-extra-data [gnome] - Adwaita GTK 2 theme and Adwaita-dark GTK 3 theme — common files
+gnupg [utils] - GNU privacy guard - a free PGP replacement
+gnupg-utils [utils] - GNU privacy guard - utility programs
+gpg [utils] - GNU Privacy Guard -- minimalist public key operations
+gpg-agent [utils] - GNU privacy guard - cryptographic agent
+gpg-wks-client [utils] - GNU privacy guard - Web Key Service client
+gpg-wks-server [utils] - GNU privacy guard - Web Key Service server
+gpgconf [utils] - GNU privacy guard - core configuration utilities
+gpgsm [utils] - GNU privacy guard - S/MIME version
+gpgv [utils] - GNU privacy guard - signature verification tool
+graphviz [graphics] - rich set of graph drawing tools
+grep [utils] - GNU grep, egrep and fgrep
+groff-base [text] - GNU troff text-formatting system (base system components)
+grub-common [admin] - GRand Unified Bootloader (common files)
+grub-pc [admin] - GRand Unified Bootloader, version 2 (PC/BIOS version)
+grub-pc-bin [admin] - GRand Unified Bootloader, version 2 (PC/BIOS modules)
+grub2-common [admin] - GRand Unified Bootloader (common files for version 2)
+gsettings-desktop-schemas [gnome] - GSettings desktop-wide schemas
+gstreamer1.0-gtk3:amd64 [graphics] - GStreamer plugin for GTK+3
+gtk-update-icon-cache [misc] - icon theme caching utility
+gtk2-engines:amd64 [gnome] - theme engines for GTK+ 2.x
+gtk2-engines-murrine:amd64 [x11] - cairo-based gtk+-2.0 theme engine
+gtk2-engines-pixbuf:amd64 [graphics] - pixbuf-based theme for GTK 2
+gvfs-backends [gnome] - userspace virtual filesystem - backends
+gvfs-fuse [gnome] - userspace virtual filesystem - fuse server
+gzip [utils] - GNU compression utilities
+hicolor-icon-theme [misc] - default fallback theme for FreeDesktop.org icon themes
+hostname [admin] - utility to set/show the host name or domain name
+hunspell-en-us [text] - English_american dictionary for hunspell
+hyphen-en-us [text] - English (US) hyphenation patterns
+i965-va-driver:amd64 [video] - VAAPI driver for Intel G45 & HD Graphics family
+iamerican [text] - American English dictionary for ispell (standard version)
+ibritish [text] - British English dictionary for ispell (standard version)
+ienglish-common [text] - Common files for British and American ispell dictionaries
+ifupdown [admin] - high level tools to configure network interfaces
+imagemagick-6-common [graphics] - image manipulation programs -- infrastructure
+inetutils-telnet [net] - telnet client
+init [metapackages] - metapackage ensuring an init system is installed
+init-system-helpers [admin] - helper tools for all init systems
+initramfs-tools [utils] - generic modular initramfs generator (automation)
+initramfs-tools-core [utils] - generic modular initramfs generator (core tools)
+installation-report [misc] - system installation report
+intel-media-va-driver:amd64 [video] - VAAPI driver for the Intel GEN8+ Graphics family
+ipp-usb [comm] - Daemon for IPP over USB printer support
+iproute2 [net] - networking and traffic control tools
+iptables [net] - administration tools for packet filtering and NAT
+iputils-ping [net] - Tools to test the reachability of network hosts
+isc-dhcp-client [net] - DHCP client for automatically obtaining an IP address
+isc-dhcp-common [net] - common manpages relevant to all of the isc-dhcp packages
+iso-codes [misc] - ISO language, territory, currency, script codes and their translations
+ispell [text] - International Ispell (an interactive spelling corrector)
+iw [net] - tool for configuring Linux wireless devices
+javascript-common [web] - Base support for JavaScript library packages
+kbd [utils] - Linux console font and keytable utilities
+keyboard-configuration [utils] - system-wide keyboard preferences
+kmod [admin] - tools for managing Linux kernel modules
+laptop-detect [utils] - system chassis type checker
+less [text] - pager program similar to more
+libatk-adaptor:amd64 [misc] - AT-SPI 2 toolkit bridge
+libauthen-sasl-perl [perl] - Authen::SASL - SASL Authentication framework
+libbinutils:amd64 [devel] - GNU binary utilities (private shared library)
+libcairo-gobject-perl [perl] - integrate Cairo into the Glib type system in Perl
+libcairo-perl [perl] - Perl interface to the Cairo graphics library
+libcap2-bin [utils] - POSIX 1003.1e capabilities (utilities)
+libclone-perl:amd64 [perl] - module for recursively copying Perl datatypes
+libctf-nobfd0:amd64 [devel] - Compact C Type Format library (runtime, no BFD dependency)
+libctf0:amd64 [devel] - Compact C Type Format library (runtime, BFD dependency)
+libdata-dump-perl [perl] - Perl module to help dump data structures
+libencode-locale-perl [perl] - utility to determine the locale encoding
+libexttextcat-data [text] - Language detection library - data files
+libextutils-depends-perl [perl] - Perl module for building extensions that depend on other extensions
+[possible audio] libffmpegthumbnailer4v5:amd64 [video] - shared library for ffmpegthumbnailer
+libfile-basedir-perl [perl] - Perl module to use the freedesktop basedir specification
+libfile-desktopentry-perl [perl] - Perl module to handle freedesktop .desktop files
+libfile-listing-perl [perl] - module to parse directory listings
+libfile-mimeinfo-perl [perl] - Perl module to determine file types
+libfont-afm-perl [perl] - Perl interface to Adobe Font Metrics files
+libgegl-common [devel] - Generic Graphics Library - common files
+libglib-object-introspection-perl [perl] - Perl bindings for gobject-introspection libraries
+libglib-perl:amd64 [perl] - interface to the GLib and GObject libraries
+libglib2.0-bin [misc] - Programs for the GLib library
+libgprofng0:amd64 [devel] - GNU Next Generation profiler (runtime library)
+libgtk-3-bin [misc] - programs for the GTK graphical user interface library
+libgtk-3-common [misc] - common files for the GTK graphical user interface library
+libgtk2.0-bin [misc] - programs for the GTK graphical user interface library
+libgtk2.0-common [misc] - common files for the GTK graphical user interface library
+libgtk3-perl [perl] - Perl bindings for the GTK+ graphical user interface library
+libgts-0.7-5:amd64 [devel] - library to deal with 3D computational surface meshes
+libgts-bin [math] - utility binaries for libgts
+libhtml-form-perl [perl] - module that represents an HTML form element
+libhtml-format-perl [perl] - module for transforming HTML into various formats
+libhtml-parser-perl:amd64 [perl] - collection of modules that parse HTML text documents
+libhtml-tagset-perl [perl] - data tables pertaining to HTML
+libhtml-tree-perl [perl] - Perl module to represent and create HTML syntax trees
+libhttp-cookies-perl [perl] - HTTP cookie jars
+libhttp-daemon-perl [perl] - simple http server class
+libhttp-date-perl [perl] - module of date conversion routines
+libhttp-message-perl [perl] - perl interface to HTTP style messages
+libhttp-negotiate-perl [perl] - implementation of content negotiation
+libio-html-perl [perl] - open an HTML file with automatic charset detection
+libio-socket-ssl-perl [perl] - Perl module implementing object oriented interface to SSL sockets
+libio-stringy-perl [perl] - modules for I/O on in-core objects (strings/arrays)
+libipc-system-simple-perl [perl] - Perl module to run commands simply, with detailed diagnostics
+libjs-mathjax [javascript] - JavaScript display engine for LaTeX and MathML
+libjxr-tools [utils] - JPEG-XR lib - command line apps
+liblocale-gettext-perl [perl] - module using libc functions for internationalization in Perl
+liblockfile-bin [utils] - support binaries for and cli utilities based on liblockfile
+liblouis-data [text] - Braille translation library - data
+liblouisutdml-bin [text] - Braille UTDML translation utilities
+liblouisutdml-data [text] - Braille UTDML translation library - data
+libluajit-5.1-2:amd64 [interpreters] - Just in time compiler for Lua - library version
+libluajit-5.1-common [interpreters] - Just in time compiler for Lua - common files
+liblwp-mediatypes-perl [perl] - module to guess media type for a file or a URL
+liblwp-protocol-https-perl [perl] - HTTPS driver for LWP::UserAgent
+libmailtools-perl [mail] - modules to manipulate email in perl programs
+libmbim-proxy [net] - Proxy to communicate with MBIM ports
+libmbim-utils [net] - Utilities to use the MBIM protocol from the command line
+libnet-dbus-perl [perl] - Perl extension for the DBus bindings
+libnet-http-perl [perl] - module providing low-level HTTP connection client
+libnet-smtp-ssl-perl [perl] - Perl module providing SSL support to Net::SMTP
+libnet-ssleay-perl:amd64 [perl] - Perl module for Secure Sockets Layer (SSL)
+[possible audio] libnotify-bin [utils] - sends desktop notifications to a notification daemon (Utilities)
+libnss-mdns:amd64 [admin] - NSS module for Multicast DNS name resolution
+libnss-systemd:amd64 [admin] - nss module providing dynamic user and group name resolution
+libpam-gnome-keyring:amd64 [admin] - PAM module to unlock the GNOME keyring upon login
+libpam-modules:amd64 [admin] - Pluggable Authentication Modules for PAM
+libpam-modules-bin [admin] - Pluggable Authentication Modules for PAM - helper binaries
+libpam-runtime [admin] - Runtime support for the PAM library
+libpam-systemd:amd64 [admin] - system and service manager - PAM module
+libpaper-utils [utils] - library for handling paper characteristics (utilities)
+libpython3-stdlib:amd64 [python] - interactive high-level object-oriented language (default python3 version)
+libpython3.11-minimal:amd64 [python] - Minimal subset of the Python language (version 3.11)
+libpython3.11-stdlib:amd64 [python] - Interactive high-level object-oriented language (standard library, version 3.11)
+libqmi-proxy [net] - Proxy to communicate with QMI ports
+libqmi-utils [net] - Utilities to use the QMI protocol from the command line
+libregexp-ipv6-perl [perl] - Regular expression for IPv6 addresses
+libreoffice-base-core [editors] - office productivity suite -- shared library
+libreoffice-calc [editors] - office productivity suite -- spreadsheet
+libreoffice-common [editors] - office productivity suite -- arch-independent files
+libreoffice-core [editors] - office productivity suite -- arch-dependent files
+libreoffice-draw [editors] - office productivity suite -- drawing
+libreoffice-gtk3 [gnome] - office productivity suite -- GTK+ 3 integration
+libreoffice-help-common [editors] - office productivity suite -- common files for LibreOffice help
+libreoffice-impress [editors] - office productivity suite -- presentation
+libreoffice-math [editors] - office productivity suite -- equation editor
+libreoffice-style-colibre [editors] - office productivity suite -- colibre symbol style
+libreoffice-writer [editors] - office productivity suite -- word processor
+libsensors-config [utils] - lm-sensors configuration files
+libsoup-3.0-common [devel] - HTTP library implementation in C -- Common files
+libsoup2.4-common [devel] - HTTP library implementation in C -- Common files
+libteamdctl0:amd64 [net] - library for communication with `teamd` process
+libtext-charwidth-perl:amd64 [perl] - get display widths of characters on the terminal
+libtext-iconv-perl:amd64 [perl] - module to convert between character sets in Perl
+libtext-wrapi18n-perl [perl] - internationalized substitute of Text::Wrap
+libtie-ixhash-perl [perl] - Perl module to order associative arrays
+libtimedate-perl [perl] - collection of modules to manipulate date/time information
+libtry-tiny-perl [perl] - module providing minimalistic try/catch
+liburi-perl [perl] - module to manipulate and access URI strings
+libwww-perl [perl] - simple and consistent interface to the world-wide web
+libwww-robotrules-perl [perl] - database of robots.txt-derived permissions
+libx11-data [x11] - X11 client-side library
+libx11-protocol-perl [perl] - Perl module for the X Window System Protocol, version 11
+libxml-parser-perl [perl] - Perl module for parsing XML files
+libxml-twig-perl [perl] - Perl module for processing huge XML documents in tree mode
+libxml-xpathengine-perl [perl] - re-usable XPath engine for DOM-like trees
+libzvbi-common [devel] - Vertical Blanking Interval decoder (VBI) - common files
+lightdm [x11] - simple display manager
+lightdm-gtk-greeter [x11] - simple display manager (GTK+ greeter)
+login [admin] - system login tools
+logrotate [admin] - Log rotation utility
+logsave [admin] - save the output of a command in a log file
+lp-solve [math] - Solve (mixed integer) linear programming problems
+lsb-release [misc] - Linux Standard Base version reporting utility (minimal implementation)
+lsof [utils] - utility to list open files
+[possible audio] lynx [web] - classic non-graphical (text-mode) web browser
+lynx-common [web] - shared files for lynx package
+mailcap [utils] - Debian's mailcap system, and support programs
+marco [x11] - lightweight GTK+ window manager for MATE
+marco-common [x11] - lightweight GTK+ window manager for MATE (common files)
+mate-applet-brisk-menu [x11] - Solus Project's Brisk Menu MATE Panel Applet
+mate-applets [x11] - Various applets for the MATE panel
+mate-applets-common [x11] - Various applets for the MATE panel (common files)
+mate-backgrounds [x11] - Set of backgrounds packaged with the MATE Desktop Environment
+mate-calc [math] - MATE desktop calculator
+mate-calc-common [math] - MATE desktop calculator (common files)
+mate-control-center [x11] - utilities to configure the MATE desktop
+mate-control-center-common [x11] - utilities to configure the MATE desktop (common files)
+mate-desktop [x11] - Library with common API for various MATE modules
+mate-desktop-common [x11] - Library with common API for various MATE modules (common files)
+mate-desktop-environment [x11] - MATE Desktop Environment (metapackage)
+mate-desktop-environment-core [x11] - MATE Desktop Environment (essential components, metapackage)
+mate-icon-theme [x11] - MATE Desktop icon theme
+mate-media [x11] - MATE media utilities
+mate-media-common [x11] - MATE media utilities (common files)
+[possible audio] mate-notification-daemon [x11] - daemon to display passive popup notifications
+[possible audio] mate-notification-daemon-common [x11] - daemon to display passive popup notifications (common files)
+mate-panel [x11] - launcher and docking facility for MATE
+mate-panel-common [x11] - launcher and docking facility for MATE (common files)
+mate-polkit [x11] - MATE authentication agent for PolicyKit-1
+mate-polkit-common [x11] - MATE authentication agent for PolicyKit-1 (common files)
+mate-power-manager [x11] - power management tool for the MATE desktop
+mate-power-manager-common [x11] - power management tool for the MATE desktop (common files)
+mate-screensaver [x11] - MATE screen saver and locker
+mate-screensaver-common [x11] - MATE screen saver and locker (common files)
+mate-session-manager [x11] - Session manager of the MATE desktop environment
+mate-settings-daemon [x11] - daemon handling the MATE session settings
+mate-settings-daemon-common [x11] - daemon handling the MATE session settings (common files)
+mate-system-monitor [x11] - Process viewer and system resource monitor for MATE
+mate-system-monitor-common [x11] - Process viewer and system resource monitor for MATE (common files)
+mate-terminal [x11] - MATE terminal emulator application
+mate-terminal-common [x11] - MATE terminal emulator application (common files)
+mate-themes [x11] - Official themes for the MATE desktop
+mate-utils [x11] - MATE desktop utilities
+mate-utils-common [x11] - MATE desktop utilities (common files)
+mawk [interpreters] - Pattern scanning and text processing language
+media-types [net] - List of standard media types and their usual file extension
+mobile-broadband-provider-info [admin] - database of mobile broadband service providers
+modemmanager [net] - D-Bus service for managing modems
+mount [admin] - tools for mounting and manipulating filesystems
+mythes-en-us [text] - English (USA) Thesaurus for LibreOffice
+nano [editors] - small, friendly text editor inspired by Pico
+ncurses-base [misc] - basic terminal type definitions
+ncurses-bin [utils] - terminal-related programs and man pages
+ncurses-term [misc] - additional terminal type definitions
+netbase [admin] - Basic TCP/IP networking system
+netcat-traditional [net] - TCP/IP swiss army knife
+network-manager [net] - network management framework (daemon and userspace tools)
+network-manager-gnome [gnome] - network management framework (GNOME frontend)
+nftables [net] - Program to control packet filtering rules by Netfilter project
+node-clipboard [javascript] - Node.js module to copy to clipboard without flash
+node-normalize.css [javascript] - Modern alternative to CSS resets
+node-prismjs [javascript] - Lightweight, robust, elegant syntax highlighting
+ntfs-3g [otherosfs] - read/write NTFS driver for FUSE
+open-vm-tools [admin] - Open VMware Tools for virtual machines hosted on VMware (CLI)
+open-vm-tools-desktop [admin] - Open VMware Tools for virtual machines hosted on VMware (GUI)
+openssh-client [net] - secure shell (SSH) client, for secure access to remote machines
+openssh-server [net] - secure shell (SSH) server, for secure access from remote machines
+openssh-sftp-server [net] - secure shell (SSH) sftp server module, for SFTP access from remote machines
+openssl [utils] - Secure Sockets Layer toolkit - cryptographic utility
+orca [gnome] - Scriptable screen reader
+os-prober [utils] - utility to detect other OSes on a set of drives
+p11-kit [misc] - p11-glue utilities
+p11-kit-modules:amd64 [misc] - p11-glue proxy and trust modules
+p7zip [utils] - 7zr file archiver with high compression ratio
+p7zip-full [utils] - 7z and 7za file archivers with high compression ratio
+parted [admin] - disk partition manipulator
+passwd [admin] - change and administer password and group data
+pci.ids [admin] - PCI ID Repository
+pciutils [admin] - PCI utilities
+perl [perl] - Larry Wall's Practical Extraction and Report Language
+perl-base [perl] - minimal Perl system
+perl-openssl-defaults:amd64 [perl] - version compatibility baseline for Perl OpenSSL packages
+perl-tk [perl] - Perl module providing the Tk graphics library
+pinentry-curses [utils] - curses-based PIN or pass-phrase entry dialog for GnuPG
+pinentry-gnome3 [utils] - GNOME 3 PIN or pass-phrase entry dialog for GnuPG
+pkexec [admin] - run commands as another user with polkit authorization
+plocate [utils] - much faster locate
+pluma [x11] - official text editor of the MATE desktop environment
+pluma-common [x11] - official text editor of the MATE desktop environment (common files)
+plymouth [misc] - boot animation, logger and I/O multiplexer
+plymouth-label [misc] - boot animation, logger and I/O multiplexer - label control
+[possible audio] pocketsphinx-en-us [sound] - Speech recognition tool - US English language model
+polkitd [admin] - framework for managing administrative policies and privileges
+polkitd-pkla [admin] - Legacy "local authority" (.pkla) backend for polkitd
+poppler-data [misc] - encoding data for the poppler PDF rendering library
+poppler-utils [utils] - PDF utilities (based on Poppler)
+ppp [admin] - Point-to-Point Protocol (PPP) - daemon
+procps [admin] - /proc file system utilities
+psmisc [admin] - utilities that use the proc file system
+publicsuffix [net] - accurate, machine-readable list of domain name suffixes
+[possible audio] pulseaudio [sound] - PulseAudio sound server
+[possible audio] pulseaudio-utils [sound] - Command line tools for the PulseAudio sound server
+python-apt-common [python] - Python interface to libapt-pkg (locales)
+python3 [python] - interactive high-level object-oriented language (default python3 version)
+python3-apt [python] - Python 3 interface to libapt-pkg
+python3-brlapi:amd64 [python] - Braille display access via BRLTTY - Python3 bindings
+python3-cairo:amd64 [python] - Python3 bindings for the Cairo vector graphics library
+python3-certifi [python] - root certificates for validating SSL certs and verifying TLS hosts (python3)
+python3-chardet [python] - Universal Character Encoding Detector (Python3)
+python3-charset-normalizer [python] - charset, encoding and language detection (Python 3)
+python3-cups:amd64 [python] - Python3 bindings for CUPS
+python3-cupshelpers [python] - Python utility modules around the CUPS printing system
+python3-dbus [python] - simple interprocess messaging system (Python 3 interface)
+python3-debconf [python] - interact with debconf from Python 3
+python3-debian [python] - Python 3 modules to work with Debian-related data formats
+python3-debianbts [python] - Python interface to Debian's Bug Tracking System
+python3-distro [python] - Linux OS platform information API
+python3-gi [python] - Python 3 bindings for gobject-introspection libraries
+python3-httplib2 [python] - comprehensive HTTP client library written for Python3
+python3-idna [python] - Python IDNA2008 (RFC 5891) handling (Python 3)
+python3-louis [python] - Python bindings for liblouis
+python3-minimal [python] - minimal subset of the Python language (default python3 version)
+python3-pkg-resources [python] - Package Discovery and Resource Access using pkg_resources
+python3-pyatspi [python] - Assistive Technology Service Provider Interface - Python3 bindings
+python3-pycurl [python] - Python bindings to libcurl (Python 3)
+python3-pyparsing [python] - alternative to creating and executing simple grammars - Python 3.x
+python3-pysimplesoap [python] - simple and lightweight SOAP Library (Python 3)
+python3-reportbug [python] - Python modules for interacting with bug tracking systems
+python3-requests [python] - elegant and simple HTTP library for Python3, built for human beings
+python3-six [python] - Python 2 and 3 compatibility library
+python3-smbc [python] - Python 3 bindings for the Samba client library
+[possible audio] python3-speechd [python] - Python interface to Speech Dispatcher
+python3-uno [python] - Python-UNO bridge
+python3-urllib3 [python] - HTTP library with thread-safe connection pooling for Python3
+python3-xdg [python] - Python 3 library to access freedesktop.org standards
+python3.11 [python] - Interactive high-level object-oriented language (version 3.11)
+python3.11-minimal [python] - Minimal subset of the Python language (version 3.11)
+readline-common [utils] - GNU readline and history libraries, common files
+reportbug [utils] - reports bugs in the Debian distribution
+rtkit [admin] - Realtime Policy and Watchdog Daemon
+runit-helper [admin] - dh-runit implementation detail
+sane-airscan [graphics] - SANE backend for AirScan (eSCL) and WSD document scanner
+sane-utils [graphics] - API library for scanners -- utilities
+sed [utils] - GNU stream editor for filtering/transforming text
+sensible-utils [utils] - Utilities for sensible alternative selection
+sgml-base [text] - SGML infrastructure and SGML catalog file support
+sgml-data [text] - common SGML and XML data
+shared-mime-info [misc] - FreeDesktop.org shared MIME database and spec
+[possible audio] sound-icons [sound] - Sounds for speech enabled applications
+[possible audio] sound-theme-freedesktop [sound] - freedesktop.org sound theme
+[possible audio] speech-dispatcher [sound] - Common interface to speech synthesizers
+[possible audio] speech-dispatcher-audio-plugins:amd64 [sound] - Speech Dispatcher: Audio output plugins
+[possible audio] speech-dispatcher-espeak-ng [sound] - Speech Dispatcher: Espeak-ng output module
+ssl-cert [utils] - simple debconf wrapper for OpenSSL
+sudo [admin] - Provide limited super user privileges to specific users
+synaptic [admin] - Graphical package manager
+system-config-printer [gnome] - graphical interface to configure the printing system
+system-config-printer-common [gnome] - backend and the translation files for system-config-printer
+system-config-printer-udev [gnome] - Utilities to detect and configure printers automatically
+systemd [admin] - system and service manager
+systemd-sysv [admin] - system and service manager - SysV compatibility symlinks
+systemd-timesyncd [admin] - minimalistic service to synchronize local time with NTP servers
+sysvinit-utils [admin] - System-V-like utilities
+tar [utils] - GNU version of the tar archiving utility
+task-desktop [tasks] - Debian desktop environment
+task-english [tasks] - General English environment
+task-mate-desktop [tasks] - MATE
+tasksel [admin] - tool for selecting tasks for installation on Debian systems
+tasksel-data [admin] - official tasks used for installation of Debian systems
+[possible audio] timgm6mb-soundfont [sound] - TimGM6mb SoundFont from MuseScore 1.3
+traceroute [net] - Traces the route taken by packets over an IPv4/IPv6 network
+ucf [utils] - Update Configuration File(s): preserve user changes to config files
+udev [admin] - /dev/ and hotplug management daemon
+udisks2 [admin] - D-Bus service to access and manipulate storage devices
+unzip [utils] - De-archiver for .zip files
+update-inetd [admin] - inetd configuration file updater
+upower [admin] - abstraction for power management
+usb-modeswitch [comm] - mode switching tool for controlling "flip flop" USB devices
+usb-modeswitch-data [comm] - mode switching data for usb-modeswitch
+usb.ids [admin] - USB ID Repository
+usbmuxd [utils] - USB multiplexor daemon for iPhone and iPod Touch devices
+usbutils [utils] - Linux USB utilities
+util-linux [utils] - miscellaneous system utilities
+util-linux-extra [utils] - interactive login tools
+va-driver-all:amd64 [video] - Video Acceleration (VA) API -- driver metapackage
+vdpau-driver-all:amd64 [video] - Video Decode and Presentation API for Unix (driver metapackage)
+vim [editors] - Vi IMproved - enhanced vi editor
+vim-common [editors] - Vi IMproved - Common files
+vim-runtime [editors] - Vi IMproved - Runtime files
+vim-tiny [editors] - Vi IMproved - enhanced vi editor - compact version
+vsftpd [net] - lightweight, efficient FTP server written for security
+wamerican [text] - American English dictionary words for /usr/share/dict
+webp-pixbuf-loader:amd64 [gnome] - WebP Image format GdkPixbuf loader
+wget [web] - retrieves files from the web
+whiptail [utils] - Displays user-friendly dialog boxes from shell scripts
+wireless-regdb [net] - wireless regulatory database for Linux
+wpasupplicant [net] - client support for WPA and WPA2 (IEEE 802.11i)
+x11-apps [x11] - X applications
+x11-common [x11] - X Window System (X.Org) infrastructure
+x11-session-utils [x11] - X session utilities
+x11-utils [x11] - X11 utilities
+x11-xkb-utils [x11] - X11 XKB utilities
+x11-xserver-utils [x11] - X server utilities
+xauth [x11] - X authentication utility
+xbitmaps [x11] - Base X bitmaps
+xbrlapi [admin] - Access software for a blind person using a braille display - xbrlapi
+xcvt [x11] - VESA CVT standard timing modelines generator
+xdg-dbus-proxy [admin] - filtering D-Bus proxy
+xdg-desktop-portal [admin] - desktop integration portal for Flatpak and Snap
+xdg-desktop-portal-gtk [gnome] - GTK+/GNOME portal backend for xdg-desktop-portal
+xdg-user-dirs [utils] - tool to manage well known user directories
+xdg-utils [utils] - desktop integration utilities from freedesktop.org
+xfonts-encodings [x11] - Encodings for X.Org fonts
+xfonts-utils [x11] - X Window System font utility programs
+xinit [x11] - X server initialisation tool
+xkb-data [x11] - X Keyboard Extension (XKB) configuration data
+xkbset [x11] - Small utility to change the AccessX settings of XKEYBOARD
+xml-core [text] - XML infrastructure and XML catalog file support
+xorg [x11] - X.Org X Window System
+xserver-common [x11] - common files used by various X servers
+xserver-xorg [x11] - X.Org X server
+xserver-xorg-core [x11] - Xorg X server - core server
+xserver-xorg-input-all [x11] - X.Org X server -- input driver metapackage
+xserver-xorg-input-libinput [x11] - X.Org X server -- libinput input driver
+xserver-xorg-input-wacom [x11] - X.Org X server -- Wacom input driver
+xserver-xorg-legacy [x11] - setuid root Xorg server wrapper
+xserver-xorg-video-all [x11] - X.Org X server -- output driver metapackage
+xserver-xorg-video-amdgpu [x11] - X.Org X server -- AMDGPU display driver
+xserver-xorg-video-ati [x11] - X.Org X server -- AMD/ATI display driver wrapper
+xserver-xorg-video-fbdev [x11] - X.Org X server -- fbdev display driver
+xserver-xorg-video-intel [x11] - X.Org X server -- Intel i8xx, i9xx display driver
+xserver-xorg-video-nouveau [x11] - X.Org X server -- Nouveau display driver
+xserver-xorg-video-qxl [x11] - X.Org X server -- QXL display driver
+xserver-xorg-video-radeon [x11] - X.Org X server -- AMD/ATI Radeon display driver
+xserver-xorg-video-vesa [x11] - X.Org X server -- VESA display driver
+xserver-xorg-video-vmware [x11] - X.Org X server -- VMware display driver
+xterm [x11] - X terminal emulator
+xz-utils [utils] - XZ-format compression utilities
+[possible audio] yelp [gnome] - Help browser for GNOME
+[possible audio] yelp-xsl [gnome] - XSL stylesheets for the yelp help browser
+zenity [gnome] - Display graphical dialog boxes from shell scripts
+zenity-common [gnome] - Display graphical dialog boxes from shell scripts (common files)
+zerofree [admin] - zero free blocks from ext2, ext3 and ext4 file-systems
+zip [utils] - Archiver for .zip files
+zstd [utils] - fast lossless compression algorithm -- CLI tool
+
+== Desktop applications ==
+/usr/share/applications/atril.desktop | Atril Document Viewer | GTK;Office;Viewer;
+/usr/share/applications/caja-autorun-software.desktop | Autorun Prompt | 
+[possible audio] /usr/share/applications/caja-browser.desktop | Caja | GTK;System;Core;
+/usr/share/applications/caja-computer.desktop | Computer | GTK;System;Core;
+/usr/share/applications/caja-file-management-properties.desktop | File Management | GTK;Settings;X-MATE-PersonalSettings;
+/usr/share/applications/caja-folder-handler.desktop | Caja | 
+/usr/share/applications/caja-home.desktop | Home Folder | GTK;System;Core;
+/usr/share/applications/caja.desktop | Caja | 
+[possible audio] /usr/share/applications/chromium.desktop | Chromium Web Browser | Network;WebBrowser;
+/usr/share/applications/debian-uxterm.desktop | UXTerm | System;TerminalEmulator;
+/usr/share/applications/debian-xterm.desktop | XTerm | System;TerminalEmulator;
+/usr/share/applications/engrampa.desktop | Engrampa Archive Manager | GTK;Utility;Archiving;Compression;
+/usr/share/applications/eom.desktop | Eye of MATE Image Viewer | GTK;Graphics;2DGraphics;RasterGraphics;Viewer;
+/usr/share/applications/ettercap.desktop | Ettercap | Network;
+/usr/share/applications/gcr-prompter.desktop | Access Prompt | 
+/usr/share/applications/gcr-viewer.desktop | View file | 
+/usr/share/applications/gimp.desktop | GNU Image Manipulation Program | Graphics;2DGraphics;RasterGraphics;GTK;
+/usr/share/applications/libreoffice-calc.desktop | LibreOffice Calc | Office;Spreadsheet;
+/usr/share/applications/libreoffice-draw.desktop | LibreOffice Draw | Office;FlowChart;Graphics;2DGraphics;VectorGraphics;
+/usr/share/applications/libreoffice-impress.desktop | LibreOffice Impress | Office;Presentation;
+/usr/share/applications/libreoffice-math.desktop | LibreOffice Math | Office;Math;
+/usr/share/applications/libreoffice-startcenter.desktop | LibreOffice Start Center | Office;X-Red-Hat-Base;X-SuSE-Core-Office;X-MandrivaLinux-Office-Other;
+/usr/share/applications/libreoffice-writer.desktop | LibreOffice Writer | Office;WordProcessor;
+/usr/share/applications/libreoffice-xsltfilter.desktop | LibreOffice XSLT based filters | 
+/usr/share/applications/marco.desktop | Marco | 
+/usr/share/applications/mate-about-me.desktop | About Me | GTK;Settings;X-MATE-PersonalSettings;
+/usr/share/applications/mate-about.desktop | About MATE | GTK;Core;Utility;
+/usr/share/applications/mate-appearance-properties.desktop | Appearance | GTK;Settings;DesktopSettings;
+/usr/share/applications/mate-at-properties.desktop | Assistive Technologies | GTK;Settings;Accessibility;
+/usr/share/applications/mate-calc.desktop | MATE Calculator | GTK;Utility;Calculator;
+/usr/share/applications/mate-color-select.desktop | MATE Color Selection | GTK;Graphics;
+/usr/share/applications/mate-default-applications-properties.desktop | Preferred Applications | GTK;Settings;X-MATE-PersonalSettings;
+/usr/share/applications/mate-dictionary.desktop | MATE Dictionary | GTK;Office;Dictionary;
+/usr/share/applications/mate-disk-image-mounter.desktop | MATE Disk Image Mounter | GTK;System;
+/usr/share/applications/mate-disk-usage-analyzer.desktop | MATE Disk Usage Analyzer | GTK;System;Filesystem;
+/usr/share/applications/mate-display-properties.desktop | Displays | GTK;Settings;HardwareSettings;
+/usr/share/applications/mate-font-viewer.desktop | MATE Font Viewer | GTK;Utility;
+/usr/share/applications/mate-keybinding.desktop | Keyboard Shortcuts | GTK;Settings;HardwareSettings;
+/usr/share/applications/mate-keyboard.desktop | Keyboard | GTK;Settings;HardwareSettings;
+/usr/share/applications/mate-network-properties.desktop | Network Proxy | GTK;Settings;X-MATE-NetworkSettings;
+/usr/share/applications/mate-network-scheme.desktop | Network | GTK;System;Core;
+[possible audio] /usr/share/applications/mate-notification-properties.desktop | Popup Notifications | GTK;Settings;DesktopSettings;
+/usr/share/applications/mate-panel.desktop | Panel | GTK;System;Core;
+/usr/share/applications/mate-power-preferences.desktop | Power Management | Settings;HardwareSettings;
+/usr/share/applications/mate-power-statistics.desktop | Power Statistics | GTK;System;Monitor;
+/usr/share/applications/mate-screensaver-preferences.desktop | Screensaver | GTK;Settings;DesktopSettings;
+/usr/share/applications/mate-screenshot.desktop | Take Screenshot | GTK;Utility;
+/usr/share/applications/mate-search-tool.desktop | MATE Search Tool | GTK;Utility;Core;
+/usr/share/applications/mate-session-properties.desktop | Startup Applications | GTK;Settings;X-MATE-PersonalSettings;
+/usr/share/applications/mate-settings-mouse.desktop | Mouse | GTK;Settings;HardwareSettings;
+/usr/share/applications/mate-system-log.desktop | Log File Viewer | GTK;System;Monitor;
+/usr/share/applications/mate-system-monitor.desktop | MATE System Monitor | GTK;System;Monitor;
+/usr/share/applications/mate-terminal.desktop | MATE Terminal | GTK;System;TerminalEmulator;
+/usr/share/applications/mate-theme-installer.desktop | Theme Installer | GTK;Settings;
+/usr/share/applications/mate-time-admin.desktop | Time And Date Manager | GTK;Settings;HardwareSettings;
+/usr/share/applications/mate-user-guide.desktop | Help | GTK;Core;Documentation;
+[possible audio] /usr/share/applications/mate-volume-control.desktop | Sound | GTK;Settings;HardwareSettings;AudioVideo;Audio;Mixer;
+/usr/share/applications/mate-window-properties.desktop | Windows | GTK;Settings;DesktopSettings;
+/usr/share/applications/matecc.desktop | Control Center | GTK;Settings;
+/usr/share/applications/nm-applet.desktop | Network | 
+/usr/share/applications/nm-connection-editor.desktop | Advanced Network Configuration | GNOME;GTK;Settings;X-GNOME-NetworkSettings;X-GNOME-Utilities;
+[possible audio] /usr/share/applications/org.freeciv.gtk322.desktop | Freeciv | GTK;Game;StrategyGame;
+[possible audio] /usr/share/applications/org.freeciv.server.desktop | Freeciv server | ConsoleOnly;Game;StrategyGame;
+/usr/share/applications/pluma.desktop | Pluma | GTK;Utility;TextEditor;
+/usr/share/applications/python3.11.desktop | Python (v3.11) | Development;
+/usr/share/applications/synaptic.desktop | Synaptic Package Manager | PackageManager;GTK;System;Settings;
+/usr/share/applications/system-config-printer.desktop | Print Settings | GNOME;GTK;Settings;HardwareSettings;X-GNOME-Settings-Panel;X-Unity-Settings-Panel;System;Printing;
+/usr/share/applications/vim.desktop | Vim | Utility;TextEditor;
+/usr/share/applications/xdg-desktop-portal-gtk.desktop | Portal | 
+/usr/share/applications/yelp.desktop | Help | GNOME;GTK;Core;Documentation;Utility;
+
+== Desktop autostart entries ==
+/etc/xdg/autostart/at-spi-dbus-bus.desktop | AT-SPI D-Bus Bus | 
+/etc/xdg/autostart/gnome-keyring-pkcs11.desktop | Certificate and Key Storage | 
+/etc/xdg/autostart/gnome-keyring-secrets.desktop | Secret Storage Service | 
+/etc/xdg/autostart/gnome-keyring-ssh.desktop | SSH Key Agent | 
+/etc/xdg/autostart/mate-power-manager.desktop | Power Manager | 
+/etc/xdg/autostart/mate-screensaver.desktop | Screensaver | 
+/etc/xdg/autostart/mate-settings-daemon.desktop | MATE Settings Daemon | 
+[possible audio] /etc/xdg/autostart/mate-volume-control-status-icon.desktop | Volume Control | AudioVideo;Mixer;Settings;HardwareSettings;
+/etc/xdg/autostart/nm-applet.desktop | Network | 
+/etc/xdg/autostart/orca-autostart.desktop | Orca Screen Reader | 
+/etc/xdg/autostart/polkit-mate-authentication-agent-1.desktop | PolicyKit Authentication Agent | 
+/etc/xdg/autostart/print-applet.desktop | Print Queue Applet | System;Monitor;GTK;
+[possible audio] /etc/xdg/autostart/pulseaudio.desktop | PulseAudio Sound System | 
+/etc/xdg/autostart/vmware-user.desktop | VMware User Agent | 
+/etc/xdg/autostart/xdg-user-dirs-kde.desktop | User folders update | 
+/etc/xdg/autostart/xdg-user-dirs.desktop | User folders update | 
+/home/pparker/.config/autostart/SetUniqueIdAuto.desktop | CyberPatriot Set Unique ID AutoRun | 
+
+== Local software and portable application locations ==
+/opt/CyberPatriot
+/opt/CyberPatriot/StopScoring.desktop
+/opt/CyberPatriot/Scoreboard.desktop
+/opt/CyberPatriot/README.desktop
+/opt/CyberPatriot/ScoringReport.desktop
+/opt/CyberPatriot/set-uid
+/opt/CyberPatriot/TechSupport.desktop
+/opt/CyberPatriot/SetUniqueIdAuto.desktop
+/opt/CyberPatriot/stop
+/opt/CyberPatriot/ccsclient
+/opt/CyberPatriot/SetUniqueId.desktop
+
+---
+exit code: 0
