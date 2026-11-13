@@ -1,0 +1,182 @@
+script:    20261113_223314_157353_trace-key-sound_774f3df38bd54de7942c48a053147285.sh
+timestamp: 2026-11-13T22:33:31Z
+host:      debian
+user:      root
+---
+
+== MATE sound and bell settings ==
+org.mate.sound event-sounds = true
+org.mate.sound input-feedback-sounds = true
+org.mate.sound theme-name = 'freedesktop'
+org.mate.Marco.general audible-bell = true
+org.mate.Marco.general visual-bell = false
+org.mate.peripherals-keyboard bell-mode = 'on'
+
+== Bell, duck, and quack sound files ==
+/usr/share/sounds/freedesktop/stereo/bell.oga -> 
+
+WATCHING FOR 90 SECONDS. Trigger the duck sound several times in the affected app now.
+
+[22:33:35 UTC]
+#46 corked=no event.id = "bell-window-system"
+#46 corked=no media.role = "event"
+#46 corked=no application.process.id = "2097"
+#46 corked=no application.process.binary = "marco"
+
+[22:33:35 UTC]
+#48 corked=no event.id = "bell-window-system"
+#48 corked=no media.role = "event"
+#48 corked=no application.process.id = "2097"
+#48 corked=no application.process.binary = "marco"
+
+[22:33:36 UTC]
+#49 corked=no event.id = "bell-window-system"
+#49 corked=no media.role = "event"
+#49 corked=no application.process.id = "2097"
+#49 corked=no application.process.binary = "marco"
+
+[22:33:36 UTC]
+#52 corked=no event.id = "bell-window-system"
+#52 corked=no media.role = "event"
+#52 corked=no application.process.id = "2097"
+#52 corked=no application.process.binary = "marco"
+
+[22:33:36 UTC]
+#53 corked=no event.id = "bell-window-system"
+#53 corked=no media.role = "event"
+#53 corked=no application.process.id = "2097"
+#53 corked=no application.process.binary = "marco"
+
+[22:33:37 UTC]
+#55 corked=no event.id = "bell-window-system"
+#55 corked=no media.role = "event"
+#55 corked=no application.process.id = "2097"
+#55 corked=no application.process.binary = "marco"
+
+[22:33:37 UTC]
+#56 corked=no event.id = "bell-window-system"
+#56 corked=no media.role = "event"
+#56 corked=no application.process.id = "2097"
+#56 corked=no application.process.binary = "marco"
+
+[22:33:37 UTC]
+#58 corked=no event.id = "bell-window-system"
+#58 corked=no media.role = "event"
+#58 corked=no application.process.id = "2097"
+#58 corked=no application.process.binary = "marco"
+
+[22:33:37 UTC]
+#59 corked=no event.id = "bell-window-system"
+#59 corked=no media.role = "event"
+#59 corked=no application.process.id = "2097"
+#59 corked=no application.process.binary = "marco"
+
+[22:33:37 UTC]
+#60 corked=no event.id = "bell-window-system"
+#60 corked=no media.role = "event"
+#60 corked=no application.process.id = "2097"
+#60 corked=no application.process.binary = "marco"
+
+[22:33:38 UTC]
+#61 corked=no event.id = "bell-window-system"
+#61 corked=no media.role = "event"
+#61 corked=no application.process.id = "2097"
+#61 corked=no application.process.binary = "marco"
+#62 corked=no event.id = "bell-window-system"
+#62 corked=no media.role = "event"
+#62 corked=no application.process.id = "2097"
+#62 corked=no application.process.binary = "marco"
+
+[22:33:38 UTC]
+#63 corked=no event.id = "bell-window-system"
+#63 corked=no media.role = "event"
+#63 corked=no application.process.id = "2097"
+#63 corked=no application.process.binary = "marco"
+
+[22:33:38 UTC]
+#65 corked=no event.id = "bell-window-system"
+#65 corked=no media.role = "event"
+#65 corked=no application.process.id = "2097"
+#65 corked=no application.process.binary = "marco"
+
+[22:33:38 UTC]
+#66 corked=no event.id = "bell-window-system"
+#66 corked=no media.role = "event"
+#66 corked=no application.process.id = "2097"
+#66 corked=no application.process.binary = "marco"
+
+[22:33:39 UTC]
+#68 corked=no event.id = "bell-window-system"
+#68 corked=no media.role = "event"
+#68 corked=no application.process.id = "2097"
+#68 corked=no application.process.binary = "marco"
+
+[22:33:39 UTC]
+#69 corked=no event.id = "bell-window-system"
+#69 corked=no media.role = "event"
+#69 corked=no application.process.id = "2097"
+#69 corked=no application.process.binary = "marco"
+
+[22:33:39 UTC]
+#70 corked=no event.id = "bell-window-system"
+#70 corked=no media.role = "event"
+#70 corked=no application.process.id = "2097"
+#70 corked=no application.process.binary = "marco"
+
+[22:33:39 UTC]
+#71 corked=no event.id = "bell-window-system"
+#71 corked=no media.role = "event"
+#71 corked=no application.process.id = "2097"
+#71 corked=no application.process.binary = "marco"
+
+[22:33:39 UTC]
+#73 corked=no event.id = "bell-window-system"
+#73 corked=no media.role = "event"
+#73 corked=no application.process.id = "2097"
+#73 corked=no application.process.binary = "marco"
+
+[22:33:40 UTC]
+#74 corked=no event.id = "bell-window-system"
+#74 corked=no media.role = "event"
+#74 corked=no application.process.id = "2097"
+#74 corked=no application.process.binary = "marco"
+
+[22:33:40 UTC]
+#76 corked=no event.id = "bell-window-system"
+#76 corked=no media.role = "event"
+#76 corked=no application.process.id = "2097"
+#76 corked=no application.process.binary = "marco"
+
+[22:33:40 UTC]
+#77 corked=no event.id = "bell-window-system"
+#77 corked=no media.role = "event"
+#77 corked=no application.process.id = "2097"
+#77 corked=no application.process.binary = "marco"
+
+[22:33:40 UTC]
+#79 corked=no event.id = "bell-window-system"
+#79 corked=no media.role = "event"
+#79 corked=no application.process.id = "2097"
+#79 corked=no application.process.binary = "marco"
+
+[22:33:41 UTC]
+#80 corked=no event.id = "bell-window-system"
+#80 corked=no media.role = "event"
+#80 corked=no application.process.id = "2097"
+#80 corked=no application.process.binary = "marco"
+
+[22:33:41 UTC]
+#81 corked=no event.id = "bell-window-system"
+#81 corked=no media.role = "event"
+#81 corked=no application.process.id = "2097"
+#81 corked=no application.process.binary = "marco"
+
+[22:33:41 UTC]
+#83 corked=no event.id = "bell-window-system"
+#83 corked=no media.role = "event"
+#83 corked=no application.process.id = "2097"
+#83 corked=no application.process.binary = "marco"
+Playback observation complete.
+
+---
+exit code: 0
