@@ -1,0 +1,50 @@
+script:    20261113_231936_878615_debian12-pam-preflight_0893378169ef058f394374dfce9d4270.sh
+timestamp: 2026-11-13T23:19:51Z
+host:      debian
+user:      root
+---
+
+===== PASSWORD QUALITY AND DICTIONARY INSTALL PLAN, SIMULATION ONLY =====
+0 upgraded, 5 newly installed, 0 to remove and 1 not upgraded.
+Inst libcrack2 (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Inst cracklib-runtime (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Inst libpwquality-common (1.4.5-1 Debian:12.15/oldstable [all])
+Inst libpwquality1 (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+Inst libpam-pwquality (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+Conf libcrack2 (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Conf cracklib-runtime (2.9.6-5+b1 Debian:12.15/oldstable [amd64])
+Conf libpwquality-common (1.4.5-1 Debian:12.15/oldstable [all])
+Conf libpwquality1 (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+Conf libpam-pwquality (1.4.5-1+b1 Debian:12.15/oldstable [amd64])
+
+===== SUPPORTED EXISTING PASSWORD-HISTORY MODULE =====
+/lib/x86_64-linux-gnu/security/pam_pwhistory.so
+
+===== EXISTING UNIX PAM PROFILE, PASSWORD SECTION =====
+Password-Type: Primary
+Password:
+	[success=end default=ignore]	pam_unix.so obscure use_authtok try_first_pass yescrypt
+Password-Initial:
+	[success=end default=ignore]	pam_unix.so obscure yescrypt
+
+===== ACTIVE PASSWORD STACK, SAFE KNOWN MODULES ONLY =====
+password	[success=1 default=ignore]	pam_unix.so obscure yescrypt
+password	requisite			pam_deny.so
+password	required			pam_permit.so
+password	optional	pam_gnome_keyring.so 
+
+===== EXISTING AFA PROFILE NAMES =====
+
+===== PAM CACHE AND HISTORY FILE METADATA ONLY =====
+755 root:root /var/lib/pam
+600 root:root /etc/security/opasswd
+
+===== REQUIRED SERVICES =====
+active
+active
+active
+
+Read-only PAM preflight complete.
+
+---
+exit code: 0
