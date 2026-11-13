@@ -1,0 +1,20 @@
+script:    20261113_220229_263620_find-prohibited-mp3_ec2566fd380140df92bb132434379f92.sh
+timestamp: 2026-11-13T22:04:17Z
+host:      debian
+user:      root
+---
+
+MP3 paths (review which files are unrelated to work):
+  /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-01-\ Ocean\ Motion.mp3
+  /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-02-\ Fall\ Festival.mp3
+  /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-03-\ Flight\ of\ the\ Humble\ Bee.mp3
+  /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-04-\ Tinker\ Bell\ s\ Dream.mp3
+  /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-05-\ Vertigo\ Delight.mp3
+  /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-06-\ Much\ Ado\ About\ Something.mp3
+  /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-07-\ Last\ Thoughts.mp3
+  /usr/share/javascript/mathjax/unpacked/extensions/a11y/invalid_keypress.mp3 [Debian package file]
+
+To remove confirmed non-work files, run this script directly in a VM terminal with --delete and the exact absolute paths.
+
+---
+exit code: 0
