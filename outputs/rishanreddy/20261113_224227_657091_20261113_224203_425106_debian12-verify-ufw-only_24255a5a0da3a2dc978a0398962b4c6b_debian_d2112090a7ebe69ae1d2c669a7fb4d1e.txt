@@ -1,0 +1,40 @@
+script:    20261113_224203_425106_debian12-verify-ufw-only_24255a5a0da3a2dc978a0398962b4c6b.sh
+timestamp: 2026-11-13T22:42:27Z
+host:      debian
+user:      root
+---
+
+===== INDEPENDENT UFW VERIFICATION =====
+PASS: UFW is fully installed
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere                   # Required SSH
+22/tcp (v6)                ALLOW IN    Anywhere (v6)              # Required SSH
+PASS: UFW is active
+PASS: Incoming-deny/outgoing-allow defaults
+PASS: Required SSH allow rule present
+PASS: Required SSH allow rule present
+PASS: UFW persistent configuration enabled
+PASS: UFW service enabled at boot
+PASS: IPv6 firewall support enabled
+PASS: ssh active
+PASS: lightdm active
+PASS: ccsclient active
+PASS: SSH enabled at boot
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*          
+LISTEN 0      128             [::]:22           [::]:*          
+PASS: FTP remains inactive
+PASS: Security-update source retained
+PASS: Package database clean
+
+Verification failures: 0
+Checks inspect firewall policy and service state; actual remote password logins were not attempted.
+
+---
+exit code: 0
