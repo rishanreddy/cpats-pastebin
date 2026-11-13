@@ -1,0 +1,38 @@
+script:    20261113_225046_856860_debian12-chromium-rollback-check_7d4e5c8ddd18cc1458d132e95c89f345.sh
+timestamp: 2026-11-13T22:51:10Z
+host:      debian
+user:      root
+---
+
+===== CURRENT AND AVAILABLE CHROMIUM VERSIONS =====
+chromium:
+  Installed: 113.0.5672.126-1
+  Candidate: 156.0.8078.79-1~deb12u1
+chromium-common:
+  Installed: 113.0.5672.126-1
+  Candidate: 156.0.8078.79-1~deb12u1
+chromium-sandbox:
+  Installed: 113.0.5672.126-1
+  Candidate: 156.0.8078.79-1~deb12u1
+
+===== CHROMIUM UPGRADE PLAN, SIMULATION ONLY =====
+3 upgraded, 1 newly installed, 0 to remove and 1 not upgraded.
+Inst chromium [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst chromium-sandbox [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst chromium-common [113.0.5672.126-1] (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64]) []
+Inst libharfbuzz-subset0 (6.0.0+dfsg-3 Debian:12.15/oldstable [amd64])
+Conf chromium (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf chromium-sandbox (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf chromium-common (156.0.8078.79-1~deb12u1 Debian-Security:12/oldstable-security [amd64])
+Conf libharfbuzz-subset0 (6.0.0+dfsg-3 Debian:12.15/oldstable [amd64])
+
+===== CACHED CHROMIUM ROLLBACK PACKAGES =====
+No original version-113 Chromium packages are cached in the standard APT archive.
+
+===== PRESERVED ORIGINAL SNAPSHOT SOURCE =====
+Preserved archive location: snapshot.debian.org/archive/debian/20230611/ Suite: bookworm
+
+Read-only rollback check complete.
+
+---
+exit code: 0
