@@ -1,0 +1,630 @@
+script:    20261113_215804_784432_debian12-first-recon_33f216732760953946b3955520d66dd2.sh
+timestamp: 2026-11-13T21:58:30Z
+host:      debian
+user:      root
+---
+
+
+===== READ-ONLY BASELINE =====
+Scenario: Debian 12, AFA. Primary user: pparker. Required remote service: SSH.
+No fixes have been applied. Findings are candidates, not scored results.
+UTC observation time: 2026-11-13 21:58:30
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+VERSION_ID="12"
+ID=debian
+Kernel: 6.1.0-9-amd64
+
+===== DESKTOP FORENSICS FILE LOCATIONS =====
+Question contents and the credential-bearing README are omitted from public output.
+/home/pparker/Desktop/Forensics Question 2.txt
+/home/pparker/Desktop/Forensics Question 1.txt
+
+===== AUTHORIZED ACCOUNT CHECK =====
+pparker uid=1001 gid=1001 home=/home/pparker shell=/bin/bash
+pparker P 2026-10-11 0 99999 7 -1
+pparker adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+tstark uid=1002 gid=1002 home=/home/tstark shell=/bin/bash
+tstark P 2026-10-11 0 99999 7 -1
+tstark adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+ppotts uid=1003 gid=1003 home=/home/ppotts shell=/bin/bash
+ppotts P 2026-10-11 0 99999 7 -1
+ppotts adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+hhogan uid=1004 gid=1004 home=/home/hhogan shell=/bin/bash
+hhogan P 2026-10-11 0 99999 7 -1
+hhogan adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+nfury uid=1005 gid=1005 home=/home/nfury shell=/bin/bash
+nfury P 2026-10-11 0 99999 7 -1
+nfury adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+mhill uid=1006 gid=1006 home=/home/mhill shell=/bin/bash
+mhill P 2026-10-11 0 99999 7 -1
+mhill adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+pcoulson uid=1007 gid=1007 home=/home/pcoulson shell=/bin/bash
+pcoulson P 2026-10-11 0 99999 7 -1
+pcoulson adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+bbanner uid=1010 gid=1010 home=/home/bbanner shell=/bin/bash
+bbanner P 2026-10-11 0 99999 7 -1
+bbanner adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+swilson uid=1017 gid=1017 home=/home/swilson shell=/bin/bash
+swilson P 2026-10-11 0 99999 7 -1
+swilson dialout cdrom floppy audio dip video plugdev users netdev scanner
+sstrange uid=1018 gid=1018 home=/home/sstrange shell=/bin/bash
+sstrange P 2026-10-11 0 99999 7 -1
+sstrange adm dialout cdrom floppy sudo audio dip video plugdev users netdev lpadmin scanner
+slang uid=1013 gid=1013 home=/home/slang shell=/bin/bash
+slang P 2026-10-11 0 99999 7 -1
+slang dialout cdrom floppy audio dip video plugdev users netdev scanner
+cdanvers uid=1009 gid=1009 home=/home/cdanvers shell=/bin/bash
+cdanvers P 2026-10-11 0 99999 7 -1
+cdanvers dialout cdrom floppy audio dip video plugdev users netdev scanner
+okoye uid=1012 gid=1012 home=/home/okoye shell=/bin/bash
+okoye P 2026-10-11 0 99999 7 -1
+okoye dialout cdrom floppy audio dip video plugdev users netdev scanner
+kbishop uid=1016 gid=1016 home=/home/kbishop shell=/bin/bash
+kbishop P 2026-10-11 0 99999 7 -1
+kbishop dialout cdrom floppy audio dip video plugdev users netdev scanner
+ybelova uid=1022 gid=1022 home=/home/ybelova shell=/bin/bash
+ybelova P 2026-10-11 0 99999 7 -1
+ybelova dialout cdrom floppy audio dip video plugdev users netdev scanner
+jfoster uid=1015 gid=1015 home=/home/jfoster shell=/bin/bash
+jfoster P 2026-10-11 0 99999 7 -1
+jfoster dialout cdrom floppy audio dip video plugdev users netdev scanner
+nleeds uid=1019 gid=1019 home=/home/nleeds shell=/bin/bash
+nleeds P 2026-10-11 0 99999 7 -1
+nleeds dialout cdrom floppy audio dip video plugdev users netdev scanner
+mjwatson uid=1008 gid=1008 home=/home/mjwatson shell=/bin/bash
+mjwatson P 2026-10-11 0 99999 7 -1
+mjwatson dialout cdrom floppy audio dip video plugdev users netdev scanner
+jtorres uid=1021 gid=1021 home=/home/jtorres shell=/bin/bash
+jtorres P 2026-10-11 0 99999 7 -1
+jtorres dialout cdrom floppy audio dip video plugdev users netdev scanner
+pcarter uid=1014 gid=1014 home=/home/pcarter shell=/bin/bash
+pcarter P 2026-10-11 0 99999 7 -1
+pcarter dialout cdrom floppy audio dip video plugdev users netdev scanner
+
+Local UID 0 and regular accounts:
+root uid=0 gid=0 home=/root shell=/bin/bash [root: direct login prohibited]
+pparker uid=1001 gid=1001 home=/home/pparker shell=/bin/bash [authorized]
+tstark uid=1002 gid=1002 home=/home/tstark shell=/bin/bash [authorized]
+ppotts uid=1003 gid=1003 home=/home/ppotts shell=/bin/bash [authorized]
+hhogan uid=1004 gid=1004 home=/home/hhogan shell=/bin/bash [authorized]
+nfury uid=1005 gid=1005 home=/home/nfury shell=/bin/bash [authorized]
+mhill uid=1006 gid=1006 home=/home/mhill shell=/bin/bash [authorized]
+pcoulson uid=1007 gid=1007 home=/home/pcoulson shell=/bin/bash [authorized]
+mjwatson uid=1008 gid=1008 home=/home/mjwatson shell=/bin/bash [authorized]
+cdanvers uid=1009 gid=1009 home=/home/cdanvers shell=/bin/bash [authorized]
+bbanner uid=1010 gid=1010 home=/home/bbanner shell=/bin/bash [authorized]
+brumlow uid=1011 gid=1011 home=/home/brumlow shell=/bin/bash [NOT IN README: investigate]
+okoye uid=1012 gid=1012 home=/home/okoye shell=/bin/bash [authorized]
+slang uid=1013 gid=1013 home=/home/slang shell=/bin/bash [authorized]
+pcarter uid=1014 gid=1014 home=/home/pcarter shell=/bin/bash [authorized]
+jfoster uid=1015 gid=1015 home=/home/jfoster shell=/bin/bash [authorized]
+kbishop uid=1016 gid=1016 home=/home/kbishop shell=/bin/bash [authorized]
+swilson uid=1017 gid=1017 home=/home/swilson shell=/bin/bash [authorized]
+sstrange uid=1018 gid=1018 home=/home/sstrange shell=/bin/bash [authorized]
+nleeds uid=1019 gid=1019 home=/home/nleeds shell=/bin/bash [authorized]
+azola uid=1020 gid=1020 home=/home/azola shell=/bin/bash [NOT IN README: investigate]
+jtorres uid=1021 gid=1021 home=/home/jtorres shell=/bin/bash [authorized]
+ybelova uid=1022 gid=1022 home=/home/ybelova shell=/bin/bash [authorized]
+
+Other local accounts with login shells:
+sync uid=4 shell=/bin/sync
+
+Root password status, no hash:
+root L 2026-09-29 0 99999 7 -1
+
+===== ADMINISTRATION AND SUDO =====
+sudo:x:27:pparker,tstark,ppotts,hhogan,nfury,mhill,pcoulson,bbanner,sstrange
+shadow:x:42:
+/etc/sudoers: parsed OK
+/etc/sudoers.d/README: parsed OK
+Sudo policy files containing password-prompt bypasses, commands omitted:
+Sudo policy files containing include directives, contents omitted:
+/etc/sudoers
+
+===== PASSWORD POLICY =====
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_WARN_AGE	7
+LOGIN_RETRIES		5
+ENCRYPT_METHOD SHA512
+
+/etc/pam.d/common-password, module names and selected policy options only:
+line 25 module=pam_unix.so obscure yescrypt
+line 27 module=pam_deny.so
+line 31 module=pam_permit.so
+line 33 module=pam_gnome_keyring.so
+
+/etc/pam.d/common-auth, module names and selected policy options only:
+line 17 module=pam_unix.so nullok
+line 19 module=pam_deny.so
+line 23 module=pam_permit.so
+
+/etc/pam.d/common-account, module names and selected policy options only:
+line 17 module=pam_unix.so
+line 19 module=pam_deny.so
+line 23 module=pam_permit.so
+
+/etc/pam.d/sshd, module names and selected policy options only:
+
+line 7 module=pam_nologin.so
+
+line 19 module=pam_selinux.so
+line 22 module=pam_loginuid.so
+line 25 module=pam_keyinit.so
+
+line 33 module=pam_motd.so
+line 34 module=pam_motd.so
+line 37 module=pam_mail.so
+line 40 module=pam_limits.so
+line 44 module=pam_env.so
+line 47 module=pam_env.so
+line 52 module=pam_selinux.so
+
+
+/etc/security/faillock.conf:
+
+===== SSH CONFIGURATION AND SERVICE =====
+sshd syntax: VALID
+port 22
+listenaddress [::]:22
+listenaddress 0.0.0.0:22
+usepam yes
+maxauthtries 6
+permitrootlogin yes
+pubkeyauthentication yes
+passwordauthentication yes
+kbdinteractiveauthentication no
+x11forwarding yes
+permitemptypasswords yes
+authorizedkeysfile .ssh/authorized_keys .ssh/authorized_keys2
+authenticationmethods any
+Files containing Match directives, scoped settings need further inspection:
+ssh.service enabled: enabled
+ssh.service active: active
+ssh.socket enabled: disabled
+ssh.socket active: inactive
+
+===== FIREWALL AND LISTENING SOCKETS =====
+UFW executable not found.
+Netid State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+udp   UNCONN 0      0            0.0.0.0:36715      0.0.0.0:*          
+udp   UNCONN 0      0            0.0.0.0:631        0.0.0.0:*          
+udp   UNCONN 0      0        224.0.0.251:5353       0.0.0.0:*          
+udp   UNCONN 0      0            0.0.0.0:5353       0.0.0.0:*          
+udp   UNCONN 0      0               [::]:55768         [::]:*          
+udp   UNCONN 0      0               [::]:5353          [::]:*          
+tcp   LISTEN 0      128        127.0.0.1:631        0.0.0.0:*          
+tcp   LISTEN 0      128          0.0.0.0:22         0.0.0.0:*          
+tcp   LISTEN 0      32                 *:21               *:*          
+tcp   LISTEN 0      128             [::]:22            [::]:*          
+tcp   LISTEN 0      128            [::1]:631           [::]:*          
+
+===== LIGHTDM AND BROWSER =====
+Configured display manager:
+/usr/sbin/lightdm
+Guest and automatic-login settings:
+/etc/lightdm/lightdm.conf:allow-guest=true
+/etc/lightdm/lightdm.conf:autologin-user=pparker
+Name: x-www-browser
+Status: auto
+Value: /usr/bin/chromium
+Alternative: /usr/bin/chromium
+Priority: 40
+/home/pparker/.config/mimeapps.list:text/html=chromium.desktop
+/home/pparker/.config/mimeapps.list:x-scheme-handler/http=chromium.desktop
+/home/pparker/.config/mimeapps.list:x-scheme-handler/https=chromium.desktop
+
+===== PACKAGE VERSIONS AND CANDIDATES =====
+chromium installed 113.0.5672.126-1
+chromium-common installed 113.0.5672.126-1
+chromium-sandbox installed 113.0.5672.126-1
+ettercap-common installed 1:0.8.3.1-11
+ettercap-graphical installed 1:0.8.3.1-11
+freeciv installed 3.0.6-1
+freeciv-client-gtk3 installed 3.0.6-1
+freeciv-data installed 3.0.6-1
+freeciv-server installed 3.0.6-1
+inetutils-telnet installed 2:2.4-2
+libpam-modules installed 1.5.2-6
+lightdm installed 1.26.0-8
+netcat-traditional installed 1.10-47
+openssh-server installed 1:9.2p1-2
+sudo installed 1.9.13p3-1
+vsftpd installed 3.0.3-13+b2
+chromium:
+  Installed: 113.0.5672.126-1
+  Candidate: 113.0.5672.126-1
+openssh-server:
+  Installed: 1:9.2p1-2
+  Candidate: 1:9.2p1-2
+ufw:
+  Installed: (none)
+  Candidate: 0.36.2-1
+lightdm:
+  Installed: 1.26.0-8
+  Candidate: 1.26.0-8
+sudo:
+  Installed: 1.9.13p3-1
+  Candidate: 1.9.13p3-1
+Cached upgrade simulation, no index refresh and no package changes:
+Packages proposed for upgrade: 0. This uses existing package indexes.
+
+===== RUNNING AND ENABLED SERVICES =====
+accounts-daemon.service
+avahi-daemon.service
+ccsclient.service
+cron.service
+cups-browsed.service
+cups.service
+dbus.service
+getty@tty1.service
+lightdm.service
+ModemManager.service
+NetworkManager.service
+open-vm-tools.service
+polkit.service
+rtkit-daemon.service
+ssh.service
+systemd-journald.service
+systemd-logind.service
+systemd-timesyncd.service
+systemd-udevd.service
+udisks2.service
+upower.service
+user@1001.service
+vgauth.service
+vsftpd.service
+wpa_supplicant.service
+
+Enabled services:
+accounts-daemon.service
+anacron.service
+apparmor.service
+avahi-daemon.service
+ccsclient.service
+console-setup.service
+cron.service
+cups-browsed.service
+cups.service
+e2scrub_reap.service
+getty@.service
+keyboard-setup.service
+lightdm.service
+ModemManager.service
+networking.service
+NetworkManager-dispatcher.service
+NetworkManager-wait-online.service
+NetworkManager.service
+open-vm-tools.service
+ssh.service
+systemd-pstore.service
+systemd-timesyncd.service
+udisks2.service
+vgauth.service
+vsftpd.service
+wpa_supplicant.service
+
+Timer names, commands omitted:
+anacron.timer enabled
+apt-daily-upgrade.timer enabled
+apt-daily.timer enabled
+dpkg-db-backup.timer enabled
+e2scrub_all.timer enabled
+fstrim.timer enabled
+logrotate.timer enabled
+man-db.timer enabled
+plocate-updatedb.timer enabled
+systemd-tmpfiles-clean.timer static
+
+Process executable names, arguments omitted to protect runner credentials:
+root     systemd
+root     kthreadd
+root     rcu_gp
+root     rcu_par_gp
+root     slub_flushwq
+root     netns
+root     kworker/0:0H-events_highpri
+root     mm_percpu_wq
+root     rcu_tasks_kthread
+root     rcu_tasks_rude_kthread
+root     rcu_tasks_trace_kthread
+root     ksoftirqd/0
+root     rcu_preempt
+root     migration/0
+root     cpuhp/0
+root     cpuhp/1
+root     migration/1
+root     ksoftirqd/1
+root     kworker/u256:1-flush-8:0
+root     kdevtmpfs
+root     inet_frag_wq
+root     kauditd
+root     khungtaskd
+root     oom_reaper
+root     writeback
+root     kcompactd0
+root     ksmd
+root     kworker/1:2-events
+root     khugepaged
+root     kintegrityd
+root     kblockd
+root     blkcg_punt_bio
+root     tpm_dev_wq
+root     edac-poller
+root     devfreq_wq
+root     kworker/1:1H-kblockd
+root     kswapd0
+root     kthrotld
+root     irq/24-pciehp
+root     irq/25-pciehp
+root     irq/26-pciehp
+root     irq/27-pciehp
+root     irq/28-pciehp
+root     irq/29-pciehp
+root     irq/30-pciehp
+root     irq/31-pciehp
+root     irq/32-pciehp
+root     irq/33-pciehp
+root     irq/34-pciehp
+root     irq/35-pciehp
+root     irq/36-pciehp
+root     irq/37-pciehp
+root     irq/38-pciehp
+root     irq/39-pciehp
+root     irq/40-pciehp
+root     irq/41-pciehp
+root     irq/42-pciehp
+root     irq/43-pciehp
+root     irq/44-pciehp
+root     irq/45-pciehp
+root     irq/46-pciehp
+root     irq/47-pciehp
+root     irq/48-pciehp
+root     irq/49-pciehp
+root     irq/50-pciehp
+root     irq/51-pciehp
+root     irq/52-pciehp
+root     irq/53-pciehp
+root     irq/54-pciehp
+root     irq/55-pciehp
+root     acpi_thermal_pm
+root     xenbus_probe
+root     mld
+root     kworker/0:1H-kblockd
+root     ipv6_addrconf
+root     kstrp
+root     zswap-shrink
+root     kworker/u257:0
+root     mpt_poll_0
+root     mpt/0
+root     ata_sff
+root     scsi_eh_0
+root     scsi_tmf_0
+root     scsi_eh_1
+root     scsi_tmf_1
+root     scsi_eh_2
+root     irq/16-vmwgfx
+root     scsi_tmf_2
+root     card0-crtc0
+root     scsi_eh_3
+root     card0-crtc1
+root     scsi_tmf_3
+root     card0-crtc2
+root     scsi_eh_4
+root     card0-crtc3
+root     card0-crtc4
+root     card0-crtc5
+root     card0-crtc6
+root     card0-crtc7
+root     scsi_tmf_4
+root     scsi_eh_5
+root     scsi_tmf_5
+root     scsi_eh_6
+root     scsi_tmf_6
+root     scsi_eh_7
+root     scsi_tmf_7
+root     scsi_eh_8
+root     scsi_tmf_8
+root     scsi_eh_9
+root     scsi_tmf_9
+root     scsi_eh_10
+root     scsi_tmf_10
+root     scsi_eh_11
+root     scsi_tmf_11
+root     scsi_eh_12
+root     scsi_tmf_12
+root     scsi_eh_13
+root     scsi_tmf_13
+root     scsi_eh_14
+root     scsi_tmf_14
+root     scsi_eh_15
+root     scsi_tmf_15
+root     scsi_eh_16
+root     scsi_tmf_16
+root     scsi_eh_17
+root     scsi_tmf_17
+root     scsi_eh_18
+root     scsi_tmf_18
+root     scsi_eh_19
+root     scsi_tmf_19
+root     scsi_eh_20
+root     scsi_tmf_20
+root     scsi_eh_21
+root     scsi_tmf_21
+root     scsi_eh_22
+root     scsi_tmf_22
+root     scsi_eh_23
+root     scsi_tmf_23
+root     scsi_eh_24
+root     scsi_tmf_24
+root     scsi_eh_25
+root     scsi_tmf_25
+root     scsi_eh_26
+root     scsi_tmf_26
+root     scsi_eh_27
+root     scsi_tmf_27
+root     scsi_eh_28
+root     scsi_tmf_28
+root     scsi_eh_29
+root     scsi_tmf_29
+root     scsi_eh_30
+root     scsi_tmf_30
+root     scsi_eh_31
+root     scsi_tmf_31
+root     kworker/u256:28-events_unbound
+root     kworker/u256:29-events_unbound
+root     scsi_eh_32
+root     scsi_tmf_32
+root     kworker/1:2H-kblockd
+root     jbd2/sda3-8
+root     ext4-rsv-conver
+root     systemd-journal
+root     vmware-vmblock-
+root     systemd-udevd
+root     irq/60-vmw_vmci
+root     irq/61-vmw_vmci
+root     ext4-rsv-conver
+systemd+ systemd-timesyn
+root     cryptd
+root     accounts-daemon
+avahi    avahi-daemon
+root     ccsclient
+root     cron
+message+ dbus-daemon
+polkitd  polkitd
+root     systemd-logind
+root     udisksd
+root     VGAuthService
+avahi    avahi-daemon
+root     vmtoolsd
+root     NetworkManager
+root     wpa_supplicant
+root     ModemManager
+root     lightdm
+root     vsftpd
+root     sshd
+root     cupsd
+root     agetty
+root     Xorg
+root     cups-browsed
+root     lightdm
+pparker  systemd
+pparker  (sd-pam)
+pparker  pulseaudio
+pparker  x-session-manag
+pparker  dbus-daemon
+rtkit    rtkit-daemon
+pparker  ssh-agent
+pparker  at-spi-bus-laun
+pparker  dbus-daemon
+pparker  dconf-service
+pparker  mate-settings-d
+pparker  at-spi2-registr
+pparker  gnome-keyring-d
+pparker  marco
+pparker  gvfsd
+pparker  gvfsd-fuse
+pparker  mate-panel
+pparker  gvfs-udisks2-vo
+pparker  caja
+pparker  wnck-applet
+pparker  gvfs-gphoto2-vo
+pparker  polkit-mate-aut
+pparker  applet.py
+pparker  vmtoolsd
+pparker  gvfs-goa-volume
+pparker  mate-volume-con
+pparker  mate-power-mana
+pparker  gvfs-mtp-volume
+pparker  gvfs-afc-volume
+pparker  mate-screensave
+pparker  nm-applet
+pparker  xdg-desktop-por
+pparker  clock-applet
+pparker  notification-ar
+pparker  xdg-document-po
+pparker  xdg-permission-
+root     fusermount3
+pparker  xdg-desktop-por
+root     upowerd
+pparker  gvfsd-trash
+pparker  gvfsd-metadata
+pparker  chromium
+pparker  chrome_crashpad
+pparker  chrome_crashpad
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  gvfsd-http
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  chromium
+pparker  pluma
+pparker  mate-terminal
+pparker  bash
+pparker  bash
+root     kworker/0:0-events
+root     kworker/1:0-rcu_par_gp
+root     kworker/0:1-events
+root     kworker/1:1-events
+root     kworker/0:2-events
+root     sudo
+root     sudo
+root     bash
+root     bash
+root     tee
+root     ps
+
+===== SCHEDULED TASK FILE LOCATIONS =====
+/etc/cron.d/.placeholder
+/etc/cron.d/anacron
+/etc/cron.d/e2scrub_all
+/etc/cron.hourly/.placeholder
+/etc/cron.daily/dpkg
+/etc/cron.daily/logrotate
+/etc/cron.daily/.placeholder
+/etc/cron.daily/man-db
+/etc/cron.daily/apt-compat
+/etc/cron.daily/0anacron
+/etc/cron.daily/plocate
+/etc/cron.weekly/.placeholder
+/etc/cron.weekly/man-db
+/etc/cron.weekly/0anacron
+/etc/cron.monthly/.placeholder
+/etc/cron.monthly/0anacron
+Commands are omitted until targeted review to avoid uploading credentials.
+
+===== MEDIA CANDIDATES, LIST ONLY =====
+/home/ppotts/Music/Brandon Musser/Pure Piano Improv, Pt 2/01-03- Flight of the Humble Bee.mp3
+/home/ppotts/Music/Brandon Musser/Pure Piano Improv, Pt 2/01-05- Vertigo Delight.mp3
+/home/ppotts/Music/Brandon Musser/Pure Piano Improv, Pt 2/01-07- Last Thoughts.mp3
+/home/ppotts/Music/Brandon Musser/Pure Piano Improv, Pt 2/01-01- Ocean Motion.mp3
+/home/ppotts/Music/Brandon Musser/Pure Piano Improv, Pt 2/01-06- Much Ado About Something.mp3
+/home/ppotts/Music/Brandon Musser/Pure Piano Improv, Pt 2/01-02- Fall Festival.mp3
+/home/ppotts/Music/Brandon Musser/Pure Piano Improv, Pt 2/01-04- Tinker Bell s Dream.mp3
+Media candidates can be forensics evidence. Do not delete before reading questions.
+
+===== SECURITY FILE PERMISSIONS =====
+644 root:root /etc/passwd
+640 root:shadow /etc/shadow
+644 root:root /etc/group
+640 root:shadow /etc/gshadow
+440 root:root /etc/sudoers
+644 root:root /etc/ssh/sshd_config
+644 root:root /etc/login.defs
+
+===== NEXT STEPS =====
+Read Desktop forensics questions before modifying evidence.
+Review candidates against the README, approve a reversible fix batch, then verify.
+Preserve all authorized users, SSH, LightDM, CCS Client, and UTC.
+READ-ONLY inspection complete. No vulnerabilities were changed by this script.
+
+---
+exit code: 0
