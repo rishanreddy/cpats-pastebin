@@ -1,0 +1,50 @@
+script:    20261113_220803_439892_debian12-verify-batch1_90b40cb3b680b644cc375cef3b405750.sh
+timestamp: 2026-11-13T22:08:49Z
+host:      debian
+user:      root
+---
+
+===== INDEPENDENT READ-ONLY VERIFICATION =====
+PASS: bbanner is not in sudo
+PASS: sstrange is not in sudo
+PASS: pparker retains sudo
+PASS: tstark retains sudo
+PASS: ppotts retains sudo
+PASS: hhogan retains sudo
+PASS: nfury retains sudo
+PASS: mhill retains sudo
+PASS: pcoulson retains sudo
+
+Current sudo group:
+sudo:x:27:pparker,tstark,ppotts,hhogan,nfury,mhill,pcoulson
+PASS: Sudo configuration validates
+
+Effective SSH policy:
+PASS: SSH configuration validates
+port 22
+usepam yes
+permitrootlogin no
+passwordauthentication yes
+permitemptypasswords no
+PASS: SSH permitrootlogin no
+PASS: SSH permitemptypasswords no
+PASS: SSH passwordauthentication yes
+PASS: SSH usepam yes
+Remote authentication checks inspect policy only; actual password logins are not attempted.
+
+LightDM guest policy:
+FAIL: Unable to inspect merged LightDM guest configuration
+
+Required services and SSH listener:
+PASS: ssh is active
+PASS: lightdm is active
+PASS: ccsclient is active
+PASS: SSH is enabled at boot
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*          
+LISTEN 0      128             [::]:22           [::]:*          
+
+Verification failures: 1
+
+---
+exit code: 1
