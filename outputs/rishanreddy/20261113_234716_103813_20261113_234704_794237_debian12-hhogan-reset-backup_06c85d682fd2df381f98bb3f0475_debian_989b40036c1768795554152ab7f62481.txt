@@ -1,0 +1,19 @@
+script:    20261113_234704_794237_debian12-hhogan-reset-backup_06c85d682fd2df381f98bb3f04750df2.sh
+timestamp: 2026-11-13T23:47:15Z
+host:      debian
+user:      root
+---
+
+===== PRIVATE PRE-RESET BACKUP =====
+Private backup directory: /root/afa-hhogan-reset-20261113T234715Z-60634
+Current metadata only, no password or hash:
+hhogan P 2026-10-11 10 90 7 -1
+
+The password has not been changed by this script.
+Run locally in another VM terminal: sudo passwd hhogan
+Enter a new unique password at the hidden prompts, at least 14 characters with upper/lower/digit/symbol.
+Do not put it in chat, a script, a clipboard upload, or shell arguments.
+If undo is necessary, restore only hhogan credential/last-change fields from the private backup, not the entire shadow/history file.
+
+---
+exit code: 0
