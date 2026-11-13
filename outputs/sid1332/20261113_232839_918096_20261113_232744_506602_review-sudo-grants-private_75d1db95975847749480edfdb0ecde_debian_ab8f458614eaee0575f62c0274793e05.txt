@@ -1,0 +1,10 @@
+script:    20261113_232744_506602_review-sudo-grants-private_75d1db95975847749480edfdb0ecde9c.sh
+timestamp: 2026-11-13T23:28:39Z
+host:      debian
+user:      root
+---
+
+Sudo review complete. Read the private report on the VM: sudo cat /var/tmp/cpats-sudo-review.2ypiwIDU/report.txt
+
+---
+exit code: 0
