@@ -1,0 +1,36 @@
+script:    20261113_220949_110871_debian12-lightdm-sources_5a7c9a6f8fe0d1bc5d7161b6a35ac41a.sh
+timestamp: 2026-11-13T22:10:16Z
+host:      debian
+user:      root
+---
+
+===== LIGHTDM GUEST POLICY IN THE MAIN CONFIGURATION =====
+[Seat:*]
+allow-guest=false
+
+===== LIGHTDM EXECUTABLE AND CONFIG-INSPECTION SUPPORT =====
+PATH lookup: /usr/sbin/lightdm
+show-config exit code: 0
+B  allow-guest=false
+Config-related help options:
+  -h, --help                Show help options
+  -c, --config=FILE         Use configuration file
+  --show-config             Show combined configuration
+
+===== ALL STANDARD LIGHTDM CONFIGURATION FILES =====
+/usr/share/lightdm/lightdm.conf.d/01_debian.conf
+
+===== DEBIAN PACKAGE REPOSITORY HOSTS AND SUITES =====
+
+/etc/apt/sources.list:
+Host: snapshot.debian.org
+Suite: bookworm
+
+===== UNREQUIRED FTP SERVICE STATUS =====
+active
+enabled
+
+READ-ONLY check complete.
+
+---
+exit code: 0
