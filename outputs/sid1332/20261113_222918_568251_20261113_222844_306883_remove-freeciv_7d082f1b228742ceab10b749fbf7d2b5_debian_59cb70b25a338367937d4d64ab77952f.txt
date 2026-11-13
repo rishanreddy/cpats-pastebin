@@ -1,0 +1,49 @@
+script:    20261113_222844_306883_remove-freeciv_7d082f1b228742ceab10b749fbf7d2b5.sh
+timestamp: 2026-11-13T22:29:14Z
+host:      debian
+user:      root
+---
+
+Command: env DEBIAN_FRONTEND=noninteractive LC_ALL=C apt-get -o APT::Get::AutomaticRemove=false -o APT::Get::Purge=false --assume-yes remove -- freeciv freeciv-client-gtk3 freeciv-data freeciv-server
+
+APT preview:
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  liblua5.3-0 libopusfile0 libsdl2-mixer-2.0-0 libwpe-1.0-1
+  libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  freeciv freeciv-client-gtk3 freeciv-data freeciv-server
+0 upgraded, 0 newly installed, 4 to remove and 4 not upgraded.
+Remv freeciv [3.0.6-1+deb12u1]
+Remv freeciv-client-gtk3 [3.0.6-1+deb12u1]
+Remv freeciv-server [3.0.6-1+deb12u1]
+Remv freeciv-data [3.0.6-1+deb12u1]
+To reinstall if needed: sudo apt-get install -- freeciv freeciv-client-gtk3 freeciv-data freeciv-server
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  liblua5.3-0 libopusfile0 libsdl2-mixer-2.0-0 libwpe-1.0-1
+  libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  freeciv freeciv-client-gtk3 freeciv-data freeciv-server
+0 upgraded, 0 newly installed, 4 to remove and 4 not upgraded.
+After this operation, 52.9 MB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 164665 files and directories currently installed.)
+Removing freeciv (3.0.6-1+deb12u1) ...
+Removing freeciv-client-gtk3 (3.0.6-1+deb12u1) ...
+Removing freeciv-server (3.0.6-1+deb12u1) ...
+Removing freeciv-data (3.0.6-1+deb12u1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for mate-menus (1.26.0-3) ...
+Processing triggers for man-db (2.11.2-2) ...
+Processing triggers for mailcap (3.70+nmu1) ...
+Processing triggers for desktop-file-utils (0.26-1) ...
+Verified: the selected Freeciv packages are no longer installed.
+
+---
+exit code: 0
