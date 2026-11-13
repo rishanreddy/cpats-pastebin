@@ -1,0 +1,13 @@
+script:    20261113_230137_681265_debian12-fix-chromium-only_c622bff7cd1ea096535ca2165f211775.sh
+timestamp: 2026-11-13T23:02:07Z
+host:      debian
+user:      root
+---
+
+===== CHROMIUM-ONLY UPGRADE PREFLIGHT =====
+ACTION REQUIRED: Save tabs and close all Chromium windows.
+Chromium is still running. No profiles or installed packages changed by this script.
+Verified rollback packages are already saved at /root/afa-chromium-20261113T225851Z-54894
+
+---
+exit code: 10
