@@ -1,0 +1,40 @@
+script:    20261113_223627_114075_debian12-verify-accounts-ftp_684fe47cf282d55b2af9e3312bcf144f.sh
+timestamp: 2026-11-13T22:36:45Z
+host:      debian
+user:      root
+---
+
+===== INDEPENDENT ACCOUNT AND FTP VERIFICATION =====
+PASS: Unauthorized account is absent: brumlow
+PASS: Home directory preserved: /home/brumlow
+755 1011:1011 /home/brumlow
+PASS: Unauthorized account is absent: azola
+PASS: Home directory preserved: /home/azola
+755 1020:1020 /home/azola
+PASS: pparker retains sudo
+PASS: tstark retains sudo
+PASS: ppotts retains sudo
+PASS: hhogan retains sudo
+PASS: nfury retains sudo
+PASS: mhill retains sudo
+PASS: pcoulson retains sudo
+PASS: FTP is inactive
+PASS: FTP is not enabled at boot
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*          
+LISTEN 0      128             [::]:22           [::]:*          
+PASS: No FTP listener on port 21
+PASS: SSH is listening on port 22
+PASS: ssh is active
+PASS: lightdm is active
+PASS: ccsclient is active
+PASS: SSH remains enabled at boot
+PASS: Security-update source remains configured
+
+UFW package state for the next proposal, no changes:
+ufw config-files 0.36.2-1
+
+Verification failures: 0
+
+---
+exit code: 0
