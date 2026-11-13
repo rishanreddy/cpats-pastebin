@@ -1,0 +1,23 @@
+script:    20261113_230131_946425_check-debian-kernel_0d6fa4ee92504c58a6c6ab217bc5d605.sh
+timestamp: 2026-11-13T23:01:55Z
+host:      debian
+user:      root
+---
+
+== Running kernel ==
+6.1.0-9-amd64
+
+== Debian kernel package (local APT cache) ==
+linux-image-amd64:
+  Installed: 6.1.27-1
+  Candidate: 6.1.190-1
+  Version table:
+     6.1.190-1 500
+        500 http://security.debian.org/debian-security bookworm-security/main amd64 Packages
+     6.1.176-1 500
+        500 http://deb.debian.org/debian bookworm/main amd64 Packages
+ *** 6.1.27-1 100
+        100 /var/lib/dpkg/status
+
+---
+exit code: 0
