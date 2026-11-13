@@ -1,0 +1,123 @@
+script:    20261113_221711_756997_debian12-fix-batch2_9f883309df10795659f0fbaaacfbd523.sh
+timestamp: 2026-11-13T22:17:18Z
+host:      debian
+user:      root
+---
+
+===== APPROVED BATCH 2: PREFLIGHT =====
+
+===== ROOT-ONLY BACKUPS =====
+Backup directory: /root/afa-batch2-20261113T221719Z-43866
+
+===== FIX 1: OFFICIAL SOURCES PINNED TO DEBIAN 12 =====
+Configured bookworm, bookworm-updates, and bookworm-security.
+
+===== FIX 2: REFRESH PACKAGE INDEXES ONLY =====
+Hit:1 http://deb.debian.org/debian bookworm InRelease
+Get:2 http://security.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+Hit:3 http://deb.debian.org/debian bookworm-updates InRelease
+Get:4 http://security.debian.org/debian-security bookworm-security/main amd64 Packages [370 kB]
+Get:5 http://security.debian.org/debian-security bookworm-security/main Translation-en [232 kB]
+Get:6 http://security.debian.org/debian-security bookworm-security/contrib amd64 Packages [1456 B]
+Get:7 http://security.debian.org/debian-security bookworm-security/contrib Translation-en [1068 B]
+Get:8 http://security.debian.org/debian-security bookworm-security/non-free amd64 Packages [6296 B]
+Get:9 http://security.debian.org/debian-security bookworm-security/non-free Translation-en [5340 B]
+Get:10 http://security.debian.org/debian-security bookworm-security/non-free-firmware amd64 Packages [940 B]
+Get:11 http://security.debian.org/debian-security bookworm-security/non-free-firmware Translation-en [648 B]
+Fetched 652 kB in 1s (790 kB/s)
+Reading package lists...
+
+===== FIX 3: INSTALL UFW =====
+Inst libip6tc2 (1.8.9-2 Debian:12.15/oldstable [amd64])
+Inst iptables (1.8.9-2 Debian:12.15/oldstable [amd64])
+Inst ufw (0.36.2-1 Debian:12.15/oldstable [all])
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Waiting for cache lock: Could not get lock /var/lib/dpkg/lock-frontend. It is held by process 5917 (apt-get)...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  iptables libip6tc2
+Suggested packages:
+  firewalld rsyslog
+The following NEW packages will be installed:
+  iptables libip6tc2 ufw
+0 upgraded, 3 newly installed, 0 to remove and 4 not upgraded.
+Need to get 548 kB of archives.
+After this operation, 3411 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libip6tc2 amd64 1.8.9-2 [19.4 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 iptables amd64 1.8.9-2 [360 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 ufw all 0.36.2-1 [168 kB]
+Preconfiguring packages ...
+Fetched 548 kB in 0s (1607 kB/s)
+Selecting previously unselected package libip6tc2:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 164443 files and directories currently installed.)
+Preparing to unpack .../libip6tc2_1.8.9-2_amd64.deb ...
+Unpacking libip6tc2:amd64 (1.8.9-2) ...
+Selecting previously unselected package iptables.
+Preparing to unpack .../iptables_1.8.9-2_amd64.deb ...
+Unpacking iptables (1.8.9-2) ...
+Selecting previously unselected package ufw.
+Preparing to unpack .../archives/ufw_0.36.2-1_all.deb ...
+Unpacking ufw (0.36.2-1) ...
+Setting up libip6tc2:amd64 (1.8.9-2) ...
+Setting up iptables (1.8.9-2) ...
+update-alternatives: using /usr/sbin/iptables-legacy to provide /usr/sbin/iptables (iptables) in auto mode
+update-alternatives: using /usr/sbin/ip6tables-legacy to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+update-alternatives: using /usr/sbin/iptables-nft to provide /usr/sbin/iptables (iptables) in auto mode
+update-alternatives: using /usr/sbin/ip6tables-nft to provide /usr/sbin/ip6tables (ip6tables) in auto mode
+update-alternatives: using /usr/sbin/arptables-nft to provide /usr/sbin/arptables (arptables) in auto mode
+update-alternatives: using /usr/sbin/ebtables-nft to provide /usr/sbin/ebtables (ebtables) in auto mode
+Setting up ufw (0.36.2-1) ...
+
+Creating config file /etc/ufw/before.rules with new version
+
+Creating config file /etc/ufw/before6.rules with new version
+
+Creating config file /etc/ufw/after.rules with new version
+
+Creating config file /etc/ufw/after6.rules with new version
+Created symlink /etc/systemd/system/multi-user.target.wants/ufw.service -> /lib/systemd/system/ufw.service.
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Processing triggers for man-db (2.11.2-2) ...
+
+Batch failed or was interrupted. Restoring approved changes where possible.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libwpe-1.0-1 libwpebackend-fdo-1.0-1
+Use 'sudo apt autoremove' to remove them.
+The following packages will be REMOVED:
+  ufw
+0 upgraded, 0 newly installed, 1 to remove and 4 not upgraded.
+After this operation, 878 kB disk space will be freed.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 164759 files and directories currently installed.)
+Removing ufw (0.36.2-1) ...
+Skip stopping firewall: ufw (not enabled)
+Processing triggers for man-db (2.11.2-2) ...
+Source configuration restored. Downloaded package indexes can be rebuilt with apt-get update.
+Rollback completed. Newly installed dependency libraries may remain.
+active
+active
+active
+
+---
+exit code: 124
