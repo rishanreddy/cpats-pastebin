@@ -1,0 +1,19 @@
+script:    20261113_224214_029444_remove-prohibited-mp3s_4a5972717110445f8f82b9276c476f7a.sh
+timestamp: 2026-11-13T22:42:23Z
+host:      debian
+user:      root
+---
+
+Private backup directory: /var/backups/cpats-prohibited-mp3.SjMMYA4f
+Removed: /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-01-\ Ocean\ Motion.mp3
+Removed: /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-02-\ Fall\ Festival.mp3
+Removed: /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-03-\ Flight\ of\ the\ Humble\ Bee.mp3
+Removed: /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-04-\ Tinker\ Bell\ s\ Dream.mp3
+Removed: /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-05-\ Vertigo\ Delight.mp3
+Removed: /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-06-\ Much\ Ado\ About\ Something.mp3
+Removed: /home/ppotts/Music/Brandon\ Musser/Pure\ Piano\ Improv\,\ Pt\ 2/01-07-\ Last\ Thoughts.mp3
+Verified: all seven tracks are absent from the album folder.
+Restore commands: /var/backups/cpats-prohibited-mp3.SjMMYA4f/restore.txt
+
+---
+exit code: 0
