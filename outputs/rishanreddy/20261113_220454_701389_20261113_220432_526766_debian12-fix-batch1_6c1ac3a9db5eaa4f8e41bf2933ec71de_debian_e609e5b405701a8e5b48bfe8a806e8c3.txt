@@ -1,0 +1,27 @@
+script:    20261113_220432_526766_debian12-fix-batch1_6c1ac3a9db5eaa4f8e41bf2933ec71de.sh
+timestamp: 2026-11-13T22:04:52Z
+host:      debian
+user:      root
+---
+
+===== APPROVED BATCH 1: PREFLIGHT =====
+
+===== ROOT-ONLY BACKUPS =====
+Backup directory: /root/afa-batch1-20261113T220452Z-3777
+
+===== FIXES 1 AND 2: REMOVE UNAUTHORIZED SUDO MEMBERSHIPS =====
+Removing user bbanner from group sudo
+Removing user sstrange from group sudo
+
+===== FIXES 3 AND 4: SSH LOGIN POLICY =====
+
+===== FIX 5: DISABLE LIGHTDM GUEST LOGIN =====
+
+===== VALIDATION BEFORE SSH RELOAD =====
+ERROR: Empty-password policy is overridden for pcarter
+
+Validation failed or execution interrupted. Restoring this batch's backups.
+Backup files restored and SSH reloaded.
+
+---
+exit code: 1
