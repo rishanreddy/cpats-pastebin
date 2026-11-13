@@ -1,0 +1,42 @@
+script:    20261113_230922_895765_audit-sysctl_8ca537548026426e8cf0370fc1b1beaf.sh
+timestamp: 2026-11-13T23:10:12Z
+host:      debian
+user:      root
+---
+
+== Kernel status ==
+6.1.0-9-amd64
+6.1.27-1
+
+== Effective sysctl values ==
+kernel.dmesg_restrict = 1
+kernel.kptr_restrict = 0
+kernel.yama.ptrace_scope = 0
+fs.protected_hardlinks = 1
+fs.protected_symlinks = 1
+net.ipv4.ip_forward = 0
+net.ipv6.conf.all.forwarding = 0
+net.ipv4.tcp_syncookies = 1
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.all.secure_redirects = 1
+net.ipv4.conf.default.secure_redirects = 1
+net.ipv4.conf.all.send_redirects = 1
+net.ipv4.conf.default.send_redirects = 1
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 1
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
+
+== Matching persistent settings ==
+/usr/lib/sysctl.d/99-protect-links.conf:8: fs.protected_hardlinks = 1
+/usr/lib/sysctl.d/99-protect-links.conf:10: fs.protected_symlinks = 1
+
+== SSH service ==
+active
+
+---
+exit code: 0
